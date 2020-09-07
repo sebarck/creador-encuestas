@@ -1,0 +1,30 @@
+.tittleQuestion {
+    width: 100%;
+    font-size: 20px;
+    height: 60px;
+    padding: 10px; 
+    margin: 10px;
+    background-color: white;
+    border: none;
+    border-bottom: solid black 1px;
+    resize: none;
+    overflow: hidden;
+
+}
+
+.tittleQuestion:focus{
+    background-color: #EEE; 
+    border-bottom: solid white 1px;
+}
+
+.smallInput {
+    width: 100%;
+    font-size: 15px;
+    height: 40px;
+    padding: 10px; 
+    margin: 10px;
+    background-color: white;
+    border: none;
+    border-bottom: solid black 1px;
+    resize: none;
+}
