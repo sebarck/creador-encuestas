@@ -22,7 +22,6 @@ class App extends Component {
                 </Container>
                 <Container className="main-container">                   
                     <SimpleQuestion addQuestion={this._addNewQuestion}/>
-                    <SimpleQuestion addQuestion={this._addNewQuestion}/>
                     <ViewSimpleQuestion pregunta={this.state.pregunta} />
                 </Container>
             </div>
