@@ -28,3 +28,12 @@
     border-bottom: solid black 1px;
     resize: none;
 }
+
+.inputShortAnswer {
+    color: #6c757d;
+    margin: 10px;
+    margin-right: 0px;
+    padding: 10px;
+    padding-right: 0px;
+    border-bottom: solid black 1px;
+}
