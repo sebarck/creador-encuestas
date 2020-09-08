@@ -10,15 +10,12 @@ export class SimpleQuestion extends Component {
     }
 
     _agregarPregunta = () => {
-        
-        console.log("SimpleQuestion")
-        console.log(this.valorPregunta)
-        this.props.addQuestion(this.valorPregunta)
+        console.log('button de Agregar preugnta')
+        this.props.addNewQuestion(this.valorPregunta)
     }
 
     render () {
         return (
-
             <div>
                 <div className="input-group mb-6">
                     <div className="col-md-9">

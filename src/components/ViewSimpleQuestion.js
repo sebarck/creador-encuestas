@@ -8,13 +8,19 @@ export class ViewSimpleQuestion extends Component {
         this.props.addQuestion(props.pregunta)
     }
 
+    _addSimpleQuestion =(pregunta) => {
+        this.setState({pregunta})
+
+    }
+
+    
     render () {
         return (
             <div>
             <div className="input-group mb-6">
                 <div className="col-md-9">
                     <div className="tittleQuestion" placeholder="Escribi tu pregunta" aria-label="Username" aria-describedby="basic-addon1">
-                        {this.props.pregunta}
+                        {this.state.pregunta}
                     </div>
                 </div>    
             </div>

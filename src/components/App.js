@@ -1,19 +1,10 @@
 import React, {Component} from 'react';
 import { Container } from 'reactstrap';
 import FormCreator from './FormCreator';
-import { SimpleQuestion } from './SimpleQuestion'
-import { ViewSimpleQuestion } from './ViewSimpleQuestion';
-
+import { View} from './View'
 
 class App extends Component {
-    state = {
-        pregunta: ""
-    }
-
-    _addNewQuestion = (pregunta) => {
-        this.setState({pregunta})
-    }
-
+    
     render () {
         return (
             <div>
@@ -21,8 +12,7 @@ class App extends Component {
                     <FormCreator />
                 </Container>
                 <Container className="main-container">                   
-                    <SimpleQuestion addQuestion={this._addNewQuestion}/>
-                    <ViewSimpleQuestion pregunta={this.state.pregunta} />
+                   <View />
                 </Container>
             </div>
         );
