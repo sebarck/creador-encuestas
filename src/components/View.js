@@ -4,38 +4,34 @@ import { ViewSimpleQuestion } from './ViewSimpleQuestion'
 import { Hola } from './Hola'
 
 export class View extends Component {
-
-
-
-
-    state = {
-        pregunta: ""
+       
+    constructor () {
+        super()
+        this.state = {componentList: [<Hola  mensaje='probando1'/>,
+                                    <Hola mensaje='probando2'/>],
+                      pregunta: ""
+}
     }
-
-
-    componentList = [
-        <Hola  mensaje='probando1'/>,
-        <Hola mensaje='probando2'/>
-    ]; // Change this to get the list from props or state
-
+    
     _addSimpleNewQuestion = (pregunta) => {
         console.log('Agregando pregunta')
         this.setState({pregunta})
     }
 
-    generarHola (){
-        
-        this.componentList.concat({Hola mensaje="otroMensaje" />})
-        
+    _agregarComponente = () => {
+        var unComponente = this.state.componentList
+        unComponente.push(<Hola mensaje='nuevo elemento hola' />)
+        this.setState({componentList: unComponente})
     }
 
     render () {
         return (
             <div>
-                {this.generarHola()}
-                {this.componentList}
+
+                {this.state.componentList}
                 <SimpleQuestion addNewQuestion={this._addSimpleNewQuestion} />
                 <ViewSimpleQuestion pregunta={this.state.pregunta} />
+                <button onClick={this._agregarComponente}>Probando agregar</button>
             </div>
         )
     }
