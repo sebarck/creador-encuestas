@@ -3,15 +3,18 @@ import { View} from './View'
 import { SimpleQuestion } from './SimpleQuestion'
 import { ViewSimpleQuestion } from './ViewSimpleQuestion'
 import { Hola } from './Hola'
+import { Questions } from './Questions'
+import { Titulo} from './Titulo'
 
 class App extends Component {
 
     constructor () {
         super()
-        this.state = {componentList: [<Hola  mensaje='probando1' id="1"/>,
+        this.state = {componentList: [{titulo: '', description: ''}]}
+        /*this.state = {componentList: [<Hola  mensaje='probando1' id="1"/>,
                                     <Hola mensaje='probando2' id="2"/>],
-                      pregunta: ""
-}
+                        pregunta: ""
+                        }*/
     }
     
     _addSimpleNewQuestion = (pregunta) => {
@@ -26,11 +29,28 @@ class App extends Component {
         console.log(this.state.componentList)
     }
 
-
+    updateTitle = (titulo) => {
+        var componentes = this.state.componentList
+        var componenteTitulo = componentes[0]
+        componenteTitulo.titulo=titulo
+        this.setState({componentList: componentes})
+        console.log(this.state.componentList[0])
+    }
     
+    updateDescription = (description) => {
+        var componentes = this.state.componentList
+        var componenteTitulo = componentes[0]
+        componenteTitulo.description=description
+        this.setState({componentList: componentes})
+        console.log(this.state.componentList[0])
+        
+    }
     render () {
         return (
             <div>
+                <Titulo handleTitle={this.updateTitle} handleDescription={this.updateDescription} />
+                <Questions />
+                {/*
                 {    
                 this.state.componentList.map(component => {
                         return (
@@ -43,6 +63,7 @@ class App extends Component {
                 <SimpleQuestion addNewQuestion={this._addSimpleNewQuestion} />
                 <ViewSimpleQuestion pregunta={this.state.pregunta} />
                 <button onClick={this._agregarComponente}>Probando agregar</button>
+                */}
             </div>
         )
     }
