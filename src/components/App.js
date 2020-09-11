@@ -7,11 +7,9 @@ class App extends Component {
 
     constructor () {
         super()
-        this.state = {componentList: [{titulo: '', description: ''}]}
-        /*this.state = {componentList: [<Hola  mensaje='probando1' id="1"/>,
-                                    <Hola mensaje='probando2' id="2"/>],
-                        pregunta: ""
-                        }*/
+        this.state = {
+            titulo: {titulo: '', descripcion: ''},    
+            questions: []}
     }
     
     _addSimpleNewQuestion = (pregunta) => {
@@ -20,43 +18,44 @@ class App extends Component {
     }
 
     _agregarComponente = () => {
-        var unComponente = this.state.componentList
+        var unComponente = this.state.questions
         unComponente.push(<SimpleQuestion />)
-        this.setState({componentList: unComponente})
-        console.log(this.state.componentList)
+        this.setState({questions: unComponente})
+        console.log(this.state.questions)
     }
 
-    updateTitle = (titulo) => {
-        var componentes = this.state.componentList
-        var componenteTitulo = componentes[0]
-        componenteTitulo.titulo=titulo
-        this.setState({componentList: componentes})
-        console.log(this.state.componentList[0])
+    updateTitle = (title) => {
+        var nuevoTitulo = {titulo: title, descripcion: this.state.titulo.descripcion}
+        this.setState({titulo: nuevoTitulo})
     }
     
     updateDescription = (description) => {
-        var componentes = this.state.componentList
-        var componenteTitulo = componentes[0]
-        componenteTitulo.description=description
-        this.setState({componentList: componentes})
-        console.log(this.state.componentList[0])
+        var nuevoTitulo = {titulo: this.state.titulo.descripcion, descripcion: description}
+        this.setState({titulo: nuevoTitulo})
+    }
+
+    addQuestion = (tipoPregunta) => {
+        var componentes = this.state.questions
+        var componente = {}
+        componente.tipoPregunta = tipoPregunta
+        componente.titulo = "nuevaPregunta"
+        componentes.push(componente)
+        this.setState({questions: componentes})
         
+    }
+
+    updatePreguntas = (index,valorPregunta) => {
+        var questions = this.state.questions
+        questions[index].titulo = valorPregunta
+        this.setState({questions: questions})
+        console.log(this.state.questions)
     }
     render () {
         return (
             <div>
-                <Titulo handleTitle={this.updateTitle} handleDescription={this.updateDescription} />
-                <Questions />
-                {/*
-                {    
-                this.state.componentList.map(component => {
-                        return (
-                            <div>
-                                {component}                            
-                            </div>
-                        )})
-                                        
-                }
+                <Titulo handleTitle={this.updateTitle} handleDescription={this.updateDescription} handleButton={this.addQuestion} />
+                <Questions questions={this.state.questions} handleChange={this.updatePreguntas}/>
+                {/*              
                 <SimpleQuestion addNewQuestion={this._addSimpleNewQuestion} />
                 <ViewSimpleQuestion pregunta={this.state.pregunta} />
                 <button onClick={this._agregarComponente}>Probando agregar</button>

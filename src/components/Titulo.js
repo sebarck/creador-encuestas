@@ -13,8 +13,10 @@ export class Titulo extends Component{
     }
 
     agregarPregunta = () => {
-        alert('hola')
+        this.props.handleButton(1)
     }
+
+
 
     render () {
         return (
@@ -45,7 +47,7 @@ export class Titulo extends Component{
 
                     </div>
                     <div className="col-md-6">  
-                        <button type="button" onClick={this._agregarPregunta} className="btn btn-primary">Agregar Pregunta</button>
+                        <button type="button" onClick={this.agregarPregunta} className="btn btn-primary">Agregar Nueva pregunta</button>
                     </div>
                 </div>
             </div>
