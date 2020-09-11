@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import { View} from './View'
 import { SimpleQuestion } from './SimpleQuestion'
-import { ViewSimpleQuestion } from './ViewSimpleQuestion'
-import { Hola } from './Hola'
 import { Questions } from './Questions'
 import { Titulo} from './Titulo'
 
