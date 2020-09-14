@@ -18,6 +18,18 @@
 }
 
 .smallInput {
+    width: 80%;
+    font-size: 15px;
+    height: 40px;
+    padding: 10px; 
+    margin: 10px;
+    background-color: white;
+    border: none;
+    border-bottom: solid black 1px;
+    resize: none;
+}
+
+.largeInput {
     width: 100%;
     font-size: 15px;
     height: 40px;
