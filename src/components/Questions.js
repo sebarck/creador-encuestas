@@ -10,6 +10,7 @@ export class Questions extends Component {
     }
 
     actualizadorTipoPregunta = (index,tipoPregunta) =>{
+        console.log(index,tipoPregunta)
         return (
             this.props.handleQuestionType(index,tipoPregunta)
         )
