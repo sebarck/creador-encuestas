@@ -12,14 +12,17 @@ export class Question extends Component {
     }
 
     renderQuestionType = (questionType) => {
-        console.log(questionType)
         switch(questionType) {
             case 1:
                 return <SimpleQuestion />
             case 2:
                 return <SimpleQuestionLarge />
             case 3: 
-                return <OptionQuestion />
+                return (
+                    <OptionQuestion 
+                        handleMultiplesOptions={this.props.handleMultiplesOptions}
+                    />
+                )
             default:
                 return <p>Respuesta genérica</p>;
             
@@ -36,7 +39,7 @@ export class Question extends Component {
 
     render () {
         return (
-            <div key={this.props.index} className="input-group mb-12" >
+            <div className="input-group mb-12" >
                 <div className="input-group mb-6" >
                     <div className="col-md-9">
                         <textarea 

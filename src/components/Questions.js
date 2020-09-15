@@ -10,9 +10,14 @@ export class Questions extends Component {
     }
 
     actualizadorTipoPregunta = (index,tipoPregunta) =>{
-        console.log(index,tipoPregunta)
         return (
             this.props.handleQuestionType(index,tipoPregunta)
+        )
+    }
+    actualizarMultiplesOpciones = (index,multiplesOpciones) => {
+        console.log(index,multiplesOpciones)
+        return (
+            this.props.handleMultiplesOptions(index,multiplesOpciones)
         )
     }
 
@@ -21,7 +26,12 @@ export class Questions extends Component {
             this.props.questions.map((question,index) => {
                 return (
                     <div key={index}>
-                        <Question index={index} handleChange={this.actualizadorTitulo} handleQuestionSelector={this.actualizadorTipoPregunta}/>
+                        <Question 
+                            index={index} 
+                            handleChange={this.actualizadorTitulo} 
+                            handleQuestionSelector={this.actualizadorTipoPregunta}
+                            handleMultiplesOptions={(multiplesOpciones) => this.actualizarMultiplesOpciones(index,multiplesOpciones)}
+                        />
                     </div>
                     
                 )})

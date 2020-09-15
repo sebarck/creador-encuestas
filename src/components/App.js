@@ -18,7 +18,8 @@ class App extends Component {
         super()
         this.state = {
             titulo: {titulo: '', descripcion: ''},    
-            questions: []}
+            questions: []
+        }
     }
     
     updateTitle = (title) => {
@@ -45,23 +46,45 @@ class App extends Component {
         var questions = this.state.questions
         questions[index].titulo = valorPregunta
         this.setState({questions: questions})
-        console.log(this.state.questions)
     }
 
     updateQuestionType = (index,typeQuestion) => {
-        console.log(index, typeQuestion)
         var questions = this.state.questions
         questions[index].tipoPregunta = typeQuestion
         this.setState({questions: questions})
-        console.log(this.state.questions)
+    }
+
+    updateMultiplesOptions = (index,multiplesOptions) => {
+        console.log(index)
+        var questions = this.state.questions
+        console.log(this.state.questions, index)
+        console.log(questions[index])
+        if (index > questions.length) {
+            var question
+            question.multiplesOptions = multiplesOptions
+            questions.push(question)
+        }
+        else {
+            questions[index].multiplesOptions = multiplesOptions
+        }
+        this.setState({questions: questions})
     }
 
     upadte
     render () {
         return (
             <div>
-                <Titulo handleTitle={this.updateTitle} handleDescription={this.updateDescription} handleButton={this.addQuestion} />
-                <Questions questions={this.state.questions} handleChange={this.updateQuestion} handleQuestionType={this.updateQuestionType}/>
+                <Titulo 
+                    handleTitle={this.updateTitle}
+                    handleDescription={this.updateDescription} 
+                    handleButton={this.addQuestion} 
+                />
+                <Questions 
+                    questions={this.state.questions} 
+                    handleChange={this.updateQuestion} 
+                    handleQuestionType={this.updateQuestionType}
+                    handleMultiplesOptions={this.updateMultiplesOptions}
+                />
               
             </div>
         )
