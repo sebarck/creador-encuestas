@@ -1,7 +1,16 @@
 import React, {Component} from 'react';
-import { SimpleQuestion } from './SimpleQuestion'
 import { Questions } from './Questions'
 import { Titulo} from './Titulo'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import $ from 'jquery'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../style/simpleQuestion.css'
+
+
+// or less ideally
+
+
+
 
 class App extends Component {
 
@@ -12,18 +21,6 @@ class App extends Component {
             questions: []}
     }
     
-    _addSimpleNewQuestion = (pregunta) => {
-        console.log('Agregando pregunta')
-        this.setState({pregunta})
-    }
-
-    _agregarComponente = () => {
-        var unComponente = this.state.questions
-        unComponente.push(<SimpleQuestion />)
-        this.setState({questions: unComponente})
-        console.log(this.state.questions)
-    }
-
     updateTitle = (title) => {
         var nuevoTitulo = {titulo: title, descripcion: this.state.titulo.descripcion}
         this.setState({titulo: nuevoTitulo})
@@ -44,22 +41,28 @@ class App extends Component {
         
     }
 
-    updatePreguntas = (index,valorPregunta) => {
+    updateQuestion = (index,valorPregunta) => {
         var questions = this.state.questions
         questions[index].titulo = valorPregunta
         this.setState({questions: questions})
         console.log(this.state.questions)
     }
+
+    updateQuestionType = (index,typeQuestion) => {
+        console.log(index, typeQuestion)
+        var questions = this.state.questions
+        questions[index].tipoPregunta = typeQuestion
+        this.setState({questions: questions})
+        console.log(this.state.questions)
+    }
+
+    upadte
     render () {
         return (
             <div>
                 <Titulo handleTitle={this.updateTitle} handleDescription={this.updateDescription} handleButton={this.addQuestion} />
-                <Questions questions={this.state.questions} handleChange={this.updatePreguntas}/>
-                {/*              
-                <SimpleQuestion addNewQuestion={this._addSimpleNewQuestion} />
-                <ViewSimpleQuestion pregunta={this.state.pregunta} />
-                <button onClick={this._agregarComponente}>Probando agregar</button>
-                */}
+                <Questions questions={this.state.questions} handleChange={this.updateQuestion} handleQuestionType={this.updateQuestionType}/>
+              
             </div>
         )
     }
