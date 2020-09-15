@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Questions } from './Questions'
-import { Titulo } from './Titulo'
+import { Titulo } from './FormBuilder/QuestionBuilder'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import $ from 'jquery'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -25,23 +25,14 @@ class App extends Component {
         }
     }
 
-    updateTitle = (title) => {
-        var nuevoTitulo = { titulo: title, descripcion: this.state.titulo.descripcion }
-        this.setState({ titulo: nuevoTitulo })
-    }
-
-    updateDescription = (description) => {
-        var nuevoTitulo = { titulo: this.state.titulo.descripcion, descripcion: description }
-        this.setState({ titulo: nuevoTitulo })
-    }
-
-    addQuestion = (tipoPregunta) => {
-        var componentes = this.state.questions
-        var componente = {}
-        componente.tipoPregunta = tipoPregunta
-        componente.titulo = "nuevaPregunta"
-        componentes.push(componente)
-        this.setState({ questions: componentes })
+    addQuestion = (question) => {
+        var componentes = this.state.questions;
+        var componente = {};
+        componente.tipoPregunta = 1;
+        componente.titulo = question.title;
+        componente.descripcion = question.description;
+        componentes.push(componente);
+        this.setState({ questions: componentes });
 
     }
 
@@ -60,7 +51,6 @@ class App extends Component {
         console.log(this.state.questions)
     }
 
-    upadte
     render() {
         return (
             <div>
@@ -70,8 +60,8 @@ class App extends Component {
                             <RenderedQuestionList questions={this.state.questions} />
                         </Col>
                         <Col className='right-column-builder'>
-                            <Titulo handleTitle={this.updateTitle} handleDescription={this.updateDescription} handleButton={this.addQuestion} />
-                            <Questions questions={this.state.questions} handleChange={this.updateQuestion} handleQuestionType={this.updateQuestionType} />
+                            <Titulo handleButton={this.addQuestion} handleQuestionSelector={this.actualizadorTipoPregunta}/>
+                            {/* <Questions questions={this.state.questions} handleChange={this.updateQuestion} handleQuestionType={this.updateQuestionType} /> */}
                         </Col>
                     </Row>
                 </Container>
