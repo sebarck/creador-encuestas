@@ -35,7 +35,7 @@ export class Question extends Component {
 
     render () {
         return (
-            <div className="input-group mb-12" >
+            <div className="contenedorPersonal" >
                 <div className="input-group mb-6" >
                     <div className="col-md-9">
                         <textarea 

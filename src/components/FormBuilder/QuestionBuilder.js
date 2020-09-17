@@ -26,7 +26,7 @@ export class Titulo extends Component {
     render() {
         return (
 
-            <Container>
+            <Container className="contenedorPersonal">
                 <Row>
                     <Col xs="12">
                         <div>
