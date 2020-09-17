@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { Container, Row, Col } from 'reactstrap';
+import '../../style/simpleQuestion.css'
+import Agregar from '../../images/agregar.png'
 
 
 export class Titulo extends Component {
@@ -22,36 +25,54 @@ export class Titulo extends Component {
 
     render() {
         return (
-            <div className="input-group mb-12" >
-                <div className="input-group mb-6" >
-                    <div className="col-md-9">
-                        <textarea
-                            className="questionTitle"
-                            onChange={this.updateTitle}
-                            placeholder="Escribi tu pregunta"
-                            aria-label="Username"
-                            aria-describedby="basic-addon1"
-                            value={this.state.title}
+
+            <Container>
+                <Row>
+                    <Col xs="12">
+                        <div>
+                            <textarea
+                                className="tittleQuestion"
+                                onChange={this.updateTitle}
+                                placeholder="Escribi tu pregunta"
+                                aria-label="Username"
+                                aria-describedby="basic-addon1"
+                                value={this.state.title}
+                                />
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs="9">
+                        <div>
+                            <input
+                                aria-label="Username"
+                                aria-describedby="basic-addon1"
+                                className="descriptionQuestion"
+                                onChange={this.updateDescription}
+                                placeholder="Máximo 150 palabras"
+                                type="text"
+                                value={this.state.description}
                             />
-                    </div>
-                </div>
-                <div className="input-group mb-6">
-                    <div className="col-md-6">
-                        <input
-                            aria-label="Username"
-                            aria-describedby="basic-addon1"
-                            className="smallInput"
-                            onChange={this.updateDescription}
-                            placeholder="Máximo 150 palabras"
-                            type="text"
-                            value={this.state.description}
-                        />
-                    </div>
-                    <div className="col-md-6">
-                        <button type="button" onClick={this.agregarPregunta} className="btn btn-primary">Agregar Nueva pregunta</button>
-                    </div>
-                </div>
-            </div>
+                        </div>
+                    </Col>
+                    <Col xs="3">
+                        <div className="botonAgregar">
+                                <img 
+                                    src={Agregar} 
+                                    className="imagenAgregar"
+                                    alt="Girl in a jacket" 
+                                    width="26" 
+                                    height="26" 
+                                    onClick={this.agregarPregunta} 
+                                />
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+
+
+
         )
     }
 }
+
