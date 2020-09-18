@@ -34,11 +34,13 @@ class App extends Component {
         this.setState({titulo: nuevoTitulo})
     }
 
-    addQuestion = (tipoPregunta) => {
+    addQuestion = (tituloPregunta) => {
+
+        console.log(tituloPregunta.title)
         var componentes = this.state.questions
         var componente = {}
-        componente.tipoPregunta = tipoPregunta
-        componente.titulo = "nuevaPregunta"
+        componente.tipoPregunta = 1
+        componente.titulo = tituloPregunta.title
         componentes.push(componente)
         this.setState({questions: componentes})
     }

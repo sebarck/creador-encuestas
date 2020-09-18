@@ -31,6 +31,7 @@ export class Questions extends Component {
                             handleChange={this.actualizadorTitulo} 
                             handleQuestionSelector={this.actualizadorTipoPregunta}
                             handleMultiplesOptions={(multiplesOpciones) => this.actualizarMultiplesOpciones(index,multiplesOpciones)}
+                            title={question.titulo}
                         />
                     </div>
                     

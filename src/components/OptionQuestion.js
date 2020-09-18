@@ -96,16 +96,7 @@ export class OptionQuestion extends Component {
                         </Col>
                     </Row>
                 </Container>
-                
-                
-                <Radio
-                    value="d"
-                    color="default"
-                    disabled
-                />
-                <span onClick={this.addOption}>
-                    nueva opción
-                </span>
+           
             </div>
         )
     }

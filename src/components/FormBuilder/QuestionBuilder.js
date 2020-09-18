@@ -7,20 +7,16 @@ import Agregar from '../../images/agregar.png'
 export class Titulo extends Component {
 
     state = {
-        title: '',
-        description: ''
+        title: ''
     };
 
     updateTitle = (event) => {
         this.setState({title: event.target.value});
     }
 
-    updateDescription = (event) => {
-        this.setState({description: event.target.value});
-    }
-
     agregarPregunta = () => {
         this.props.handleButton(this.state);
+        this.setState({title: ''})
     }
 
     render() {
@@ -28,7 +24,7 @@ export class Titulo extends Component {
 
             <Container className="contenedorPersonal">
                 <Row>
-                    <Col xs="12">
+                    <Col xs="9">
                         <div>
                             <textarea
                                 className="tittleQuestion"
@@ -38,21 +34,6 @@ export class Titulo extends Component {
                                 aria-describedby="basic-addon1"
                                 value={this.state.title}
                                 />
-                        </div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs="9">
-                        <div>
-                            <input
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                                className="descriptionQuestion"
-                                onChange={this.updateDescription}
-                                placeholder="Máximo 150 palabras"
-                                type="text"
-                                value={this.state.description}
-                            />
                         </div>
                     </Col>
                     <Col xs="3">

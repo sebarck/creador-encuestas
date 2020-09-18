@@ -41,7 +41,8 @@ export class Question extends Component {
                         <textarea 
                             className="tittleQuestion" 
                             onChange={(e) => this.props.handleChange(this.props.index,e.target.value)} 
-                            placeholder="Escribi tu pregunta" 
+                            placeholder="Escribi tu pregunta"
+                            value={this.props.title} 
                             aria-label="Username" 
                             aria-describedby="basic-addon1">
                         </textarea>
