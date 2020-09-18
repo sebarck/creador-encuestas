@@ -16,7 +16,6 @@ export class SelectorQuestions extends Component {
 
     render() {
         return (
-            <div>
                 <div className="dropdown">
                     <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.buttonDescription[this.state.questionTypeSelected - 1]}
@@ -26,8 +25,6 @@ export class SelectorQuestions extends Component {
                         <button className="dropdown-item" type="button" onClick={() => this.selectQuestion(2)}>Simple larga</button>
                         <button className="dropdown-item" type="button" onClick={() => this.selectQuestion(3)}>Selección múltiple</button>
                     </div>
-                </div>
-            </div>
-        )
+                </div>        )
     }  
 }

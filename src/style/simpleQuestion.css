@@ -1,3 +1,6 @@
+html {background-color: #ededed;}
+#root{ background-color: #ededed; }
+
 .tittleQuestion {
     width: 100%;
     font-size: 20px;
@@ -10,6 +13,18 @@
     resize: none;
     overflow: hidden;
 
+}
+
+.descriptionQuestion {
+    width: 100%;
+    font-size: 15px;
+    height: 40px;
+    padding: 10px; 
+    margin: 10px;
+    background-color: white;
+    border: none;
+    border-bottom: solid black 1px;
+    resize: none;
 }
 
 .tittleQuestion:focus{
@@ -49,3 +64,32 @@
     padding-right: 0px;
     border-bottom: solid black 1px;
 }
+
+.botonAgregar {
+    display: flex;
+    position: relative;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+}
+
+.imagenAgregar{
+    position: relative;
+    
+    top: -13px;
+    left: -13px;
+}
+.conteinerBotonAgregar{
+    height: 50px;
+    position: absolute;
+
+}
+
+.contenedorPersonal {
+    -webkit-box-shadow: 6px 8px 16px -2px rgba(0,0,0,0.76);
+    -moz-box-shadow: 6px 8px 16px -2px rgba(0,0,0,0.76);
+    box-shadow: 6px 8px 16px -2px rgba(0,0,0,0.76);
+    background-color: white;
+    margin-top: 10px
+}
+

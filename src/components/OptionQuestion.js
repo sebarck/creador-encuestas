@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Radio from '@material-ui/core/Radio'
 import Image from '../images/delete.png'
+import { Col, Container, Row } from 'reactstrap'
+
 
 export class OptionQuestion extends Component {
     constructor() {
@@ -34,36 +36,67 @@ export class OptionQuestion extends Component {
     }
     render () {
         return (
-            <div>
+            <div className="container-fluid">
                 {this.state.options.map((opcion,index) => {
                 
                     return(
-                        <div key={index}>
+                        <div key={index} className="container-fluid">
+                            <Container >
+                                <Row className="row">
+                                    <Col className="col-xs-1 col-xl-1">
+                                        <Radio
+                                            value="d"
+                                            color="default"
+                                            disabled
+                                    />
+                                    </Col>
+                                    <Col className="col-xs-9 col-xl-9">
+                                        <input 
+                                            type="text" 
+                                            className="smallInput" 
+                                            placeholder="ingresá tu nueva opción"
+                                            aria-label="opcion" 
+                                            onChange={(e) => this.updateOption(index,e.target.value)}
+                                            value={opcion.valueOption}
+                                        />    
+                                    </Col>
+                                    <Col className="col-xs-2 col-xl-2">
+                                        <figure className="image" value="unvalue">
+                                            <img 
+                                                src={Image} 
+                                                alt="Girl in a jacket" 
+                                                width="25" 
+                                                height="25" 
+                                                onClick={() => this.deleteOption(index)}
+                                            />
+                                        </figure>
+                                    </Col>
+
+                                </Row>
+                            </Container>
+                            
+                            
+                            
+                    </div>
+                    )})
+                }
+                <Container>
+                    <Row>
+                        <Col>
                             <Radio
                                 value="d"
                                 color="default"
                                 disabled
                             />
-                            <input 
-                                type="text" 
-                                className="smallInput" 
-                                placeholder="ingresá tu nueva opción"
-                                aria-label="opcion" 
-                                onChange={(e) => this.updateOption(index,e.target.value)}
-                                value={opcion.valueOption}
-                            />
-                            <figure className="image" value="unvalue">
-                                <img 
-                                    src={Image} 
-                                    alt="Girl in a jacket" 
-                                    width="25" 
-                                    height="25" 
-                                    onClick={() => this.deleteOption(index)}
-                                />
-                            </figure>
-                    </div>
-                    )})
-                }
+                        </Col>
+                        <Col>
+                            <span onClick={this.addOption}>
+                                nueva opción
+                            </span>
+                        </Col>
+                    </Row>
+                </Container>
+                
                 
                 <Radio
                     value="d"

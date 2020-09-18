@@ -18,11 +18,7 @@ export class Question extends Component {
             case 2:
                 return <SimpleQuestionLarge />
             case 3: 
-                return (
-                    <OptionQuestion 
-                        handleMultiplesOptions={this.props.handleMultiplesOptions}
-                    />
-                )
+                return <OptionQuestion handleMultiplesOptions={this.props.handleMultiplesOptions} />
             default:
                 return <p>Respuesta genérica</p>;
             
@@ -39,12 +35,12 @@ export class Question extends Component {
 
     render () {
         return (
-            <div className="input-group mb-12" >
+            <div className="contenedorPersonal" >
                 <div className="input-group mb-6" >
                     <div className="col-md-9">
                         <textarea 
                             className="tittleQuestion" 
-                            onBlur={(e) => this.props.handleChange(this.props.index,e.target.value)} 
+                            onChange={(e) => this.props.handleChange(this.props.index,e.target.value)} 
                             placeholder="Escribi tu pregunta" 
                             aria-label="Username" 
                             aria-describedby="basic-addon1">
@@ -56,10 +52,8 @@ export class Question extends Component {
                         </SelectorQuestions>
                     </div>
                 </div>
-                <div className="input-group mb-6">
-                    <div className="col-md-6">  
-                        {this.renderQuestionType(this.state.questionSelector)}
-                    </div>
+                <div className="container">  
+                    {this.renderQuestionType(this.state.questionSelector)}
                 </div>
             </div>
         )

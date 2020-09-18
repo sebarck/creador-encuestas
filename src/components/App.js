@@ -1,10 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Questions } from './Questions'
-import { Titulo} from './Titulo'
+import { Titulo } from './FormBuilder/QuestionBuilder'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import $ from 'jquery'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/simpleQuestion.css'
+import { Container, Col, Row } from 'reactstrap';
+import RenderedQuestionList from './RenderizedForm/RenderedQuestionList';
 
 
 // or less ideally
@@ -14,14 +16,14 @@ import '../style/simpleQuestion.css'
 
 class App extends Component {
 
-    constructor () {
+    constructor() {
         super()
         this.state = {
-            titulo: {titulo: '', descripcion: ''},    
+            titulo: { titulo: '', descripcion: '' },
             questions: []
         }
     }
-    
+
     updateTitle = (title) => {
         var nuevoTitulo = {titulo: title, descripcion: this.state.titulo.descripcion}
         this.setState({titulo: nuevoTitulo})
@@ -39,7 +41,6 @@ class App extends Component {
         componente.titulo = "nuevaPregunta"
         componentes.push(componente)
         this.setState({questions: componentes})
-        
     }
 
     updateQuestion = (index,valorPregunta) => {
@@ -70,22 +71,24 @@ class App extends Component {
         this.setState({questions: questions})
     }
 
-    upadte
-    render () {
+    render() {
         return (
-            <div>
-                <Titulo 
-                    handleTitle={this.updateTitle}
-                    handleDescription={this.updateDescription} 
-                    handleButton={this.addQuestion} 
-                />
-                <Questions 
-                    questions={this.state.questions} 
-                    handleChange={this.updateQuestion} 
-                    handleQuestionType={this.updateQuestionType}
-                    handleMultiplesOptions={this.updateMultiplesOptions}
-                />
-              
+            <div className='container-fluid'>
+                <Container fluid="true">
+                    <Row xs="2">
+                        <Col className='left-column-data'>
+                            <Questions 
+                                questions={this.state.questions} 
+                                handleChange={this.updateQuestion} 
+                                handleQuestionType={this.updateQuestionType}
+                                handleMultiplesOptions={this.updateMultiplesOptions}
+                            />
+                        </Col>
+                        <Col className='right-column-builder'>
+                            <Titulo handleButton={this.addQuestion} />
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         )
     }
