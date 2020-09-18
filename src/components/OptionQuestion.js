@@ -3,6 +3,7 @@ import Radio from '@material-ui/core/Radio'
 import Image from '../images/delete.png'
 import { Col, Container, Row } from 'reactstrap'
 
+
 export class OptionQuestion extends Component {
     constructor() {
         super()
@@ -97,6 +98,14 @@ export class OptionQuestion extends Component {
                 </Container>
                 
                 
+                <Radio
+                    value="d"
+                    color="default"
+                    disabled
+                />
+                <span onClick={this.addOption}>
+                    nueva opción
+                </span>
             </div>
         )
     }
