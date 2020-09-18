@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Questions } from './Questions'
-import { Titulo } from './FormBuilder/QuestionBuilder'
+import { QuestionGenerator } from './QuestionGenerator'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import $ from 'jquery'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/simpleQuestion.css'
 import { Container, Col, Row } from 'reactstrap';
-import RenderedQuestionList from './RenderizedForm/RenderedQuestionList';
+import { Titulo } from './Titulo';
+
 
 
 // or less ideally
@@ -79,6 +80,10 @@ class App extends Component {
                 <Container fluid="true">
                     <Row xs="2">
                         <Col className='left-column-data'>
+                            <Titulo 
+                                handleTitle={this.updateTitle}
+                                handleDescription={this.updateDescription}
+                            />
                             <Questions 
                                 questions={this.state.questions} 
                                 handleChange={this.updateQuestion} 
@@ -87,7 +92,7 @@ class App extends Component {
                             />
                         </Col>
                         <Col className='right-column-builder'>
-                            <Titulo handleButton={this.addQuestion} />
+                            <QuestionGenerator handleButton={this.addQuestion} />
                         </Col>
                     </Row>
                 </Container>

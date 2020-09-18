@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
-import '../../style/simpleQuestion.css'
-import Agregar from '../../images/agregar.png'
+import '../style/simpleQuestion.css'
+import Agregar from '../images/agregar.png'
 
 
-export class Titulo extends Component {
+export class QuestionGenerator extends Component {
 
     state = {
         title: ''
