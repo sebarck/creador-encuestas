@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Questions } from './Questions'
 import { QuestionGenerator } from './QuestionGenerator'
 import 'bootstrap/dist/js/bootstrap.min.js'
-import $ from 'jquery'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/simpleQuestion.css'
 import { Container, Col, Row } from 'reactstrap';

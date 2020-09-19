@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { OptionQuestion } from './OptionQuestion'
+import { OptionQuestion } from './OptionQuestions/OptionQuestion'
 import { SelectorQuestions } from './SelectorQuestions'
 import { SimpleQuestion } from './SimpleQuestion'
 import { SimpleQuestionLarge } from './SimpleQuestionLarge'
