@@ -6,13 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/simpleQuestion.css'
 import { Container, Col, Row } from 'reactstrap';
 import { Titulo } from './Titulo';
-
-
-
-// or less ideally
-
-
-
+import DrawerMenu from './Drawer/DrawerMenu';
 
 class App extends Component {
 
@@ -76,6 +70,7 @@ class App extends Component {
     render() {
         return (
             <div className='container-fluid'>
+                <DrawerMenu />
                 <Container fluid="true">
                     <Row xs="2">
                         <Col className='left-column-data'>
