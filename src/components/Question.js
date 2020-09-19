@@ -3,7 +3,6 @@ import { OptionQuestion } from './OptionQuestions/OptionQuestion'
 import { SelectorQuestions } from './SelectorQuestions'
 import { SimpleQuestion } from './SimpleQuestion'
 import { SimpleQuestionLarge } from './SimpleQuestionLarge'
-import { OptionImage } from './OptionImage'
 
 export class Question extends Component {
     
@@ -19,11 +18,9 @@ export class Question extends Component {
             case 2:
                 return <SimpleQuestionLarge />
             case 3: 
-                return <OptionQuestion handleMultiplesOptions={this.props.handleMultiplesOptions} multiple="false"/>
-            case 4: 
-                return <OptionQuestion handleMultiplesOptions={this.props.handleMultiplesOptions} multiple="true"/>
+                return <OptionQuestion handleMultiplesOptions={this.props.handleMultiplesOptions} />
             default:
-                return <OptionImage handleOptionImagen={this.props.handleOptionImagen}/>
+                return <p>Respuesta genérica</p>;
             
         }
         
