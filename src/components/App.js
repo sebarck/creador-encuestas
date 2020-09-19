@@ -73,6 +73,13 @@ class App extends Component {
         this.setState({questions: questions})
     }
 
+    updateImageOptions = (index,imageOptions) => {
+        var questions = this.state.questions
+        questions[index].imageOptions = imageOptions
+        this.setState({questions: questions})
+        }
+       
+
     render() {
         return (
             <div className='container-fluid'>
@@ -88,6 +95,7 @@ class App extends Component {
                                 handleChange={this.updateQuestion} 
                                 handleQuestionType={this.updateQuestionType}
                                 handleMultiplesOptions={this.updateMultiplesOptions}
+                                handleImageOptions={this.updateImageOptions}
                             />
                         </Col>
                         <Col className='right-column-builder'>

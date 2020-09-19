@@ -34,6 +34,17 @@ export class OptionQuestion extends Component {
         this.setState({ options: opciones })
         this.props.handleMultiplesOptions(this.state.options)
     }
+
+    renderTypeButton = () => {
+        console.log(this.props.multiple)
+        if (this.props.multiple==="true") {
+            return <CustomInput type="checkbox" id="checkbox" name="checkbox" disabled/>
+        }
+        else {
+            return <CustomInput type="radio" id="radio" name="radio" disabled/>
+        }
+    }
+
     render() {
         return (
             <Container className="themed-container" fluid={true}>
@@ -43,7 +54,7 @@ export class OptionQuestion extends Component {
                             <Container >
                                 <Row className="row">
                                     <Col className="col-xs-1 col-xl-1">
-                                        <CustomInput type="radio" id="radioOption" name="radioOption" />
+                                        {this.renderTypeButton()}
                                     </Col>
                                     <Col className="col-xs-9 col-xl-9">
                                         <input
