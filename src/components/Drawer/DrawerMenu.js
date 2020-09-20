@@ -4,6 +4,7 @@ import React from 'react';
 import { ChevronLeft, ListAlt, Person, Menu, PostAddOutlined } from '@material-ui/icons';
 import { Link, BrowserRouter, Route, Switch } from 'react-router-dom';
 import SurveyList from '../Survey/SurveyList';
+import { NuevaEncuesta } from '../NuevaEncuesta';
 
 const DrawerMenu = () => {
     const [open, setOpen] = React.useState(false);
@@ -41,19 +42,19 @@ const DrawerMenu = () => {
                     </div>
                     <Divider />
                     <List>
-                        <ListItem button component={Link} to="/crear" key="nueva">
+                        <ListItem button component={Link} to="/crear" key="nueva" onClick={handleDrawerClose}>
                             <ListItemIcon>
                                 <PostAddOutlined />
                             </ListItemIcon>
                             <ListItemText primary="Crear nueva encuesta" />
                         </ListItem>
-                        <ListItem button component={Link} to="/" key="encuestas">
+                        <ListItem button component={Link} to="/" key="encuestas" onClick={handleDrawerClose}>
                             <ListItemIcon>
                                 <ListAlt />
                             </ListItemIcon>
                             <ListItemText primary="Encuestas creadas" />
                         </ListItem>
-                        <ListItem button component={Link} to="/perfil" key="perfil">
+                        <ListItem button component={Link} to="/perfil" key="perfil" onClick={handleDrawerClose}>
                             <ListItemIcon>
                                 <Person />
                             </ListItemIcon>
@@ -64,6 +65,9 @@ const DrawerMenu = () => {
                 <Switch>
                     <Route exact path="/">
                         <SurveyList />
+                    </Route>
+                    <Route exact path="/crear">
+                        <NuevaEncuesta />
                     </Route>
                 </Switch>
             </BrowserRouter>
