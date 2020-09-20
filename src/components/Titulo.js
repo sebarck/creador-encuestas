@@ -9,7 +9,7 @@ export function Titulo(props) {
                     <div>
                         <textarea
                             className="title"
-                            onChange={props.handleTitle}
+                            onChange={(e)=> (props.handleTitle(e.target.value))}
                             placeholder="Escribí el título de tu encuesta"
                         />
                     </div>
@@ -20,6 +20,7 @@ export function Titulo(props) {
                     <div>
                         <input type="text" 
                             className="descripcionTitulo" 
+                            onChange={(e)=> (props.handleDescription(e.target.value))}
                             placeholder="Aclará una descripción" 
                         />
                     </div>

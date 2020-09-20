@@ -1,5 +1,9 @@
 html {background-color:  rgb(242, 250, 255);}
 #root{ background-color: rgb(242, 250, 255);}
+input:focus {    
+    background-color: #EEE; 
+    border-bottom: solid white 1px;
+}
 
 .title {
     width: 90%;
@@ -12,7 +16,6 @@ html {background-color:  rgb(242, 250, 255);}
     border-bottom: solid black 1px;
     resize: none;
     overflow: hidden;
-    font-weight: bold;
 }
 
 .title:focus {
@@ -41,7 +44,7 @@ html {background-color:  rgb(242, 250, 255);}
 
 .descripcionTitulo {
     width: 90%;
-    font-size: 15px;
+    font-size: 20px;
     height: 40px;
     padding: 10px; 
     margin: 10px;
@@ -49,7 +52,6 @@ html {background-color:  rgb(242, 250, 255);}
     border: none;
     border-bottom: solid black 1px;
     resize: none;
-    font-weight: bold;
 }
 
 .descripcionTitulo:focus {
@@ -112,6 +114,7 @@ html {background-color:  rgb(242, 250, 255);}
     position: relative;
     height: 50px;
     top: 50%;
+    width: 50px;
     left: 50%;
 }
 
@@ -128,13 +131,22 @@ html {background-color:  rgb(242, 250, 255);}
 }
 
 .contenedorPersonal {
-    -webkit-box-shadow: 6px 8px 16px -2px rgba(0,0,0,0.76);
-    -moz-box-shadow: 6px 8px 16px -2px rgba(0,0,0,0.76);
-    box-shadow: 6px 8px 16px -2px rgba(0,0,0,0.76);
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
     background-color: white;
     margin-top: 20px;
     padding-bottom: 15px;
 }
 
+.labelComponent {
+    font-size: 15px;
+    height: 40px;
+    padding: 10px; 
+    margin: 10px;
+    background-color: white;
+    border: none;
+}
 
-
+.buttonSelector {
+    margin: 15px;
+    padding: 10px;
+}
