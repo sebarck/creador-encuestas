@@ -1,9 +1,5 @@
 html {background-color:  rgb(242, 250, 255);}
 #root{ background-color: rgb(242, 250, 255);}
-input:focus {    
-    background-color: #EEE; 
-    border-bottom: solid white 1px;
-}
 
 .title {
     width: 90%;
@@ -140,16 +136,5 @@ input:focus {
     padding-bottom: 15px;
 }
 
-.labelComponent {
-    font-size: 15px;
-    height: 40px;
-    padding: 10px; 
-    margin: 10px;
-    background-color: white;
-    border: none;
-}
 
-.buttonSelector {
-    margin: 15px;
-    padding: 10px;
-}
+
