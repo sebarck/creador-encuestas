@@ -23,13 +23,11 @@ export class NuevaEncuesta extends Component {
     }
     
     updateDescription = (description) => {
-        var nuevoTitulo = {titulo: this.state.titulo.descripcion, descripcion: description}
+        var nuevoTitulo = {titulo: this.state.titulo.titulo, descripcion: description}
         this.setState({titulo: nuevoTitulo})
     }
 
     addQuestion = (tituloPregunta) => {
-
-        console.log(tituloPregunta.title)
         var componentes = this.state.questions
         var componente = {}
         componente.tipoPregunta = 1
@@ -51,10 +49,7 @@ export class NuevaEncuesta extends Component {
     }
 
     updateMultiplesOptions = (index,multiplesOptions) => {
-        console.log(index)
         var questions = this.state.questions
-        console.log(this.state.questions, index)
-        console.log(questions[index])
         if (index > questions.length) {
             var question
             question.multiplesOptions = multiplesOptions
@@ -65,6 +60,13 @@ export class NuevaEncuesta extends Component {
         }
         this.setState({questions: questions})
     }
+
+    updateImageOptions = (index,imageOptions) => {
+        var questions = this.state.questions
+        questions[index].imageOptions = imageOptions
+        this.setState({questions: questions})
+        }
+       
 
     render() {
         return (
@@ -81,6 +83,7 @@ export class NuevaEncuesta extends Component {
                                 handleChange={this.updateQuestion} 
                                 handleQuestionType={this.updateQuestionType}
                                 handleMultiplesOptions={this.updateMultiplesOptions}
+                                handleImageOptions={this.updateImageOptions}
                             />
                         </Col>
                         <Col className='right-column-builder'>
