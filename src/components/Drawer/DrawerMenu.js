@@ -5,6 +5,7 @@ import { ChevronLeft, ListAlt, Person, Menu, PostAddOutlined } from '@material-u
 import { Link, BrowserRouter, Route, Switch } from 'react-router-dom';
 import SurveyList from '../Survey/SurveyList';
 import { NuevaEncuesta } from '../NuevaEncuesta';
+import MiPerfil from '../MiPerfil';
 
 
 const DrawerMenu = () => {
@@ -69,6 +70,9 @@ const DrawerMenu = () => {
                     </Route>
                     <Route exact path="/crear">
                         <NuevaEncuesta />
+                    </Route>
+                    <Route exact path="/perfil">
+                        <MiPerfil />
                     </Route>
                 </Switch>
             </BrowserRouter>

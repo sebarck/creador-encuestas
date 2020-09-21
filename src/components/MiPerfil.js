@@ -2,16 +2,23 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/js/bootstrap.min.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/simpleQuestion.css'
-import DrawerMenu from './Drawer/DrawerMenu';
+//Agrego el logging condicional
+import ConditionalLogging from './ConditionalLogging'
+import Forms from './Forms'
 
-class App extends Component {
+
+
+export class MiPerfil extends Component {
     render() {
         return (
             <div className='container-fluid'>
-                <DrawerMenu />
+
+                <Forms />
+                <ConditionalLogging/>
+
+
             </div>
         )
     }
 }
-
-export default App;
+export default MiPerfil;
