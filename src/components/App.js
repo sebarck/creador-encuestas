@@ -5,8 +5,6 @@ import '../style/simpleQuestion.css'
 import DrawerMenu from './Drawer/DrawerMenu';
 
 class App extends Component {
-
-    
     render() {
         return (
             <div className='container-fluid'>

@@ -5,6 +5,8 @@ import { ChevronLeft, ListAlt, Person, Menu, PostAddOutlined } from '@material-u
 import { Link, BrowserRouter, Route, Switch } from 'react-router-dom';
 import SurveyList from '../Survey/SurveyList';
 import { NuevaEncuesta } from '../NuevaEncuesta';
+import InicioDeSesión from '../InicioDeSesión';
+import MiPerfil from '../MiPerfil';
 
 
 const DrawerMenu = () => {
@@ -43,6 +45,12 @@ const DrawerMenu = () => {
                     </div>
                     <Divider />
                     <List>
+                        <ListItem button component={Link} to="/login" key="sesion" onClick={handleDrawerClose}>
+                            <ListItemIcon>
+                              <Person />
+                            </ListItemIcon>
+                            <ListItemText primary="Iniciar Sesión" />
+                        </ListItem>
                         <ListItem button component={Link} to="/encuesta/0" key="nueva" onClick={handleDrawerClose}>
                             <ListItemIcon>
                                 <PostAddOutlined />
@@ -61,13 +69,15 @@ const DrawerMenu = () => {
                             </ListItemIcon>
                             <ListItemText primary="Mi Perfil" />
                         </ListItem>
+
                     </List>
                 </Drawer> 
                 <Switch>    
                     <Route path="/encuesta/:id" component={NuevaEncuesta} />
                     <Route exact path="/" component={SurveyList} />
+										<Route exact path="/login" component={InicioDeSesión} />
                 </Switch>
-
+                </Drawer>
         </div>
     );
 }
