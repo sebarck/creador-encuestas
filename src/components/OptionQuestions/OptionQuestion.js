@@ -12,6 +12,22 @@ export class OptionQuestion extends Component {
         }
     }
 
+    static defaultProps={
+        question: []
+    }
+
+    componentDidMount = () => {
+        console.log("componentDidMount - OptionCuestion", this.props.question)
+        this.setState({options: this.props.question}) 
+    }
+
+    componentDidUpdate = (prevProps) => {
+        if (this.props.question !== prevProps.question) {
+            this.setState({options: this.props.question}) 
+        }
+    } 
+    
+
     addOption = () => {
         var opciones = this.state.options
         var opcion = {}
@@ -47,6 +63,7 @@ export class OptionQuestion extends Component {
     render() {
         return (
             <Container className="themed-container" fluid={true}>
+                {console.log("option",this.state.option)}
                 {this.state.options.map((opcion, index) => {
                     return (
                         <div key={index} className="container-fluid">

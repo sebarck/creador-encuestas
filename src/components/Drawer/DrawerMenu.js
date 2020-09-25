@@ -30,7 +30,7 @@ const DrawerMenu = () => {
                     Creador de encuestas
                 </Typography>
             </Toolbar>
-            <BrowserRouter>
+            <BrowserRouter></BrowserRouter>
                 <Drawer
                     variant="persistent"
                     anchor="left"
@@ -43,7 +43,7 @@ const DrawerMenu = () => {
                     </div>
                     <Divider />
                     <List>
-                        <ListItem button component={Link} to="/crear" key="nueva" onClick={handleDrawerClose}>
+                        <ListItem button component={Link} to="/encuesta/0" key="nueva" onClick={handleDrawerClose}>
                             <ListItemIcon>
                                 <PostAddOutlined />
                             </ListItemIcon>
@@ -62,16 +62,12 @@ const DrawerMenu = () => {
                             <ListItemText primary="Mi Perfil" />
                         </ListItem>
                     </List>
-                </Drawer>
-                <Switch>
-                    <Route exact path="/">
-                        <SurveyList />
-                    </Route>
-                    <Route exact path="/crear">
-                        <NuevaEncuesta />
-                    </Route>
+                </Drawer> 
+                <Switch>    
+                    <Route path="/encuesta/:id" component={NuevaEncuesta} />
+                    <Route exact path="/" component={SurveyList} />
                 </Switch>
-            </BrowserRouter>
+
         </div>
     );
 }
