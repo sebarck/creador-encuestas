@@ -2,7 +2,7 @@ import { AppBar, CssBaseline, Divider, Drawer, List, ListItem, ListItemIcon, Lis
 import IconButton from '@material-ui/core/IconButton';
 import React from 'react';
 import { ChevronLeft, ListAlt, Person, Menu, PostAddOutlined } from '@material-ui/icons';
-import { Link, BrowserRouter} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const DrawerMenu = () => {
     const [open, setOpen] = React.useState(false);
@@ -38,32 +38,32 @@ const DrawerMenu = () => {
                     </IconButton>
                 </div>
                 <Divider />
-                    <List>
-                        <ListItem button component={Link} to="/" key="sesion" onClick={handleDrawerClose}>
-                            <ListItemIcon>
-                                <Person />
-                            </ListItemIcon>
-                            <ListItemText primary="Iniciar Sesión" />
-                        </ListItem>
-                        <ListItem button component={Link} to="/encuesta/0" key="nueva" onClick={handleDrawerClose}>
-                            <ListItemIcon>
-                                <PostAddOutlined />
-                            </ListItemIcon>
-                            <ListItemText primary="Crear nueva encuesta" />
-                        </ListItem>
-                        <ListItem button component={Link} to="/encuestas" key="encuestas" onClick={handleDrawerClose}>
-                            <ListItemIcon>
-                                <ListAlt />
-                            </ListItemIcon>
-                            <ListItemText primary="Encuestas creadas" />
-                        </ListItem>
-                        <ListItem button component={Link} to="/perfil" key="perfil" onClick={handleDrawerClose}>
-                            <ListItemIcon>
-                                <Person />
-                            </ListItemIcon>
-                            <ListItemText primary="Mi Perfil" />
-                        </ListItem>
-                    </List>
+                <List>
+                    <ListItem button component={Link} to="/" key="sesion" onClick={handleDrawerClose}>
+                        <ListItemIcon>
+                            <Person />
+                        </ListItemIcon>
+                        <ListItemText primary="Iniciar Sesión" />
+                    </ListItem>
+                    <ListItem button component={Link} to="/encuesta/0" key="nueva" onClick={handleDrawerClose}>
+                        <ListItemIcon>
+                            <PostAddOutlined />
+                        </ListItemIcon>
+                        <ListItemText primary="Crear nueva encuesta" />
+                    </ListItem>
+                    <ListItem button component={Link} to="/encuestas" key="encuestas" onClick={handleDrawerClose}>
+                        <ListItemIcon>
+                            <ListAlt />
+                        </ListItemIcon>
+                        <ListItemText primary="Encuestas creadas" />
+                    </ListItem>
+                    <ListItem button component={Link} to="/perfil" key="perfil" onClick={handleDrawerClose}>
+                        <ListItemIcon>
+                            <Person />
+                        </ListItemIcon>
+                        <ListItemText primary="Mi Perfil" />
+                    </ListItem>
+                </List>
             </Drawer>
         </div>
     );
