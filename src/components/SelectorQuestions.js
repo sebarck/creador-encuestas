@@ -6,9 +6,27 @@ export class SelectorQuestions extends Component {
     
     constructor() {
         super()
-        this.state = ({questionTypeSelected: "1"})
+        this.state = ({questionTypeSelected: 1})
     }
 
+
+    static defaultProps={
+        selectedQuestion: 1
+    }
+
+    componentDidMount = () => {
+        this.setState({questionTypeSelected: this.props.selectedQuestion})
+
+    }
+    componentDidUpdate = (prevProps) => {
+        
+        if (this.props.selectedQuestion !== prevProps.selectedQuestion) {
+            this.setState({questionTypeSelected: this.props.selectedQuestion})
+
+        }
+    } 
+    
+    
     selectQuestion = (questionTypeSelected) => {
         this.setState({questionTypeSelected})
         this.props.questionType(questionTypeSelected)
