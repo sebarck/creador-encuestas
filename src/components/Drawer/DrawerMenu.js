@@ -27,7 +27,6 @@ const DrawerMenu = () => {
                     Creador de encuestas
                 </Typography>
             </Toolbar>
-            <BrowserRouter></BrowserRouter>
             <Drawer
                 variant="persistent"
                 anchor="left"
