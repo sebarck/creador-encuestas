@@ -1,13 +1,39 @@
 import React, { Component } from 'react';
 import { Questions } from './Questions'
 import { QuestionGenerator } from './QuestionGenerator'
-/*import 'bootstrap/dist/js/bootstrap.min.js'*/
-import 'bootstrap/dist/css/bootstrap.min.css'
-import '../style/simpleQuestion.css'
 import { Container, Col, Row } from 'reactstrap';
 import { Titulo } from './Titulo';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../style/simpleQuestion.css'
+
+import encuesta1 from '../recursos/encuesta1.json'
+
 
 export class NuevaEncuesta extends Component {
+    static propTypes={
+        match: PropTypes.shape({
+            params: PropTypes.shape({
+                id:PropTypes.string
+            }),
+            isExact: PropTypes.bool,
+            path: PropTypes.string,
+            url: PropTypes.string
+        })
+    }
+
+    static defaultProps={
+        match: {
+            params: {
+                id: ''
+            },
+            isExact: true,
+            path: '',
+            url: ''
+        }
+    }
 
     constructor() {
         super()
@@ -16,6 +42,29 @@ export class NuevaEncuesta extends Component {
             questions: []
         }
     }
+
+
+    componentDidMount = () => {
+
+        
+        var emptyTitle = {titulo: '', descripcion: ''}
+        var emptyQuestions = []
+        
+         this.props.match.params.id !=="0" ?
+            this.setState({titulo: encuesta1.titulo, questions: encuesta1.questions}) :                    
+            this.setState({titulo: emptyTitle, questions: emptyQuestions})
+        
+    }
+
+    componentDidUpdate = (prevProps) => {
+        var emptyTitle = {titulo: '', descripcion: ''}
+        var emptyQuestions = []
+        if (this.props.match.params.id !== prevProps.match.params.id) {
+            this.props.match.params.id!=="0" ?
+                this.setState({titulo: encuesta1.titulo, questions: encuesta1.questions}) :                    
+                this.setState({titulo: emptyTitle, questions: emptyQuestions})
+        }
+    } 
 
     updateTitle = (title) => {
         var nuevoTitulo = {titulo: title, descripcion: this.state.titulo.descripcion}
@@ -69,6 +118,7 @@ export class NuevaEncuesta extends Component {
        
 
     render() {
+
         return (
             <div className='container-fluid'>
                 <Container fluid="true">
@@ -77,6 +127,7 @@ export class NuevaEncuesta extends Component {
                             <Titulo 
                                 handleTitle={this.updateTitle}
                                 handleDescription={this.updateDescription}
+                                titulo={this.state.titulo}
                             />
                             <Questions 
                                 questions={this.state.questions} 
@@ -95,3 +146,5 @@ export class NuevaEncuesta extends Component {
         )
     }
 }
+
+export default withRouter(NuevaEncuesta);
