@@ -4,7 +4,6 @@ import { SelectorQuestions } from './SelectorQuestions'
 import { SimpleQuestion } from './SimpleQuestion'
 import { SimpleQuestionLarge } from './SimpleQuestionLarge'
 import { OptionImage } from './OptionImage'
-import PropTypes from 'prop-types'
 
 export class Question extends Component {
   
