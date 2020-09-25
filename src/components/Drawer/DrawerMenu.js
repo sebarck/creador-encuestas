@@ -32,7 +32,7 @@ const DrawerMenu = () => {
                     Creador de encuestas
                 </Typography>
             </Toolbar>
-            <BrowserRouter>
+            <BrowserRouter></BrowserRouter>
                 <Drawer
                     variant="persistent"
                     anchor="left"
@@ -45,13 +45,13 @@ const DrawerMenu = () => {
                     </div>
                     <Divider />
                     <List>
-                        <ListItem button component={Link} to="/iniciarsesión" key="sesion" onClick={handleDrawerClose}>
+                        <ListItem button component={Link} to="/login" key="sesion" onClick={handleDrawerClose}>
                             <ListItemIcon>
-                            <Person />
+                              <Person />
                             </ListItemIcon>
-                        <ListItemText primary="Iniciar Sesión" />
+                            <ListItemText primary="Iniciar Sesión" />
                         </ListItem>
-                        <ListItem button component={Link} to="/crear" key="nueva" onClick={handleDrawerClose}>
+                        <ListItem button component={Link} to="/encuesta/0" key="nueva" onClick={handleDrawerClose}>
                             <ListItemIcon>
                                 <PostAddOutlined />
                             </ListItemIcon>
@@ -71,22 +71,13 @@ const DrawerMenu = () => {
                         </ListItem>
 
                     </List>
-                </Drawer>
-                <Switch>
-                    <Route exact path="/">
-                        <SurveyList />
-                    </Route>
-                    <Route exact path="/crear">
-                        <NuevaEncuesta />
-                    </Route>
-                    <Route exact path="/perfil">
-                        <MiPerfil />
-                    </Route>
-                    <Route exact path="/iniciarsesión">
-                        <InicioDeSesión />
-                    </Route>
+                </Drawer> 
+                <Switch>    
+                    <Route path="/encuesta/:id" component={NuevaEncuesta} />
+                    <Route exact path="/" component={SurveyList} />
+										<Route exact path="/login" component={InicioDeSesión} />
                 </Switch>
-            </BrowserRouter>
+                </Drawer>
         </div>
     );
 }

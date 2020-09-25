@@ -31,6 +31,7 @@ export class Questions extends Component {
             this.props.questions.map((question,index) => {
                 return (
                     <div key={index}>
+                        {console.log(question)}
                         <Question 
                             index={index} 
                             handleChange={this.actualizadorTitulo} 
@@ -38,6 +39,7 @@ export class Questions extends Component {
                             handleMultiplesOptions={(multiplesOpciones) => this.actualizarMultiplesOpciones(index,multiplesOpciones)}
                             handleImageImageOptin={this.actualizarOpcionImagen}
                             title={question.titulo}
+                            question={question}
                         />
                     </div>
                     
