@@ -1,0 +1,49 @@
+{
+	"titulo": {
+		"titulo": "Encuesta de satisfaccion 2020",
+		"descripcion": "Encuesta dirigida a clientes para conocer su grado de satisfaccion"
+	},
+	"questions": [
+        {
+            "tipoPregunta": 1,
+            "titulo": "Que te pareció el año 2020?"
+        },
+        {
+            "tipoPregunta": 3,
+            "titulo": "Te gustaría repetirlo?",
+            "multiplesOptions": [
+                {
+                    "valueOption": "SI"
+                },
+                {
+                    "valueOption": "NO"
+                },
+                {
+                    "valueOption": "No estoy seguro"
+                }
+            ]
+        },
+        {
+            "tipoPregunta": 4,
+            "titulo": "Qué días trabajas remoto desde tu casa?",
+            "multiplesOptions": [
+                {
+                    "valueOption": "Lunes"
+                },
+                {
+                    "valueOption": "Martes"
+                },
+                {
+                    "valueOption": "Miércoles"
+                },
+                {
+                    "valueOption": "Jueves"
+                },
+                {
+                    "valueOption": "Viernes"
+                }
+            ]
+        }
+    ]
+
+}

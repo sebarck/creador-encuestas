@@ -12,6 +12,22 @@ export class OptionQuestion extends Component {
         }
     }
 
+    static defaultProps={
+        question: []
+    }
+
+    componentDidMount = () => {
+        console.log("componentDidMount - OptionCuestion", this.props.question)
+        this.setState({options: this.props.question}) 
+    }
+
+    componentDidUpdate = (prevProps) => {
+        if (this.props.question !== prevProps.question) {
+            this.setState({options: this.props.question}) 
+        }
+    } 
+    
+
     addOption = () => {
         var opciones = this.state.options
         var opcion = {}
@@ -34,16 +50,27 @@ export class OptionQuestion extends Component {
         this.setState({ options: opciones })
         this.props.handleMultiplesOptions(this.state.options)
     }
+
+    renderTypeButton = () => {
+        if (this.props.multiple==="true") {
+            return <CustomInput type="checkbox" id="checkbox" name="checkbox" disabled/>
+        }
+        else {
+            return <CustomInput type="radio" id="radio" name="radio" disabled/>
+        }
+    }
+
     render() {
         return (
             <Container className="themed-container" fluid={true}>
+                {console.log("option",this.state.option)}
                 {this.state.options.map((opcion, index) => {
                     return (
                         <div key={index} className="container-fluid">
                             <Container >
                                 <Row className="row">
                                     <Col className="col-xs-1 col-xl-1">
-                                        <CustomInput type="radio" id="radioOption" name="radioOption" />
+                                        {this.renderTypeButton()}
                                     </Col>
                                     <Col className="col-xs-9 col-xl-9">
                                         <input
