@@ -12,29 +12,17 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import Logo from '../images/observatoriopyme.png'
+import backendEncuestas from '../apis/backendEncuestas';
+import { CircularProgress } from '@material-ui/core';
 
 
 
 export default class Login extends Component {
   constructor() {
     super()
-    this.state = ({values: 1} )
+    this.state = ({ values: 1, isLoading: false })
   }
 
-  /*
-  Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://www.observatoriopyme.org.ar/">
-          Fundación Observatorio Pyme
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
-*/
   useStyles = makeStyles((theme) => ({
     paper: {
       marginTop: theme.spacing(8),
@@ -57,69 +45,58 @@ export default class Login extends Component {
 
   classes = this.useStyles
 
+  handleOcultarSpinner = () => {
+    this.setState({ isLoading: false })
+  }
 
   handleLogin = async (e) => {
-   e.preventDefault()
+    e.preventDefault()
+    this.setState({ isLoading: true });
 
-  const url='http://localhost:8080/api/v1/usuario'
-  const myHeaders = new Headers({
-    'Accept':'application/x-www-form-urlencoded',
-    'Content-Type': 'application/x-www-form-urlencoded'
-  //  'Access-Control-Allow-Origin': "http://localhost:3000"
-  });
-  const myInit = {
-    method: 'GET',
-    headers: myHeaders,
-    mode: 'cors',
-    cache: 'default'
-  };
-
-
- fetch(url,myInit)
- .then(response => response.text())
- .then(contents => console.log(contents))
- .catch((e) => console.log("Can’t access " + url + " response. Blocked by browser?",e))
-
-
-
-
-  
+    const response = await backendEncuestas.get("/usuario", {
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    });
+    
+    console.log(response);
+    this.setState({isLoading: false});
 
   }
 
-  render () {
+  render() {
     return (
       <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={this.classes.paper}>
-      <img
-          src={Logo}
-          className="imagenObservatorioPyme"
-          alt="Obs pyme"
-          width="128"
-          height="128"
-      />
-        <Typography component="h1" variant="h5">
-          ¡Bienvenido, Usuario!
-        </Typography>
-        <form className={this.classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="usuario"
-            label="Usuario/Mail"
-            name="usuario"
-            autoComplete="usuario"
-            autoFocus
+        <CssBaseline />
+        <div className={this.classes.paper}>
+          <img
+            src={Logo}
+            className="imagenObservatorioPyme"
+            alt="Obs pyme"
+            width="128"
+            height="128"
           />
+          <Typography component="h1" variant="h5">
+            ¡Bienvenido, Usuario!
+        </Typography>
+          <form className={this.classes.form} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              name="contraseña" 
+              id="usuario"
+              label="Usuario/Mail"
+              name="usuario"
+              autoComplete="usuario"
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="contraseña"
               label="Contraseña"
               type={this.state.values.showPassword ? 'text' : 'password'}
               id="contraseña"
@@ -129,21 +106,23 @@ export default class Login extends Component {
               control={<Checkbox value="remember" color="primary" />}
               label="Recordarme"
             />
-            <Button
-              onClick={this.handleLogin}
-              component={Link}
-              to="/encuestas"
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={this.classes.submit}
-            >
-              Iniciar Sesión
-            </Button>
+            {this.state.isLoading
+              ? <CircularProgress />
+              : (<Button
+                onClick={this.handleLogin}
+                component={Link}
+                to="/encuestas"
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={this.classes.submit}
+              >
+                Iniciar Sesión
+              </Button>)}
             <Grid container>
               <Grid item xs>
-               {/* 
+                {/* 
                 <Link href="#" variant="body2">
                   Olvidé mi contraseña
                 </Link>
