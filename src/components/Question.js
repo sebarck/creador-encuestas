@@ -12,10 +12,7 @@ export class Question extends Component {
         this.state={questionSelector: 1}
     }
 
-
     renderQuestionType = (questionType) => {
-        console.log(this.props.question)
-        console.log("questionType", questionType)
         switch(this.props.question.tipoPregunta) {
             case 1:
                 return <SimpleQuestion />

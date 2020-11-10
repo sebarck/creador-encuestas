@@ -43,7 +43,7 @@ const DrawerMenu = () => {
                         <ListItemIcon>
                             <Person />
                         </ListItemIcon>
-                        <ListItemText primary="Iniciar Sesión" />
+                        <ListItemText primary="Cerrar Sesion" />
                     </ListItem>
                     <ListItem button component={Link} to="/encuesta/0" key="nueva" onClick={handleDrawerClose}>
                         <ListItemIcon>
