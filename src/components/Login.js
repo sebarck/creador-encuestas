@@ -64,8 +64,8 @@ export default class Login extends Component {
   const url='http://localhost:8080/api/v1/usuario'
   const myHeaders = new Headers({
     'Accept':'application/x-www-form-urlencoded',
-    'Content-Type': 'application/x-www-form-urlencoded'
-  //  'Access-Control-Allow-Origin': "http://localhost:3000"
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Access-Control-Allow-Origin': "http://localhost:3000"
   });
   const myInit = {
     method: 'GET',
