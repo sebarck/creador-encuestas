@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -13,53 +13,85 @@ import Container from '@material-ui/core/Container';
 
 import Logo from '../images/observatoriopyme.png'
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://www.observatoriopyme.org.ar/">
-        Fundación Observatorio Pyme
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
-export default function Login() {
-  const classes = useStyles();
-  const [values] = React.useState({
-    amount: '',
-    password: '',
-    weight: '',
-    weightRange: '',
-    showPassword: false,
+export default class Login extends Component {
+  constructor() {
+    super()
+    this.state = ({values: 1} )
+  }
+
+  /*
+  Copyright() {
+    return (
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" href="https://www.observatoriopyme.org.ar/">
+          Fundación Observatorio Pyme
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
+*/
+  useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+
+  classes = this.useStyles
+
+
+  handleLogin = async (e) => {
+   e.preventDefault()
+
+  const url='http://localhost:8080/api/v1/usuario'
+  const myHeaders = new Headers({
+    'Accept':'application/x-www-form-urlencoded',
+    'Content-Type': 'application/x-www-form-urlencoded'
+  //  'Access-Control-Allow-Origin': "http://localhost:3000"
   });
+  const myInit = {
+    method: 'GET',
+    headers: myHeaders,
+    mode: 'cors',
+    cache: 'default'
+  };
 
-  return (
-    <Container component="main" maxWidth="xs">
+
+ fetch(url,myInit)
+ .then(response => response.text())
+ .then(contents => console.log(contents))
+ .catch((e) => console.log("Can’t access " + url + " response. Blocked by browser?",e))
+
+
+
+
+  
+
+  }
+
+  render () {
+    return (
+      <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
+      <div className={this.classes.paper}>
       <img
           src={Logo}
           className="imagenObservatorioPyme"
@@ -70,7 +102,7 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           ¡Bienvenido, Usuario!
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={this.classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -82,44 +114,48 @@ export default function Login() {
             autoComplete="usuario"
             autoFocus
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="contraseña"
-            label="Contraseña"
-            type={values.showPassword ? 'text' : 'password'}
-            id="contraseña"
-            autoComplete="contraseña-actual"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Recordarme"
-          />
-          <Button
-            component={Link}
-            to="/encuestas"
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Iniciar Sesión
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Olvidé mi contraseña
-              </Link>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="contraseña" 
+              label="Contraseña"
+              type={this.state.values.showPassword ? 'text' : 'password'}
+              id="contraseña"
+              autoComplete="contraseña-actual"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Recordarme"
+            />
+            <Button
+              onClick={this.handleLogin}
+              component={Link}
+              to="/encuestas"
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={this.classes.submit}
+            >
+              Iniciar Sesión
+            </Button>
+            <Grid container>
+              <Grid item xs>
+               {/* 
+                <Link href="#" variant="body2">
+                  Olvidé mi contraseña
+                </Link>
+              */}
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
-  );
+          </form>
+        </div>
+        <Box mt={8}>
+          {this.Copyright}
+        </Box>
+      </Container>
+    )
+  }
 }
