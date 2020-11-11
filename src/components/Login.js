@@ -18,7 +18,10 @@ import Logo from '../images/observatoriopyme.png'
 export default class Login extends Component {
   constructor() {
     super()
-    this.state = ({values: 1} )
+    this.state = ({
+      values: 1,
+      email: 'cristianmerenda2@afa.com'
+    } )
   }
 
   /*
@@ -61,17 +64,18 @@ export default class Login extends Component {
   handleLogin = async (e) => {
    e.preventDefault()
 
-  const url='http://localhost:8080/api/v1/usuario'
+  const url='http://localhost:8080/api/v1/login'
   const myHeaders = new Headers({
     'Accept':'application/x-www-form-urlencoded',
     'Content-Type': 'application/x-www-form-urlencoded',
     'Access-Control-Allow-Origin': "http://localhost:3000"
   });
   const myInit = {
-    method: 'GET',
+    method: 'POST',
     headers: myHeaders,
     mode: 'cors',
-    cache: 'default'
+    cache: 'default',
+    body: JSON.stringify( {email: this.state.email, password:  this.state.password})
   };
 
 
@@ -113,6 +117,7 @@ export default class Login extends Component {
             name="usuario"
             autoComplete="usuario"
             autoFocus
+            onChange={(e)=>{this.setState({email: e.target.value})}}
           />
             <TextField
               variant="outlined"
@@ -124,6 +129,7 @@ export default class Login extends Component {
               type={this.state.values.showPassword ? 'text' : 'password'}
               id="contraseña"
               autoComplete="contraseña-actual"
+              onChange={(e) => {this.setState({password: e.target.value})}}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -140,7 +146,11 @@ export default class Login extends Component {
               className={this.classes.submit}
             >
               Iniciar Sesión
+              
             </Button>
+            <p>{this.state.email}</p>
+            <p>{this.state.password}</p>
+            <p>aa</p>
             <Grid container>
               <Grid item xs>
                {/* 
@@ -152,6 +162,7 @@ export default class Login extends Component {
             </Grid>
           </form>
         </div>
+        
         <Box mt={8}>
           {this.Copyright}
         </Box>
