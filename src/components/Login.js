@@ -60,10 +60,12 @@ export default class Login extends Component {
 
   classes = this.useStyles
 
-
   handleLogin = async (e) => {
-   e.preventDefault()
+    e.preventDefault()
 
+  let formData = new URLSearchParams()   
+  formData.append('email', this.state.email)
+  formData.append('password', this.state.password)
   const url='http://localhost:8080/api/v1/login'
   const myHeaders = new Headers({
     'Accept':'application/x-www-form-urlencoded',
@@ -75,9 +77,10 @@ export default class Login extends Component {
     headers: myHeaders,
     mode: 'cors',
     cache: 'default',
-    body: JSON.stringify( {email: this.state.email, password:  this.state.password})
+    body: formData
   };
-
+//revisar esta URL para los parámetros
+//https://stackoverrun.com/es/q/9738505
 
  fetch(url,myInit)
  .then(response => response.text())
