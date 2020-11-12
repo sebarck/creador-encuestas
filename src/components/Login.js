@@ -7,19 +7,31 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { withRouter } from 'react-router-dom'
 
 import Logo from '../images/observatoriopyme.png'
+import { MensajeError } from './mensajeria/mensajeError';
 
 
 
-export default class Login extends Component {
+export class Login extends Component {
+  
   constructor() {
     super()
-    this.state = ({values: 1} )
+    this.state = ({
+      isLogged: false,
+      mensajeError: '',
+      values: 1,
+      email: 'usuario1gmail.com',
+      password: 'Una clave nueva'
+
+    } )
   }
+
+
+
 
   /*
   Copyright() {
@@ -57,35 +69,47 @@ export default class Login extends Component {
 
   classes = this.useStyles
 
+handleLogin = async (e) => {
+    e.preventDefault()
+    
+    let formData = new URLSearchParams()   
+    formData.append('email', this.state.email)
+    formData.append('password', this.state.password)
+    const url='http://localhost:8080/api/v1/login'
+    const myHeaders = new Headers({
+        'Accept':'application/x-www-form-urlencoded',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Access-Control-Allow-Origin': "http://localhost:3000"
+    })
+    const myInit = {
+        method: 'POST',
+        headers: myHeaders,
+        mode: 'cors',
+        cache: 'default',
+        body: formData
+    };
 
-  handleLogin = async (e) => {
-   e.preventDefault()
-
-  const url='http://localhost:8080/api/v1/usuario'
-  const myHeaders = new Headers({
-    'Accept':'application/x-www-form-urlencoded',
-    'Content-Type': 'application/x-www-form-urlencoded'
-  //  'Access-Control-Allow-Origin': "http://localhost:3000"
-  });
-  const myInit = {
-    method: 'GET',
-    headers: myHeaders,
-    mode: 'cors',
-    cache: 'default'
-  };
-
-
- fetch(url,myInit)
- .then(response => response.text())
- .then(contents => console.log(contents))
- .catch((e) => console.log("Can’t access " + url + " response. Blocked by browser?",e))
-
-
-
-
-  
-
-  }
+    fetch(url,myInit)
+        .then(response => {
+            this.setState({isLogged: response.ok})
+            return (response.json())
+        })
+        .then(data => {
+            console.log(data);
+            if (this.state.isLogged) {
+                this.props.history.push('/encuestas')
+            }
+            else {
+                console.log('is logged?',this.state.isLogged)
+                console.log(data.err);
+                this.setState({mensajeError: data.err.message})
+            }
+        })
+    .catch((e) => {
+        console.log(e);
+        this.setState({mensajeError: "Error de sistema"})
+    })
+}
 
   render () {
     return (
@@ -99,9 +123,10 @@ export default class Login extends Component {
           width="128"
           height="128"
       />
-        <Typography component="h1" variant="h5">
-          ¡Bienvenido, Usuario!
-        </Typography>
+        <MensajeError className="mensajeError">
+          {this.state.mensajeError}
+        </MensajeError>
+
         <form className={this.classes.form} noValidate>
           <TextField
             variant="outlined"
@@ -113,6 +138,7 @@ export default class Login extends Component {
             name="usuario"
             autoComplete="usuario"
             autoFocus
+            onChange={(e)=>{this.setState({email: e.target.value})}}
           />
             <TextField
               variant="outlined"
@@ -124,6 +150,7 @@ export default class Login extends Component {
               type={this.state.values.showPassword ? 'text' : 'password'}
               id="contraseña"
               autoComplete="contraseña-actual"
+              onChange={(e) => {this.setState({password: e.target.value})}}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -140,18 +167,21 @@ export default class Login extends Component {
               className={this.classes.submit}
             >
               Iniciar Sesión
+              
             </Button>
+            
             <Grid container>
               <Grid item xs>
-               {/* 
+                
                 <Link href="#" variant="body2">
                   Olvidé mi contraseña
                 </Link>
-              */}
+              
               </Grid>
             </Grid>
           </form>
         </div>
+        
         <Box mt={8}>
           {this.Copyright}
         </Box>
@@ -159,3 +189,5 @@ export default class Login extends Component {
     )
   }
 }
+
+export default withRouter(Login);
