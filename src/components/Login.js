@@ -13,6 +13,7 @@ import { withRouter } from 'react-router-dom'
 
 import Logo from '../images/observatoriopyme.png'
 import { MensajeError } from './mensajeria/mensajeError';
+import { Typography } from '@material-ui/core';
 
 
 
@@ -31,14 +32,11 @@ export class Login extends Component {
   }
 
 
-
-
-  /*
   Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://www.observatoriopyme.org.ar/">
+        <Link color="inherit" to="https://www.observatoriopyme.org.ar/">
           Fundación Observatorio Pyme
         </Link>{' '}
         {new Date().getFullYear()}
@@ -46,7 +44,7 @@ export class Login extends Component {
       </Typography>
     );
   }
-*/
+
   useStyles = makeStyles((theme) => ({
     paper: {
       marginTop: theme.spacing(8),
@@ -69,7 +67,7 @@ export class Login extends Component {
 
   classes = this.useStyles
 
-handleLogin = async (e) => {
+handleLogin = (e) => {
     e.preventDefault()
     
     let formData = new URLSearchParams()   
