@@ -9,8 +9,8 @@ import PropTypes from 'prop-types'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/simpleQuestion.css'
 
-import { converter } from '../helpers/helper' 
-
+import converter   from '../helpers/helper' 
+import encuestaController from '../controller/encuestasController'
 import encuesta1 from '../recursos/encuesta1.json'
 
 
@@ -119,47 +119,15 @@ export class NuevaEncuesta extends Component {
     }
 
     managePoll = () => {
-    
-        let convertJsonToBodyServices = converter.encuestas()
-     
-        const url='http://localhost:8080/api/v1/encuestas'
-        const myHeaders = new Headers({
-            'Accept':'application/x-www-form-urlencoded',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Access-Control-Allow-Origin': "http://localhost:3000"
-        })
-        const myInit = {
-            method: 'POST',
-            headers: myHeaders,
-            mode: 'cors',
-            cache: 'default',
-            body: convertJsonToBodyServices
-        };
-
-        fetch(url,myInit)
-            .then(response => {
-                this.setState({isLogged: response.ok})
-                return (response.json())
-            })
-            .then(data => {
-                console.log(data);
-                if (this.state.isLogged) {
-                    this.props.history.push('/encuestas')
-                }
-                else {
-                    console.log('is logged?',this.state.isLogged)
-                    console.log(data.err);
-                    this.setState({mensajeError: data.err.message})
-                }
-            })
-        .catch((e) => {
-            console.log(e);
-            this.setState({mensajeError: "Error de sistema"})
-        })
+        let convertStateToBodyAPI = converter(this.state)      
+        encuestaController.generarEncuesta(
+            convertStateToBodyAPI,
+            response => console.log(response.json()),
+            data => console.log(data),
+            (e) => console.log(e) 
+        )        
     }
 
-
-       
 
     render() {
 
