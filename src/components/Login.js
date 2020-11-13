@@ -25,7 +25,7 @@ export class Login extends Component {
       isLogged: false,
       mensajeError: '',
       values: 1,
-      email: 'usuario1gmail.com',
+      email: 'usuario20@gmail.com',
       password: 'Una clave nueva'
 
     } )

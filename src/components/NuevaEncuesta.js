@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/simpleQuestion.css'
 
 import converter   from '../helpers/helper' 
-import encuestaController from '../controller/encuestasController'
+import generarEncuesta from '../controller/encuestasController'
 import encuesta1 from '../recursos/encuesta1.json'
 
 
@@ -120,7 +120,7 @@ export class NuevaEncuesta extends Component {
 
     managePoll = () => {
         let convertStateToBodyAPI = converter(this.state)      
-        encuestaController.generarEncuesta(
+        generarEncuesta(
             convertStateToBodyAPI,
             response => console.log(response.json()),
             data => console.log(data),
