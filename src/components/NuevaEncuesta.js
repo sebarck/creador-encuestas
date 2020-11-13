@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Questions } from './Questions'
 import { QuestionGenerator } from './QuestionGenerator'
-import { Container, Col, Row } from 'reactstrap';
+import { Container, Col, Row, Button } from 'reactstrap';
 import { Titulo } from './Titulo';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/simpleQuestion.css'
+
+import { converter } from '../helpers/helper' 
 
 import encuesta1 from '../recursos/encuesta1.json'
 
@@ -114,7 +116,49 @@ export class NuevaEncuesta extends Component {
         var questions = this.state.questions
         questions[index].imageOptions = imageOptions
         this.setState({questions: questions})
-        }
+    }
+
+    managePoll = () => {
+    
+        let convertJsonToBodyServices = converter.encuestas()
+     
+        const url='http://localhost:8080/api/v1/encuestas'
+        const myHeaders = new Headers({
+            'Accept':'application/x-www-form-urlencoded',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Access-Control-Allow-Origin': "http://localhost:3000"
+        })
+        const myInit = {
+            method: 'POST',
+            headers: myHeaders,
+            mode: 'cors',
+            cache: 'default',
+            body: convertJsonToBodyServices
+        };
+
+        fetch(url,myInit)
+            .then(response => {
+                this.setState({isLogged: response.ok})
+                return (response.json())
+            })
+            .then(data => {
+                console.log(data);
+                if (this.state.isLogged) {
+                    this.props.history.push('/encuestas')
+                }
+                else {
+                    console.log('is logged?',this.state.isLogged)
+                    console.log(data.err);
+                    this.setState({mensajeError: data.err.message})
+                }
+            })
+        .catch((e) => {
+            console.log(e);
+            this.setState({mensajeError: "Error de sistema"})
+        })
+    }
+
+
        
 
     render() {
@@ -138,7 +182,21 @@ export class NuevaEncuesta extends Component {
                             />
                         </Col>
                         <Col className='right-column-builder'>
-                            <QuestionGenerator handleButton={this.addQuestion} />
+                            <Row>
+                                <Col>
+                                    <QuestionGenerator handleButton={this.addQuestion} />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className="contenedorButtonGuardar">
+                                <Button className="buttonSelector buttonGuardar" 
+                                    variant="secondary"
+                                    onClick={this.managePoll}
+                                >
+                                    Guardar encuesta
+                                </Button>
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
                 </Container>
