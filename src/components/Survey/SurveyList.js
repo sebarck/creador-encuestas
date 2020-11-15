@@ -45,7 +45,7 @@ export  class SurveyList extends Component {
                             {
                                 icon: 'edit',
                                 tooltip: 'Modificar encuesta',
-                                onClick: () => this.modificarEncuesta('1')
+                                onClick: () => this.modificarEncuesta('5fa789442738422892e6a4d0')
                             },
                             {
                                 icon: 'delete',

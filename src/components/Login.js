@@ -26,7 +26,7 @@ export class Login extends Component {
       mensajeError: '',
       values: 1,
       email: 'usuario20@gmail.com',
-      password: 'Una clave nueva'
+      password: 'Una Passwordd'
 
     } )
   }
