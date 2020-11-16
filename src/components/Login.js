@@ -15,8 +15,6 @@ import Logo from '../images/observatoriopyme.png'
 import { MensajeError } from './mensajeria/mensajeError';
 import { Typography } from '@material-ui/core';
 
-import { login } from '../controller/loginController'
-
 
 export class Login extends Component {
   
@@ -26,8 +24,8 @@ export class Login extends Component {
       isLogged: false,
       mensajeError: '',
       values: 1,
-      email: 'usuario20@gmail.com',
-      password: 'Una Passwordd'
+      email: 'usuario1gmail.com',
+      password: 'Una clave nueva'
 
     } )
   }
@@ -67,26 +65,45 @@ export class Login extends Component {
 
   classes = this.useStyles
 
-handleLogin = (e) => {
+handleLogin = async (e) => {
     e.preventDefault()
     
     let formData = new URLSearchParams()   
     formData.append('email', this.state.email)
     formData.append('password', this.state.password)
-    login(formData
-        ,(data => {
-            if (data.ok) {
-                this.setState({isLogged: true})
+    const myHeaders = new Headers({
+        'Accept':'application/x-www-form-urlencoded',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Access-Control-Allow-Origin': `${process.env.REACT_APP_BACKEND_ORIGIN}`
+    })
+    const myInit = {
+        method: 'POST',
+        headers: myHeaders,
+        mode: 'cors',
+        cache: 'default',
+        body: formData
+    };
+
+    fetch(`${process.env.REACT_APP_BACKEND_URI}/login`,myInit)
+        .then(response => {
+            this.setState({isLogged: response.ok})
+            return (response.json())
+        })
+        .then(data => {
+            console.log(data);
+            if (this.state.isLogged) {
                 this.props.history.push('/encuestas')
             }
             else {
+                console.log('is logged?',this.state.isLogged)
+                console.log(data.err);
                 this.setState({mensajeError: data.err.message})
             }
         })
-    ,(e) => {
+    .catch((e) => {
+        console.log(e);
         this.setState({mensajeError: "Error de sistema"})
-    }
-    )
+    })
 }
 
   render () {

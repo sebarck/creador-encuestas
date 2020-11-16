@@ -31,6 +31,7 @@ export class Questions extends Component {
             this.props.questions.map((question,index) => {
                 return (
                     <div key={index}>
+                        {console.log(question)}
                         <Question 
                             index={index} 
                             handleChange={this.actualizadorTitulo} 
