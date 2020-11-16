@@ -105,7 +105,6 @@ export class NuevaEncuesta extends Component {
     }
 
     updateMultiplesOptions = (index,multiplesOptions) => {
-        console.log('multiplesOptions',multiplesOptions)
         var questions = this.state.questions
         if (index > questions.length) {
             var question

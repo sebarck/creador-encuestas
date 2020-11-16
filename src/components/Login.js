@@ -14,6 +14,7 @@ import { withRouter } from 'react-router-dom'
 import Logo from '../images/observatoriopyme.png'
 import { MensajeError } from './mensajeria/mensajeError';
 import { Typography } from '@material-ui/core';
+import { login } from '../controller/loginController'
 
 
 
@@ -73,38 +74,20 @@ handleLogin = (e) => {
     let formData = new URLSearchParams()   
     formData.append('email', this.state.email)
     formData.append('password', this.state.password)
-    const url='http://localhost:8080/api/v1/login'
-    const myHeaders = new Headers({
-        'Accept':'application/x-www-form-urlencoded',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': "http://localhost:3000"
-    })
-    const myInit = {
-        method: 'POST',
-        headers: myHeaders,
-        mode: 'cors',
-        cache: 'default',
-        body: formData
-    };
-
-    fetch(url,myInit)
-        .then(response => {
-            this.setState({isLogged: response.ok})
-            return (response.json())
-        })
-        .then(data => {
-            if (this.state.isLogged) {
+    login(formData
+        ,(data => {
+            if (data.ok) {
+                this.setState({isLogged: true})
                 this.props.history.push('/encuestas')
             }
             else {
-                console.log(data.err);
                 this.setState({mensajeError: data.err.message})
             }
         })
-    .catch((e) => {
-        console.log(e);
+    ,(e) => {
         this.setState({mensajeError: "Error de sistema"})
-    })
+    }
+    )
 }
 
   render () {
