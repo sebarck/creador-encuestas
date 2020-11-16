@@ -7,20 +7,42 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { withRouter } from 'react-router-dom'
 
 import Logo from '../images/observatoriopyme.png'
-import backendEncuestas from '../apis/backendEncuestas';
-import { CircularProgress } from '@material-ui/core';
+import { MensajeError } from './mensajeria/mensajeError';
+import { Typography } from '@material-ui/core';
 
 
 
-export default class Login extends Component {
+export class Login extends Component {
+  
   constructor() {
     super()
-    this.state = ({ values: 1, isLoading: false })
+    this.state = ({
+      isLogged: false,
+      mensajeError: '',
+      values: 1,
+      email: 'usuario20@gmail.com',
+      password: 'Una clave nueva'
+
+    } )
+  }
+
+
+  Copyright() {
+    return (
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" to="https://www.observatoriopyme.org.ar/">
+          Fundación Observatorio Pyme
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
   }
 
   useStyles = makeStyles((theme) => ({
@@ -45,92 +67,118 @@ export default class Login extends Component {
 
   classes = this.useStyles
 
-  handleOcultarSpinner = () => {
-    this.setState({ isLoading: false })
-  }
-
-  handleLogin = async (e) => {
+handleLogin = (e) => {
     e.preventDefault()
-    this.setState({ isLoading: true });
-
-    const response = await backendEncuestas.get("/usuario", {
-      "headers": {
-        "Content-Type": "application/json"
-      }
-    });
     
-    console.log(response);
-    this.setState({isLoading: false});
+    let formData = new URLSearchParams()   
+    formData.append('email', this.state.email)
+    formData.append('password', this.state.password)
+    const myHeaders = new Headers({
+        'Accept':'application/x-www-form-urlencoded',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Access-Control-Allow-Origin': `${process.env.REACT_APP_BACKEND_ORIGIN}`
+    })
+    const myInit = {
+        method: 'POST',
+        headers: myHeaders,
+        mode: 'cors',
+        cache: 'default',
+        body: formData
+    };
 
-  }
+    fetch(`${process.env.REACT_APP_BACKEND_URI}`,myInit)
+        .then(response => {
+            this.setState({isLogged: response.ok})
+            return (response.json())
+        })
+        .then(data => {
+            console.log(data);
+            if (this.state.isLogged) {
+                this.props.history.push('/encuestas')
+            }
+            else {
+                console.log('is logged?',this.state.isLogged)
+                console.log(data.err);
+                this.setState({mensajeError: data.err.message})
+            }
+        })
+    .catch((e) => {
+        console.log(e);
+        this.setState({mensajeError: "Error de sistema"})
+    })
+}
 
-  render() {
+  render () {
     return (
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={this.classes.paper}>
-          <img
-            src={Logo}
-            className="imagenObservatorioPyme"
-            alt="Obs pyme"
-            width="128"
-            height="128"
+      <CssBaseline />
+      <div className={this.classes.paper}>
+      <img
+          src={Logo}
+          className="imagenObservatorioPyme"
+          alt="Obs pyme"
+          width="128"
+          height="128"
+      />
+        <MensajeError className="mensajeError">
+          {this.state.mensajeError}
+        </MensajeError>
+
+        <form className={this.classes.form} noValidate>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="usuario"
+            label="Usuario/Mail"
+            name="usuario"
+            autoComplete="usuario"
+            autoFocus
+            onChange={(e)=>{this.setState({email: e.target.value})}}
           />
-          <Typography component="h1" variant="h5">
-            ¡Bienvenido, Usuario!
-        </Typography>
-          <form className={this.classes.form} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              id="usuario"
-              label="Usuario/Mail"
-              name="usuario"
-              autoComplete="usuario"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="contraseña"
+              name="contraseña" 
               label="Contraseña"
               type={this.state.values.showPassword ? 'text' : 'password'}
               id="contraseña"
               autoComplete="contraseña-actual"
+              onChange={(e) => {this.setState({password: e.target.value})}}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Recordarme"
             />
-            {this.state.isLoading
-              ? <CircularProgress />
-              : (<Button
-                onClick={this.handleLogin}
-                component={Link}
-                to="/encuestas"
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={this.classes.submit}
-              >
-                Iniciar Sesión
-              </Button>)}
+            <Button
+              onClick={this.handleLogin}
+              component={Link}
+              to="/encuestas"
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={this.classes.submit}
+            >
+              Iniciar Sesión
+              
+            </Button>
+            
             <Grid container>
               <Grid item xs>
-                {/* 
+                
                 <Link href="#" variant="body2">
                   Olvidé mi contraseña
                 </Link>
-              */}
+              
               </Grid>
             </Grid>
           </form>
         </div>
+        
         <Box mt={8}>
           {this.Copyright}
         </Box>
@@ -138,3 +186,5 @@ export default class Login extends Component {
     )
   }
 }
+
+export default withRouter(Login);
