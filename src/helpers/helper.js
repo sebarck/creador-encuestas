@@ -11,7 +11,7 @@ export const encuestasToBodyApi = (encuesta) => {
     }
     Object.values(encuesta.questions).forEach((question,index) => {
         let questionBody = {
-            q_type: question.tipoPregunta,
+            q_type: question.tipoPregunta.toString(),
             value: question.titulo,
             mandatory: Boolean(true),
             options: question.multiplesOptions
@@ -32,7 +32,7 @@ export const bodyApiToEncuesta = (bodyApi) => {
 
     Object.values(bodyApi.encuesta.questions.values).forEach((question,index) => {
         let questionBody = {
-            tipoPregunta: question.q_type,
+            tipoPregunta: parseInt(question.q_type),
             titulo: question.value,
             multiplesOptions: question.options
         }
