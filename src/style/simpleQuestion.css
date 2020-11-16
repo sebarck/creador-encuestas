@@ -149,10 +149,22 @@ input:focus {
 .buttonSelector {
     margin: 15px;
     padding: 10px;
+    text-align: rigth;
+}
+
+.buttonGuardar {
+    width: 300px;
 }
 
 .mensajeError {
     font-size: 15px; 
     color: red;
     padding: 10px; 
+}
+
+.contenedorButtonGuardar {
+    padding: 30px;
+    text-align: right;
+    
+
 }
