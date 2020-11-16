@@ -1,4 +1,4 @@
-const origin = process.env.REACT_APP_ORIGIN
+const origin = process.env.REACT_APP_BACKEND_ORIGIN
     const myHeaders = new Headers({
         'Accept':'application/x-www-form-urlencoded, application/json',
         'Content-Type': 'application/json',
@@ -7,7 +7,7 @@ const origin = process.env.REACT_APP_ORIGIN
 
 
 export const generarEncuesta = (body,callbackResponse, callbackData, callbackCatch) => {
-    const url = process.env.REACT_APP_API_URL
+    const url = process.env.REACT_APP_BACKEND_URI
     const myInit = {
         method: 'POST',
         headers: myHeaders,
@@ -23,7 +23,7 @@ export const generarEncuesta = (body,callbackResponse, callbackData, callbackCat
 }
 
 export const actualizarEncuesta = (id, body, callbackResponse, callbackData, callbackCatch) => {
-    const url = process.env.REACT_APP_API_URL
+    const url = process.env.REACT_APP_BACKEND_URI
     const myInit = {
         method: 'PUT',
         headers: myHeaders,
@@ -39,7 +39,7 @@ export const actualizarEncuesta = (id, body, callbackResponse, callbackData, cal
 }
 
 export const obtenerTodasEncuestas = (callbackData, callbackCatch) => {
-    const url = process.env.REACT_APP_API_URL
+    const url = process.env.REACT_APP_BACKEND_URI
         const myInit = {
         method: 'GET',
         headers: myHeaders,
@@ -54,7 +54,7 @@ export const obtenerTodasEncuestas = (callbackData, callbackCatch) => {
 }
 
 export const obtenerEncuestaById = (id, callbackData, callbackCatch) => {
-    const url = process.env.REACT_APP_API_URL
+    const url = process.env.REACT_APP_BACKEND_URI
         const myInit = {
         method: 'GET',
         headers: myHeaders,
