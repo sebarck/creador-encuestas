@@ -17,7 +17,6 @@ export class OptionQuestion extends Component {
     }
 
     componentDidMount = () => {
-        console.log("componentDidMount - OptionCuestion", this.props.question)
         this.setState({options: this.props.question}) 
     }
 
@@ -63,7 +62,6 @@ export class OptionQuestion extends Component {
     render() {
         return (
             <Container className="themed-container" fluid={true}>
-                {console.log("option",this.state.option)}
                 {this.state.options.map((opcion, index) => {
                     return (
                         <div key={index} className="container-fluid">
