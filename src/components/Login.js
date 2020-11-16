@@ -84,7 +84,7 @@ handleLogin = async (e) => {
         body: formData
     };
 
-    fetch(`${process.env.REACT_APP_BACKEND_URI}`,myInit)
+    fetch(`${process.env.REACT_APP_BACKEND_URI}/login`,myInit)
         .then(response => {
             this.setState({isLogged: response.ok})
             return (response.json())
