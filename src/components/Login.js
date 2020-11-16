@@ -14,8 +14,8 @@ import { withRouter } from 'react-router-dom'
 import Logo from '../images/observatoriopyme.png'
 import { MensajeError } from './mensajeria/mensajeError';
 import { Typography } from '@material-ui/core';
-import { login } from '../controller/loginController'
 
+import { login } from '../controller/loginController'
 
 
 export class Login extends Component {
@@ -31,7 +31,6 @@ export class Login extends Component {
 
     } )
   }
-
 
   Copyright() {
     return (
