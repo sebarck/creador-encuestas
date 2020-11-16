@@ -2,40 +2,9 @@ import { Container } from '@material-ui/core';
 import MaterialTable from 'material-table';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
-import { obtenerTodasEncuestas } from '../../controller/encuestasController'
 
 
 export  class SurveyList extends Component {
-
-    constructor() {
-        super()
-        this.state = {
-            data: [],
-            action: []
-        }
-    }
-    componentDidMount  =() => {
-        obtenerTodasEncuestas(
-            data => {
-                let dataState = []
-                data.data.map((encuesta) => {
-                    let dataListSurvey = {
-                        name: encuesta.poll_title,
-                        description: encuesta.description,
-                        creationDate: encuesta.createAt,
-                        createdBy: 'Tito Perez',
-                        id: encuesta._id
-                    }
-
-                    dataState.push(dataListSurvey) 
-                    return true
-                })
-                this.setState({data: dataState})
-            },
-            (e) => console.log(e) 
-        )
-
-    }
  
     modificarEncuesta = (id) => {
         this.props.history.push('/encuesta/'+id)
@@ -51,20 +20,32 @@ export  class SurveyList extends Component {
                             { title: 'Nombre', field: 'name' },
                             { title: 'Descripcion', field: 'description' },
                             { title: 'Fecha de creacion', field: 'creationDate' },
-                            { title: 'Creado por', field: 'createdBy' },
-                            {title: 'id', field: 'id', hidden: true}
+                            { title: 'Creado por', field: 'createdBy' }
                         ]}
-                        data={this.state.data}
+                        data={[
+                            {
+                                name: 'Encuesta de satisfaccion 2020',
+                                description: 'Encuesta dirigida a clientes para conocer su grado de satisfaccion',
+                                creationDate: '19/09/2020',
+                                createdBy: 'Jose Perez'
+                            },
+                            {
+                                name: 'Benchmarking marketing Abril 2020',
+                                description: 'Encuesta para medir el grado de llegada del marketing realizado en Abril',
+                                creationDate: '15/09/2020',
+                                createdBy: 'Tito Lopez'
+                            }
+                        ]}
                         actions={[
                             {
                                 icon: 'library_add',
                                 tooltip: 'Duplicar encuesta',
-                                
+                                onClick: () => console.log("Duplicar encuesta fired")
                             },
                             {
                                 icon: 'edit',
                                 tooltip: 'Modificar encuesta',
-                                onClick: (event, rowData) => this.modificarEncuesta(rowData.id)
+                                onClick: () => this.modificarEncuesta('1')
                             },
                             {
                                 icon: 'delete',
