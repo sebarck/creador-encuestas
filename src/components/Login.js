@@ -93,12 +93,10 @@ handleLogin = (e) => {
             return (response.json())
         })
         .then(data => {
-            console.log(data);
             if (this.state.isLogged) {
                 this.props.history.push('/encuestas')
             }
             else {
-                console.log('is logged?',this.state.isLogged)
                 console.log(data.err);
                 this.setState({mensajeError: data.err.message})
             }
