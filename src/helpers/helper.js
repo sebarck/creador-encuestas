@@ -1,8 +1,8 @@
-const encuestas = (encuesta) => {
+export const encuestasToBodyApi = (encuesta) => {
         
-    let encuestaBody = {
+    let bodyApi = {
         poll_title:  encuesta.titulo.titulo,
-        state: "true",
+        poll_state: "true",
         description: encuesta.titulo.descripcion,
         questions: {
             total: Object.values(encuesta.questions).length,
@@ -13,11 +13,31 @@ const encuestas = (encuesta) => {
         let questionBody = {
             q_type: question.tipoPregunta,
             value: question.titulo,
-            mandatory: Boolean(true)
+            mandatory: Boolean(true),
+            options: question.multiplesOptions
         }
-        encuestaBody.questions.values.push(questionBody)
+        bodyApi.questions.values.push(questionBody)
     })
-    return encuestaBody
+    return bodyApi
 }
 
-export default encuestas;
+export const bodyApiToEncuesta = (bodyApi) => {
+    let encuesta = {
+        titulo: {
+            titulo: bodyApi.encuesta.poll_title,
+            descripcion: bodyApi.encuesta.description
+        },
+        questions: []
+    }
+
+    Object.values(bodyApi.encuesta.questions.values).forEach((question,index) => {
+        let questionBody = {
+            tipoPregunta: question.q_type,
+            titulo: question.value,
+            multiplesOptions: question.options
+        }
+        encuesta.questions.push(questionBody)
+    })
+    return encuesta
+
+}

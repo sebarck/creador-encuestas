@@ -9,8 +9,8 @@ import PropTypes from 'prop-types'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/simpleQuestion.css'
 
-import converter   from '../helpers/helper' 
-import generarEncuesta from '../controller/encuestasController'
+import  { encuestasToBodyApi, bodyApiToEncuesta }   from '../helpers/helper' 
+import  { generarEncuesta, actualizarEncuesta, obtenerEncuestaById} from '../controller/encuestasController'
 import encuesta1 from '../recursos/encuesta1.json'
 
 
@@ -45,17 +45,22 @@ export class NuevaEncuesta extends Component {
         }
     }
 
-
     componentDidMount = () => {
-
-        
-        var emptyTitle = {titulo: '', descripcion: ''}
-        var emptyQuestions = []
-        
-         this.props.match.params.id !=="0" ?
-            this.setState({titulo: encuesta1.titulo, questions: encuesta1.questions}) :                    
+        const id = this.props.match.params.id
+        if (id !== '0' && id) {
+            obtenerEncuestaById(id,
+                data => {
+                    var convertBodyApiToState = bodyApiToEncuesta(data)
+                    this.setState({titulo: convertBodyApiToState.titulo, questions: convertBodyApiToState.questions})
+                },
+                (e) => console.log(e) 
+            )
+        }
+        else {
+            let emptyTitle = {titulo: '', descripcion: ''}
+            let emptyQuestions = []
             this.setState({titulo: emptyTitle, questions: emptyQuestions})
-        
+        }
     }
 
     componentDidUpdate = (prevProps) => {
@@ -100,6 +105,7 @@ export class NuevaEncuesta extends Component {
     }
 
     updateMultiplesOptions = (index,multiplesOptions) => {
+        console.log('multiplesOptions',multiplesOptions)
         var questions = this.state.questions
         if (index > questions.length) {
             var question
@@ -119,13 +125,24 @@ export class NuevaEncuesta extends Component {
     }
 
     managePoll = () => {
-        let convertStateToBodyAPI = converter(this.state)      
-        generarEncuesta(
-            convertStateToBodyAPI,
-            response => console.log(response.json()),
-            data => console.log(data),
-            (e) => console.log(e) 
-        )        
+        let convertStateToBodyAPI = encuestasToBodyApi(this.state)      
+        if (this.props.match.params.id === '0') { //Se genera una nueva encuesta controlando que nos se envía el parámetro
+            generarEncuesta(
+                convertStateToBodyAPI,
+                response => console.log(response.json()),
+                data => console.log(data),
+                (e) => console.log(e) 
+            )        
+        }
+        else {
+            actualizarEncuesta(
+                this.props.match.params.id,
+                convertStateToBodyAPI,
+                response => console.log(response.json()),
+                data => console.log(data),
+                (e) => console.log(e) 
+            )
+        }
     }
 
 
