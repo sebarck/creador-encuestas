@@ -13,7 +13,7 @@ import { withRouter } from 'react-router-dom'
 
 import Logo from '../images/observatoriopyme.png'
 import { MensajeError } from './mensajeria/mensajeError';
-
+import { Typography } from '@material-ui/core';
 
 
 export class Login extends Component {
@@ -30,15 +30,11 @@ export class Login extends Component {
     } )
   }
 
-
-
-
-  /*
   Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://www.observatoriopyme.org.ar/">
+        <Link color="inherit" to="https://www.observatoriopyme.org.ar/">
           Fundación Observatorio Pyme
         </Link>{' '}
         {new Date().getFullYear()}
@@ -46,7 +42,7 @@ export class Login extends Component {
       </Typography>
     );
   }
-*/
+
   useStyles = makeStyles((theme) => ({
     paper: {
       marginTop: theme.spacing(8),
@@ -75,11 +71,10 @@ handleLogin = async (e) => {
     let formData = new URLSearchParams()   
     formData.append('email', this.state.email)
     formData.append('password', this.state.password)
-    const url='http://localhost:8080/api/v1/login'
     const myHeaders = new Headers({
         'Accept':'application/x-www-form-urlencoded',
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': "http://localhost:3000"
+        'Access-Control-Allow-Origin': `${process.env.REACT_APP_BACKEND_ORIGIN}`
     })
     const myInit = {
         method: 'POST',
@@ -89,7 +84,7 @@ handleLogin = async (e) => {
         body: formData
     };
 
-    fetch(url,myInit)
+    fetch(`${process.env.REACT_APP_BACKEND_URI}`,myInit)
         .then(response => {
             this.setState({isLogged: response.ok})
             return (response.json())
