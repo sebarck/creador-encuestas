@@ -38,7 +38,6 @@ export class Question extends Component {
 
 
     render () {
-        console.log("cuestionSelector",this.state.questionSelector)
         return (
             <div className="contenedorPersonal" >
                 <div className="input-group mb-6" >

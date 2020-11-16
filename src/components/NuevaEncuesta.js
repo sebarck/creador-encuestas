@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Questions } from './Questions'
 import { QuestionGenerator } from './QuestionGenerator'
-import { Container, Col, Row } from 'reactstrap';
+import { Container, Col, Row, Button } from 'reactstrap';
 import { Titulo } from './Titulo';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types'
@@ -9,6 +9,8 @@ import PropTypes from 'prop-types'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/simpleQuestion.css'
 
+import  { encuestasToBodyApi, bodyApiToEncuesta }   from '../helpers/helper' 
+import  { generarEncuesta, actualizarEncuesta, obtenerEncuestaById} from '../controller/encuestasController'
 import encuesta1 from '../recursos/encuesta1.json'
 
 
@@ -43,17 +45,22 @@ export class NuevaEncuesta extends Component {
         }
     }
 
-
     componentDidMount = () => {
-
-        
-        var emptyTitle = {titulo: '', descripcion: ''}
-        var emptyQuestions = []
-        
-         this.props.match.params.id !=="0" ?
-            this.setState({titulo: encuesta1.titulo, questions: encuesta1.questions}) :                    
+        const id = this.props.match.params.id
+        if (id !== '0' && id) {
+            obtenerEncuestaById(id,
+                data => {
+                    var convertBodyApiToState = bodyApiToEncuesta(data)
+                    this.setState({titulo: convertBodyApiToState.titulo, questions: convertBodyApiToState.questions})
+                },
+                (e) => console.log(e) 
+            )
+        }
+        else {
+            let emptyTitle = {titulo: '', descripcion: ''}
+            let emptyQuestions = []
             this.setState({titulo: emptyTitle, questions: emptyQuestions})
-        
+        }
     }
 
     componentDidUpdate = (prevProps) => {
@@ -114,8 +121,29 @@ export class NuevaEncuesta extends Component {
         var questions = this.state.questions
         questions[index].imageOptions = imageOptions
         this.setState({questions: questions})
+    }
+
+    managePoll = () => {
+        let convertStateToBodyAPI = encuestasToBodyApi(this.state)      
+        if (this.props.match.params.id === '0') { //Se genera una nueva encuesta controlando que nos se envía el parámetro
+            generarEncuesta(
+                convertStateToBodyAPI,
+                response => console.log(response.json()),
+                data => console.log(data),
+                (e) => console.log(e) 
+            )        
         }
-       
+        else {
+            actualizarEncuesta(
+                this.props.match.params.id,
+                convertStateToBodyAPI,
+                response => console.log(response.json()),
+                data => console.log(data),
+                (e) => console.log(e) 
+            )
+        }
+    }
+
 
     render() {
 
@@ -138,7 +166,21 @@ export class NuevaEncuesta extends Component {
                             />
                         </Col>
                         <Col className='right-column-builder'>
-                            <QuestionGenerator handleButton={this.addQuestion} />
+                            <Row>
+                                <Col>
+                                    <QuestionGenerator handleButton={this.addQuestion} />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className="contenedorButtonGuardar">
+                                <Button className="buttonSelector buttonGuardar" 
+                                    variant="secondary"
+                                    onClick={this.managePoll}
+                                >
+                                    Guardar encuesta
+                                </Button>
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
                 </Container>
