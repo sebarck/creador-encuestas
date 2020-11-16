@@ -150,3 +150,9 @@ input:focus {
     margin: 15px;
     padding: 10px;
 }
+
+.mensajeError {
+    font-size: 15px; 
+    color: red;
+    padding: 10px; 
+}

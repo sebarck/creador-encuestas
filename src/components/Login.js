@@ -16,7 +16,6 @@ import { MensajeError } from './mensajeria/mensajeError';
 import { Typography } from '@material-ui/core';
 
 
-
 export class Login extends Component {
   
   constructor() {
@@ -25,12 +24,11 @@ export class Login extends Component {
       isLogged: false,
       mensajeError: '',
       values: 1,
-      email: 'usuario20@gmail.com',
+      email: 'usuario1gmail.com',
       password: 'Una clave nueva'
 
     } )
   }
-
 
   Copyright() {
     return (
@@ -67,7 +65,7 @@ export class Login extends Component {
 
   classes = this.useStyles
 
-handleLogin = (e) => {
+handleLogin = async (e) => {
     e.preventDefault()
     
     let formData = new URLSearchParams()   
