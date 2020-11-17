@@ -2,7 +2,8 @@ const origin = process.env.REACT_APP_BACKEND_ORIGIN
     const myHeaders = new Headers({
         'Accept':'application/x-www-form-urlencoded, application/json',
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': origin
+        'Access-Control-Allow-Origin': origin,
+        'Authorization': localStorage.getItem('token')
     })
 
 

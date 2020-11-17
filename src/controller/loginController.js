@@ -7,8 +7,6 @@ const myHeaders = new Headers({
 })
 
 export const login = (body, callbackData, callbackCatch) => {
-    console.log(origin)
-    console.log(body)
     const URL = process.env.REACT_APP_BACKEND_URI
     
     const myInit = {

@@ -77,6 +77,7 @@ handleLogin = (e) => {
         ,(data => {
             if (data.ok) {
                 this.setState({isLogged: true})
+                localStorage.setItem('token', data.token)
                 this.props.history.push('/encuestas')
             }
             else {
