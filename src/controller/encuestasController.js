@@ -1,17 +1,19 @@
 const origin = process.env.REACT_APP_BACKEND_ORIGIN
-    const myHeaders = new Headers({
+
+function getHeaders() {
+    return ({
         'Accept':'application/x-www-form-urlencoded, application/json',
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': origin,
         'Authorization': localStorage.getItem('token')
     })
-
+}
 
 export const generarEncuesta = (body,callbackResponse, callbackData, callbackCatch) => {
     const url = process.env.REACT_APP_BACKEND_URI
     const myInit = {
         method: 'POST',
-        headers: myHeaders,
+        headers: getHeaders(),
         mode: 'cors',
         cache: 'default',
         body: JSON.stringify(body)
@@ -27,7 +29,7 @@ export const actualizarEncuesta = (id, body, callbackResponse, callbackData, cal
     const url = process.env.REACT_APP_BACKEND_URI
     const myInit = {
         method: 'PUT',
-        headers: myHeaders,
+        headers: getHeaders(),
         mode: 'cors',
         cache: 'default',
         body: JSON.stringify(body)
@@ -43,7 +45,7 @@ export const obtenerTodasEncuestas = (callbackData, callbackCatch) => {
     const url = process.env.REACT_APP_BACKEND_URI
         const myInit = {
         method: 'GET',
-        headers: myHeaders,
+        headers: getHeaders(),
         mode: 'cors',
         cache: 'default',
     };
@@ -58,7 +60,7 @@ export const obtenerEncuestaById = (id, callbackData, callbackCatch) => {
     const url = process.env.REACT_APP_BACKEND_URI
         const myInit = {
         method: 'GET',
-        headers: myHeaders,
+        headers: getHeaders(),
         mode: 'cors',
         cache: 'default',
     };
@@ -68,5 +70,4 @@ export const obtenerEncuestaById = (id, callbackData, callbackCatch) => {
         .then(data => callbackData(data))
         .catch(e => callbackCatch(e))    
 }
-
 

@@ -26,8 +26,8 @@ export class Login extends Component {
       isLogged: false,
       mensajeError: '',
       values: 1,
-      email: 'usuario20@gmail.com',
-      password: 'Una Passwordd'
+      email: 'usuario33@gmail.com',
+      password: 'Una clave nueva'
 
     } )
   }
@@ -117,6 +117,7 @@ handleLogin = (e) => {
             name="usuario"
             autoComplete="usuario"
             autoFocus
+            value={this.state.email}
             onChange={(e)=>{this.setState({email: e.target.value})}}
           />
             <TextField
@@ -129,6 +130,7 @@ handleLogin = (e) => {
               type={this.state.values.showPassword ? 'text' : 'password'}
               id="contraseña"
               autoComplete="contraseña-actual"
+              value={this.state.password}
               onChange={(e) => {this.setState({password: e.target.value})}}
             />
             <FormControlLabel
