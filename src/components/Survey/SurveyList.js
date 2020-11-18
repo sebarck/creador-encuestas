@@ -40,6 +40,10 @@ export  class SurveyList extends Component {
     modificarEncuesta = (id) => {
         this.props.history.push('/encuesta/'+id)
     }
+
+    duplicarEncuesta = (id) => {
+        console.log('duplicar encuesta')
+    }
     render () {
         
         return (
@@ -59,7 +63,7 @@ export  class SurveyList extends Component {
                             {
                                 icon: 'library_add',
                                 tooltip: 'Duplicar encuesta',
-                                
+                                onClick: (event, rowData) => this.duplicarEncuesta(rowData.id)
                             },
                             {
                                 icon: 'edit',
