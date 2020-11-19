@@ -41,7 +41,7 @@ export class NuevaEncuesta extends Component {
         super()
         this.state = {
             titulo: { titulo: '', descripcion: '' },
-            questions: []
+            questions: [],
         }
     }
 
