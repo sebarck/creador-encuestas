@@ -3,6 +3,9 @@ import MaterialTable from 'material-table';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { obtenerTodasEncuestas } from '../../controller/encuestasController'
+import  AlertDialogSlide  from './Modal'
+import { eliminarEncuesta } from '../../controller/encuestasController'
+
 
 
 export  class SurveyList extends Component {
@@ -11,10 +14,17 @@ export  class SurveyList extends Component {
         super()
         this.state = {
             data: [],
-            action: []
+            action: [],
+            openModal: false,
+            id: 0,
+            nombre: ''
         }
     }
     componentDidMount  =() => {
+        this.obtenerEncuestas()
+    }
+
+    obtenerEncuestas = () => {
         obtenerTodasEncuestas(
             data => {
                 let dataState = []
@@ -34,7 +44,6 @@ export  class SurveyList extends Component {
             },
             (e) => console.log(e) 
         )
-
     }
  
     modificarEncuesta = (id) => {
@@ -44,11 +53,38 @@ export  class SurveyList extends Component {
     duplicarEncuesta = (id) => {
         console.log('duplicar encuesta')
     }
+
+    eliminarEncuesta = (id, name) => {
+        this.setState({id, nombre: name})
+        this.abrirModal()
+    }
+
+    handlerEliminar = (id) => {
+        eliminarEncuesta(id,
+            data => {
+                console.log('eliminacion OK')
+                this.obtenerEncuestas()
+            },
+            (e) => console.log(e) 
+        )
+
+    }
+
+    abrirModal = () => {
+        this.setState({openModal: !this.state.openModal})
+    }
     render () {
         
         return (
-           
-                <Container maxWidth="lg">
+            <div>
+                <AlertDialogSlide 
+                    input={this.state.id} 
+                    nombre={this.state.nombre} 
+                    abrirModal={this.abrirModal} 
+                    openModal={this.state.openModal}
+                    eliminar={this.handlerEliminar}    
+                />
+                <Container maxWidth="lg">   
                     <MaterialTable
                         title="Listado de encuestas creadas"
                         columns={[
@@ -73,7 +109,7 @@ export  class SurveyList extends Component {
                             {
                                 icon: 'delete',
                                 tooltip: 'Eliminar encuesta',
-                                onClick: () => console.log("Eliminar encuesta fired")
+                                onClick: (event, rowData) => this.eliminarEncuesta(rowData.id, rowData.name)
                             }
                         ]}
 
@@ -97,7 +133,8 @@ export  class SurveyList extends Component {
 
                     />
                 </Container>
-               
+                
+            </div>   
         )
     }
 }

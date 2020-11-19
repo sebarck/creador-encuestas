@@ -71,3 +71,17 @@ export const obtenerEncuestaById = (id, callbackData, callbackCatch) => {
         .catch(e => callbackCatch(e))    
 }
 
+export const eliminarEncuesta = (id, callbackData, callbackCatch) => {
+    const url = process.env.REACT_APP_BACKEND_URI
+    const myInit = {
+        method: 'DELETE',
+        headers: getHeaders(),
+        mode: 'cors',
+        cache: 'default',
+    };
+
+    fetch(url+'/encuestas/'+id,myInit)
+        .then(response => response.json())
+        .then(data => callbackData(data))
+        .catch(e => callbackCatch(e))    
+}
