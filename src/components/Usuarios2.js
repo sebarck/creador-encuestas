@@ -26,7 +26,7 @@ function getHeaders() {
   };
 }
 
-let url = process.env.REACT_APP_BACKEND_URI + "/usuario/";
+let url = process.env.REACT_APP_BACKEND_URI + "/usuario";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -117,24 +117,14 @@ export default function Usuarios2() {
       console.log(name);
       const response = await axios.post(url, {
         headers: getHeaders(),
-        nombre: { name },
-        email: { email },
-        password: { password },
-        rol: {role}
-      });
-      if (response.data.ok === true) {
-        alert("Se realizó el cambio");
-      } else {
-        alert("existió un error");
-      }
-    } else {
-      const response = await axios.post(url, {
-        headers: getHeaders(),
         nombre: name,
         email: email,
+        password:password,
+        role:role,
       });
       if (response.data.ok === true) {
-        alert("Se realizó la creación");
+        alert("El usuario fue creado");
+        obtenerUsuarios();
       } else {
         alert("Existió un error");
       }
@@ -154,33 +144,32 @@ export default function Usuarios2() {
             { title: "Nombre", field: "nombre" },
             { title: "E-mail", field: "email" },
             { title: "Rol", field: "role" },
-            { title: "Estado", field: "estado" },
           ]}
           data={userData}
-          //   editable={{
-          //     onRowUpdate: (newData, oldData) =>
-          //       new Promise((resolve, reject) => {
-          //         setTimeout(() => {
-          //           const dataUpdate = [...data2];
-          //           const index = oldData.tableData.id;
-          //           dataUpdate[index] = newData;
-          //           setData2([...dataUpdate]);
+            editable={{
+              onRowUpdate: (newData, oldData) =>
+                new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                    const dataUpdate = [...userData];
+                    const index = oldData.tableData.id;
+                    dataUpdate[index] = newData;
+                    setUserData([...dataUpdate]);
 
-          //           resolve();
-          //         }, 1000);
-          //       }),
-          //     onRowDelete: (oldData) =>
-          //       new Promise((resolve, reject) => {
-          //         setTimeout(() => {
-          //           const dataDelete = [...data2];
-          //           const index = oldData.tableData.id;
-          //           dataDelete.splice(index, 1);
-          //           setData2([...dataDelete]);
+                    resolve();
+                  }, 1000);
+                }),
+              onRowDelete: (oldData) =>
+                new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                    const dataDelete = [...userData];
+                    const index = oldData.tableData.id;
+                    dataDelete.splice(index, 1);
+                    setUserData([...dataDelete]);
 
-          //           resolve();
-          //         }, 1000);
-          //       }),
-          //   }}
+                    resolve();
+                  }, 1000);
+                }),
+            }}
         />
         <br />
         <Button variant="contained" color="primary" onClick={handleClickOpen}>
@@ -240,8 +229,8 @@ export default function Usuarios2() {
                 onChange={handleChange}
                 fullWidth
               >
-                <MenuItem value={10}>ADMIN-ROLE</MenuItem>
-                <MenuItem value={20}>USER-ROLE</MenuItem>
+                <MenuItem value={"ADMIN-ROLE"}>ADMIN-ROLE</MenuItem>
+                <MenuItem value={"USER_ROLE"}>USER_ROLE</MenuItem>
               </Select>
             </FormControl>
           </DialogContent>
