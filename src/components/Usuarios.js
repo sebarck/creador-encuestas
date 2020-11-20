@@ -6,7 +6,6 @@ import { obtenerTodasEncuestas } from "../controller/encuestasController";
 import AlertDialogSlide from "../components/Survey/Modal";
 import {
   eliminarEncuesta,
-  duplicarEncuesta,
 } from "../controller/encuestasController";
 
 export class SurveyList extends Component {

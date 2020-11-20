@@ -82,7 +82,7 @@ const DrawerMenu = () => {
             </ListItemIcon>
             <ListItemText primary="Cerrar Sesion" />
           </ListItem>
-          {!(sessionStorage.getItem("rolUsuario") == "ADMIN-ROLE") && (
+          {!(sessionStorage.getItem("rolUsuario") === "ADMIN-ROLE") && (
           <ListItem
             button
             component={Link}
@@ -119,7 +119,7 @@ const DrawerMenu = () => {
             </ListItemIcon>
             <ListItemText primary="Mi Perfil" />
           </ListItem>
-          {(sessionStorage.getItem("rolUsuario") == "ADMIN-ROLE") && (
+          {(sessionStorage.getItem("rolUsuario") === "ADMIN-ROLE") && (
             <ListItem
               button
               component={Link}

@@ -7,9 +7,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { NuevaEncuesta } from './NuevaEncuesta';
 import SurveyList from './Survey/SurveyList';
 import Login from './Login';
+
 import Usuarios from './Usuarios';
 import MiPerfil from './MiPerfil';
-
 
 class App extends Component {
     constructor(props) {
@@ -34,9 +34,11 @@ class App extends Component {
                     <Switch>
                         <Route path="/encuesta/:id" component={NuevaEncuesta} />
                         <Route exact path="/encuestas" component={SurveyList} />
+
                         <Route exact path="/usuarios" component={Usuarios} />
                         <Route exact path="/" render={(props) => <Login isDrawerVisibleFalse={this.showingDrawerFalse} isDrawerVisibleTrue={this.showingDrawerTrue}/>} />
-                        <Route exact path="/MiPerfil" component={MiPerfil} />
+                        <Route exact path="/perfil" component={MiPerfil} />
+
                     </Switch>
                 </BrowserRouter>
             </div>
