@@ -30,10 +30,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-let userID = ""
+let userID = "";
 let url = process.env.REACT_APP_BACKEND_URI + "/usuario/";
-
-  const obtenerUser = async () => await axios.get(url,{
+let url2 = url;
+  const obtenerUser = async () => await axios.get(url2,{
     "headers": getHeaders()}).then((response) => response.data)
 
 
@@ -46,21 +46,20 @@ export default function SignIn() {
   const[name , setName] = React.useState("");
   const[email , setEmail] = React.useState("");
   const[password , setPass] = React.useState("");
-  const[user, setUser] = React.useState();
+  const[user, setUser] = React.useState("");
 
 
   React.useEffect(() => {
     if(sessionStorage.getItem("usuario")){
       userID = JSON.parse(sessionStorage.getItem("usuario"));
-      url = url + userID._id
+      url2 = url + userID._id;
+      
     }
-    
     const fetchUser = async () => {setUser(await obtenerUser())};
     fetchUser();
 },[]);
 
   React.useEffect(()=>{
-    console.log(user)
     if(user){
       setName(user.usuario.nombre);
       setEmail(user.usuario.email)
@@ -69,16 +68,15 @@ export default function SignIn() {
 
   async function handleClick(){
     if(password !== ""){
-      console.log(name);
-    const response = await axios.put(url,{"headers": getHeaders(),
+    const response = await axios.put(url2,{"headers": getHeaders(),
       nombre:{name}, email:{email}, password:{password}});
         if(response.data.ok === true){
           alert("Se realizó el cambio");
-        }else{
+        }else{  
           alert("existió un error");
         }
     }else{
-      const response = await axios.put(url,
+      const response = await axios.put(url2,
         {"headers": getHeaders(),
           nombre:name, email:email});
       if(response.data.ok === true){
