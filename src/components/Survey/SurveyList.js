@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { obtenerTodasEncuestas } from '../../controller/encuestasController'
 import  AlertDialogSlide  from './Modal'
-import { eliminarEncuesta } from '../../controller/encuestasController'
+import { eliminarEncuesta, duplicarEncuesta } from '../../controller/encuestasController'
 
 
 
@@ -24,7 +24,9 @@ export  class SurveyList extends Component {
         this.obtenerEncuestas()
     }
 
+
     obtenerEncuestas = () => {
+        console.log("disparar evento");
         obtenerTodasEncuestas(
             data => {
                 let dataState = []
@@ -51,7 +53,12 @@ export  class SurveyList extends Component {
     }
 
     duplicarEncuesta = (id) => {
-        console.log('duplicar encuesta')
+        duplicarEncuesta(id,
+            data => {
+                console.log("Duplicacion OK");
+                this.obtenerEncuestas();
+            },
+            (e) => console.log(e));
     }
 
     eliminarEncuesta = (id, name) => {
@@ -63,10 +70,10 @@ export  class SurveyList extends Component {
         eliminarEncuesta(id,
             data => {
                 console.log('eliminacion OK')
-                this.obtenerEncuestas()
+                this.obtenerEncuestas();
             },
             (e) => console.log(e) 
-        )
+        );
 
     }
 
@@ -99,7 +106,7 @@ export  class SurveyList extends Component {
                             {
                                 icon: 'library_add',
                                 tooltip: 'Duplicar encuesta',
-                                onClick: (event, rowData) => this.duplicarEncuesta(rowData.id)
+                                onClick: (event, rowData) => {this.duplicarEncuesta(rowData.id)}
                             },
                             {
                                 icon: 'edit',
