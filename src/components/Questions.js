@@ -16,6 +16,7 @@ export class Questions extends Component {
     }
     actualizarMultiplesOpciones = (index,multiplesOpciones) => {
         return (
+            
             this.props.handleMultiplesOptions(index,multiplesOpciones)
         )
     }

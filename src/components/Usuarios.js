@@ -2,14 +2,14 @@ import { Container } from "@material-ui/core";
 import MaterialTable from "material-table";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { obtenerTodasEncuestas } from "../../controller/encuestasController";
-import AlertDialogSlide from "./Modal";
+import { obtenerTodasEncuestas } from "../controller/encuestasController";
+import AlertDialogSlide from "../components/Survey/Modal";
 import {
   eliminarEncuesta,
   duplicarEncuesta,
-} from "../../controller/encuestasController";
+} from "../controller/encuestasController";
 
-export class SurveyList extends Component {    
+export class SurveyList extends Component {
   constructor() {
     super();
     this.state = {
@@ -18,6 +18,27 @@ export class SurveyList extends Component {
       openModal: false,
       id: 0,
       nombre: "",
+      data1: {
+        ok: true,
+        usuarios: [
+          {
+            role: "ADMIN-ROLE",
+            estado: true,
+            _id: "5fa78a042738422892e6a4d5",
+            nombre: "Usuario 33",
+            email: "usuario33@gmail.com",
+            __v: 0,
+          },
+          {
+            role: "ADMIN-ROLE",
+            estado: true,
+            _id: "5fa78a152738422892e6a4d6",
+            nombre: "Usuario 34",
+            email: "usuario34@gmail.com",
+            __v: 0,
+          },
+        ],
+      },
     };
   }
   componentDidMount = () => {
@@ -51,17 +72,6 @@ export class SurveyList extends Component {
     this.props.history.push("/encuesta/" + id);
   };
 
-  duplicarEncuesta = (id) => {
-    duplicarEncuesta(
-      id,
-      (data) => {
-        console.log("Duplicacion OK");
-        this.obtenerEncuestas();
-      },
-      (e) => console.log(e)
-    );
-  };
-
   eliminarEncuesta = (id, name) => {
     this.setState({ id, nombre: name });
     this.abrirModal();
@@ -93,23 +103,16 @@ export class SurveyList extends Component {
         />
         <Container maxWidth="lg">
           <MaterialTable
-            title="Listado de encuestas creadas"
+            title="Usuarios"
             columns={[
-              { title: "Nombre", field: "name" },
-              { title: "Descripcion", field: "description" },
-              { title: "Fecha de creacion", field: "creationDate" },
-              { title: "Creado por", field: "createdBy" },
-              { title: "id", field: "id", hidden: true },
+              { title: "Nombre", field: "nombre" },
+            //   { title: "Descripcion", field: "description" },
+            //   { title: "Fecha de creacion", field: "creationDate" },
+            //   { title: "Creado por", field: "createdBy" },
+            //   { title: "id", field: "id", hidden: true },
             ]}
-            data={this.state.data}
+            data={this.state.data1.usuarios}
             actions={[
-              {
-                icon: "library_add",
-                tooltip: "Duplicar encuesta",
-                onClick: (event, rowData) => {
-                  this.duplicarEncuesta(rowData.id);
-                },
-              },
               {
                 icon: "edit",
                 tooltip: "Modificar encuesta",

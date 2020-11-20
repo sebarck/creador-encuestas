@@ -8,7 +8,6 @@ import {
 } from '@material-ui/pickers';
 
 export default function MaterialUIPickers() {
-  // The first commit of Material-UI
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = (date) => {
@@ -20,12 +19,12 @@ export default function MaterialUIPickers() {
       <Grid container justify="space-around">
         <KeyboardDatePicker
           fullWidth
-          style={{ margin: 8 }}
+          style={{ margin: 10 }}
           variant="outlined"
           margin="normal"
           id="Fecha de Nacimiento"
           label="Fecha de Nacimiento"
-          format="dd/mm/yyyy"
+          format="dd/MM/yyyy"
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{

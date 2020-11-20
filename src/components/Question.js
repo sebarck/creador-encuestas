@@ -13,6 +13,7 @@ export class Question extends Component {
     }
 
     renderQuestionType = (questionType) => {
+        
         switch(this.props.question.tipoPregunta) {
             case 1:
                 return <SimpleQuestion />
