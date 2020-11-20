@@ -3,8 +3,8 @@ import MaterialTable from "material-table";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { obtenerTodasEncuestas } from "../controller/encuestasController";
-import AlertDialogSlide from "../components/Survey/Modal";
-import { eliminarEncuesta } from "../controller/encuestasController";
+import AlertDialogSlide from "../components/mensajeria/ModalUserDeletion";
+import { eliminarUsuario } from "../controller/usuarioController";
 
 export class SurveyList extends Component {
   constructor() {
@@ -42,6 +42,7 @@ export class SurveyList extends Component {
     this.obtenerEncuestas();
   };
 
+  //esto tiene que ser obtener usuarios
   obtenerEncuestas = () => {
     console.log("disparar evento");
     obtenerTodasEncuestas(
@@ -65,17 +66,19 @@ export class SurveyList extends Component {
     );
   };
 
-  modificarEncuesta = (id) => {
-    this.props.history.push("/encuesta/" + id);
-  };
 
-  eliminarEncuesta = (id, name) => {
+//   modificarEncuesta = (id) => {
+//     this.props.history.push("/encuesta/" + id);
+//   };
+
+  eliminarUsuario = (id, name) => {
     this.setState({ id, nombre: name });
     this.abrirModal();
   };
 
+  //esto tiene que ser para eliminar usuario
   handlerEliminar = (id) => {
-    eliminarEncuesta(
+    eliminarUsuario(
       id,
       (data) => {
         console.log("eliminacion OK");
@@ -88,7 +91,6 @@ export class SurveyList extends Component {
   abrirModal = () => {
     this.setState({ openModal: !this.state.openModal });
   };
-
   render() {
     return (
       <div>
@@ -101,20 +103,30 @@ export class SurveyList extends Component {
         />
         <Container maxWidth="lg">
           <MaterialTable
-            title="Usuarios"
-            columns={columns}
-            
-            // columns={[
-            //   { title: "Nombre", field: "nombre" },
-            //   //   { title: "Descripcion", field: "description" },
-            //   //   { title: "Fecha de creacion", field: "creationDate" },
-            //   //   { title: "Creado por", field: "createdBy" },
-            //   //   { title: "id", field: "id", hidden: true },
-            // ]}
-
-
-            // data={this.state.data1.usuarios}
-            data={data}
+            title="Administración de usuarios"
+            columns={[
+              { title: "Nombre", field: "nombre" },
+              { title: "Email", field: "email" },
+              { title: "Estado", field: "estado" },
+              //   { title: "Descripcion", field: "description" },
+              //   { title: "Fecha de creacion", field: "creationDate" },
+              //   { title: "Creado por", field: "createdBy" },
+              //   { title: "id", field: "id", hidden: true },
+            ]}
+            data={this.state.data1.usuarios}
+            actions={[
+              {
+                icon: "edit",
+                tooltip: "Modificar usuario",
+                onClick: (event, rowData) => this.modificarEncuesta(rowData.id),
+              },
+              {
+                icon: "delete",
+                tooltip: "Eliminar usuario",
+                onClick: (event, rowData) =>
+                  this.eliminarUsuario(rowData.id, rowData.name),
+              },
+            ]}
             localization={{
               body: {
                 emptyDataSourceMessage: "Ningun registro para mostrar",
@@ -130,38 +142,6 @@ export class SurveyList extends Component {
                 nextTooltip: "Próxima página",
                 lastTooltip: "Última página",
               },
-            }}
-            editable={{
-              onRowAdd: (newData) =>
-                new Promise((resolve, reject) => {
-                  setTimeout(() => {
-                    setData([...data, newData]);
-
-                    resolve();
-                  }, 1000);
-                }),
-              onRowUpdate: (newData, oldData) =>
-                new Promise((resolve, reject) => {
-                  setTimeout(() => {
-                    const dataUpdate = [...data];
-                    const index = oldData.tableData.id;
-                    dataUpdate[index] = newData;
-                    setData([...dataUpdate]);
-
-                    resolve();
-                  }, 1000);
-                }),
-              onRowDelete: (oldData) =>
-                new Promise((resolve, reject) => {
-                  setTimeout(() => {
-                    const dataDelete = [...data];
-                    const index = oldData.tableData.id;
-                    dataDelete.splice(index, 1);
-                    setData([...dataDelete]);
-
-                    resolve();
-                  }, 1000);
-                }),
             }}
           />
         </Container>
