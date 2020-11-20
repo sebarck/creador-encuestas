@@ -137,7 +137,7 @@ export class NuevaEncuesta extends Component {
             generarEncuesta(
                 convertStateToBodyAPI,
                 response => console.log(response.json()),
-                data => console.log(data),
+                data => alert(`Encuesta guarda con éxito`),
                 (e) => console.log(e) 
             )        
             this.setState({titulo: { titulo: '', descripcion: '' }})
