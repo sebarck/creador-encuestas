@@ -85,3 +85,14 @@ export const eliminarEncuesta = (id, callbackData, callbackCatch) => {
         .then(data => callbackData(data))
         .catch(e => callbackCatch(e))    
 }
+
+export const duplicarEncuesta = (id, callbackData, callbackCatch) => {
+    obtenerEncuestaById(id, data => {
+        let encuesta = data.encuesta;
+        encuesta.poll_title="Copy - " + encuesta.poll_title;
+        generarEncuesta(encuesta,
+            obtenerTodasEncuestas(callbackData, callbackCatch ),
+            (e) => callbackCatch(e))
+    },(e) => callbackCatch(e)
+    );
+}
