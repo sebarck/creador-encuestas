@@ -126,7 +126,11 @@ export class NuevaEncuesta extends Component {
 
     managePoll = () => {
         let convertStateToBodyAPI = encuestasToBodyApi(this.state)      
+
         if (this.props.match.params.id === '0') { //Se genera una nueva encuesta controlando que nos se envía el parámetro
+            let usuario = JSON.parse(sessionStorage.getItem('usuario'))
+            convertStateToBodyAPI.usuario_id = usuario._id
+            console.log(convertStateToBodyAPI)
             generarEncuesta(
                 convertStateToBodyAPI,
                 response => console.log(response.json()),
