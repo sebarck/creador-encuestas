@@ -12,7 +12,7 @@ import { withRouter } from 'react-router-dom'
 
 import Logo from '../images/observatoriopyme.png'
 import { MensajeError } from './mensajeria/mensajeError';
-import { Typography } from '@material-ui/core';
+import { CircularProgress, Typography } from '@material-ui/core';
 
 import { login } from '../controller/loginController'
 
@@ -20,8 +20,8 @@ import { login } from '../controller/loginController'
 
 
 export class Login extends Component {
-componentDidMount = () => {this.props.isDrawerVisibleFalse();}
-  
+  componentDidMount = () => { this.props.isDrawerVisibleFalse(); }
+
 
   constructor() {
     super()
@@ -30,13 +30,13 @@ componentDidMount = () => {this.props.isDrawerVisibleFalse();}
       mensajeError: '',
       values: 1,
       email: 'usuario33@gmail.com',
-      password: 'Una clave nueva'
-
-    } )
+      password: 'Una clave nueva',
+      isLoading: false
+    })
   }
 
   Copyright() {
-    
+
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
@@ -61,7 +61,7 @@ componentDidMount = () => {this.props.isDrawerVisibleFalse();}
       backgroundColor: theme.palette.secondary.main,
     },
     form: {
-      width: '100%', 
+      width: '100%',
       marginTop: theme.spacing(1),
     },
     submit: {
@@ -71,97 +71,87 @@ componentDidMount = () => {this.props.isDrawerVisibleFalse();}
 
   classes = this.useStyles
 
-handleLogin = (e) => {
+  handleLogin = (e) => {
     e.preventDefault()
-    
-    let formData = new URLSearchParams()   
+    this.setState({ isLoading: true });
+
+    let formData = new URLSearchParams()
     formData.append('email', this.state.email)
     formData.append('password', this.state.password)
     login(formData
-        ,(data => {
-            if (data.ok) {
-                this.setState({isLogged: true})
-                localStorage.setItem('token', data.token)
-                sessionStorage.setItem('usuario', JSON.stringify(data.usuario))
-                sessionStorage.setItem('rolUsuario', data.usuario.role)
-                sessionStorage.setItem('userLogged', true)
-                this.props.isDrawerVisibleTrue()
-                this.props.history.push('/encuestas')
-            }
-            else {
-                this.setState({mensajeError: data.err.message})
-            }
-        })
-    ,(e) => {
-        this.setState({mensajeError: "Error de sistema"})
-    }
+      , (data => {
+        if (data.ok) {
+          this.setState({ isLoading: false });
+          this.setState({ isLogged: true })
+          localStorage.setItem('token', data.token)
+          sessionStorage.setItem('usuario', JSON.stringify(data.usuario))
+          sessionStorage.setItem('rolUsuario', data.usuario.role)
+          sessionStorage.setItem('userLogged', true)
+          this.props.isDrawerVisibleTrue()
+          this.props.history.push('/encuestas')
+        }
+        else {
+          this.setState({ isLoading: false });
+          this.setState({ mensajeError: data.err.message })
+        }
+      })
+      , (e) => {
+        this.setState({ isLoading: false });
+        this.setState({ mensajeError: "Error de sistema" })
+      }
     )
-}
+  }
 
-  render () {
-    
+  render() {
+
     return (
-      
-      <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <br/>
-      <div className={this.classes.paper}>
-      <img
-          src={Logo}
-          className="imagenObservatorioPyme"
-          alt="Obs pyme"
-          width="128"
-          height="128"
-      />
-        <MensajeError className="mensajeError">
-          {this.state.mensajeError}
-        </MensajeError>
 
-        <form className={this.classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="usuario"
-            label="Usuario/Mail"
-            name="usuario"
-            autoComplete="usuario"
-            autoFocus
-            value={this.state.email}
-            onChange={(e)=>{this.setState({email: e.target.value})}}
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <br />
+        <div className={this.classes.paper}>
+          <img
+            src={Logo}
+            className="imagenObservatorioPyme"
+            alt="Obs pyme"
+            width="128"
+            height="128"
           />
+          <MensajeError className="mensajeError">
+            {this.state.mensajeError}
+          </MensajeError>
+
+          <form className={this.classes.form} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              name="contraseña" 
+              id="usuario"
+              label="Usuario/Mail"
+              name="usuario"
+              autoComplete="usuario"
+              autoFocus
+              value={this.state.email}
+              onChange={(e) => { this.setState({ email: e.target.value }) }}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="contraseña"
               label="Contraseña"
               type={this.state.values.showPassword ? 'text' : 'password'}
               id="contraseña"
               autoComplete="contraseña-actual"
               value={this.state.password}
-              onChange={(e) => {this.setState({password: e.target.value})}}
+              onChange={(e) => { this.setState({ password: e.target.value }) }}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Recordarme"
             />
-            <Button
-              onClick={this.handleLogin}
-              component={Link}
-              to="/encuestas"
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={this.classes.submit}
-            >
-              Iniciar Sesión
-              
-            </Button>
-            
             {/* <Grid container>
               <Grid item xs>
                 
@@ -172,8 +162,27 @@ handleLogin = (e) => {
               </Grid>
             </Grid> */}
           </form>
+          <Container maxWidth="md">
+            {this.state.isLoading
+              ? <CircularProgress style={{ marginLeft: 150 }} />
+              : (
+                <Button
+                  onClick={this.handleLogin}
+                  component={Link}
+                  to="/encuestas"
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={this.classes.submit}
+                >
+                  Iniciar Sesión
+                </Button>
+              )
+            }
+          </Container>
         </div>
-        <br/>
+        <br />
         <Box mt={8}>
           {this.Copyright}
         </Box>
