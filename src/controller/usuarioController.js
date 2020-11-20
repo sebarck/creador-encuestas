@@ -33,6 +33,11 @@ export const eliminarUsuario = (id, callbackData, callbackCatch) => {
     mode: "cors",
     cache: "default",
   };
+
+  fetch(url+'/usuario/' + id,myInit)
+        .then(response => response.json())
+        .then(data => callbackData(data))
+        .catch(e => callbackCatch(e))  
 };
 
 export const obtenerTodosUsuarios = (callbackData, callbackCatch) => {
@@ -45,6 +50,22 @@ export const obtenerTodosUsuarios = (callbackData, callbackCatch) => {
     };
 
     fetch(url+'/usuario',myInit)
+        .then(response => response.json())
+        .then(data => callbackData(data))
+        .catch(e => callbackCatch(e))    
+}
+
+export const actualizarUsuario = (id, body, callbackResponse, callbackData, callbackCatch) => {
+    const url = process.env.REACT_APP_BACKEND_URI
+    const myInit = {
+        method: 'PUT',
+        headers: getHeaders(),
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify(body)
+    };
+
+    fetch(url+'/usuario/'+id,myInit)
         .then(response => response.json())
         .then(data => callbackData(data))
         .catch(e => callbackCatch(e))    

@@ -44,7 +44,6 @@ export class SurveyList extends Component {
 
   //esto tiene que ser obtener usuarios
   obtenerEncuestas = () => {
-    console.log("disparar evento");
     obtenerTodasEncuestas(
       (data) => {
         let dataState = [];
