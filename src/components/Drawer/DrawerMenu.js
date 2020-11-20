@@ -19,7 +19,9 @@ import {
   Menu,
   PostAddOutlined,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory} from "react-router-dom";
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const DrawerMenu = () => {
   const [open, setOpen] = React.useState(false);
@@ -32,7 +34,21 @@ const DrawerMenu = () => {
     setOpen(false);
   };
 
+  const handleDrawerCloseLogin = () => {
+    sessionStorage.clear();
+    localStorage.clear();
+    setOpen(false);
+  };
+
+  const history = useHistory();
+
+  if (!sessionStorage.getItem('userLogged')) {
+    console.log("no auth token set");
+    history.push("/");
+  }
+
   return (
+    
     <div className="drawer-menu">
       <CssBaseline />
       <AppBar position="fixed" className="drawer-menu-appbar" />
@@ -57,10 +73,10 @@ const DrawerMenu = () => {
             component={Link}
             to="/"
             key="sesion"
-            onClick={handleDrawerClose}
+            onClick={handleDrawerCloseLogin}
           >
             <ListItemIcon>
-              <Person />
+              <ExitToAppIcon />
             </ListItemIcon>
             <ListItemText primary="Cerrar Sesion" />
           </ListItem>
@@ -110,7 +126,7 @@ const DrawerMenu = () => {
               onClick={handleDrawerClose}
             >
               <ListItemIcon>
-                <Person />
+                <SupervisorAccountIcon />
               </ListItemIcon>
               <ListItemText primary="Usuarios" />
             </ListItem>

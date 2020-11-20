@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import 'bootstrap/dist/js/bootstrap.min.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/simpleQuestion.css'
@@ -9,17 +9,32 @@ import SurveyList from './Survey/SurveyList';
 import Login from './Login';
 import Usuarios from './Usuarios';
 
+
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          loginPage: true
+        };
+      } 
+    
+    showingDrawerFalse = () => {
+      this.setState({loginPage:false});
+    }
+    
+    showingDrawerTrue =() => {
+        this.setState({loginPage:true});
+    }
     render() {
         return (
             <div className='container-fluid'>
                 <BrowserRouter>
-                    <DrawerMenu />
+                    {(this.state.loginPage) && <DrawerMenu />}
                     <Switch>
                         <Route path="/encuesta/:id" component={NuevaEncuesta} />
                         <Route exact path="/encuestas" component={SurveyList} />
                         <Route exact path="/usuarios" component={Usuarios} />
-                        <Route exact path="/" component={Login} />
+                        <Route exact path="/" render={(props) => <Login isDrawerVisibleFalse={this.showingDrawerFalse} isDrawerVisibleTrue={this.showingDrawerTrue}/>} />
                     </Switch>
                 </BrowserRouter>
             </div>
