@@ -1,13 +1,12 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Row, Col } from 'reactstrap';
+import Container from '@material-ui/core/Container';
 import 'date-fns';
-
 import axios from 'axios'
 const origin = process.env.REACT_APP_BACKEND_ORIGIN
 
@@ -22,9 +21,10 @@ function getHeaders() {
 
 
 const useStyles = makeStyles((theme) => ({
-root: {
+  root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
+      width: '25ch',
     },
   },
 }));
@@ -83,7 +83,6 @@ export default function SignIn() {
     };
 
   return (
-
     <Container fixed>
       <CssBaseline />
       <div className={classes.paper}>
@@ -150,27 +149,11 @@ export default function SignIn() {
           </Button>
 </Grid>
 
-        </Col>
-
-<Col sm={{ size: 2, order: 2}}>
-</Col>
-
-<Col sm={{ size: 3, order: 3}}>
-            <div>
-            <img
-                src={LogoGrande}
-                className="imagenObservatorioPymeGrande"
-                alt="Obs pyme"
-
-            />
-            </div>
-        </Col>
-
-              </Row>
 
 
+
+        </form>
+      </div>
     </Container>
-
-
   );
 }
