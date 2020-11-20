@@ -88,6 +88,7 @@ export class NuevaEncuesta extends Component {
         var componente = {}
         componente.tipoPregunta = 1
         componente.titulo = tituloPregunta.title
+        componente.multiplesOptions = []
         componentes.push(componente)
         this.setState({questions: componentes})
     }
@@ -106,7 +107,7 @@ export class NuevaEncuesta extends Component {
 
     updateMultiplesOptions = (index,multiplesOptions) => {
         var questions = this.state.questions
-        if (index > questions.length) {
+        if (index >= questions.length) {
             var question
             question.multiplesOptions = multiplesOptions
             questions.push(question)

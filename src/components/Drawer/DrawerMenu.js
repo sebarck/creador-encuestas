@@ -63,6 +63,12 @@ const DrawerMenu = () => {
                         </ListItemIcon>
                         <ListItemText primary="Mi Perfil" />
                     </ListItem>
+                    <ListItem button component={Link} to="/usuarios" key="usuarios" onClick={handleDrawerClose}>
+                        <ListItemIcon>
+                            <Person />
+                        </ListItemIcon>
+                        <ListItemText primary="Usuarios" />
+                    </ListItem>
                 </List>
             </Drawer>
         </div>

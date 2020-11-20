@@ -28,6 +28,7 @@ export class OptionQuestion extends Component {
     
 
     addOption = () => {
+        console.log(this.props.question)
         var opciones = this.state.options
         var opcion = {}
         opcion.valueOption = ""
@@ -63,6 +64,7 @@ export class OptionQuestion extends Component {
         return (
             <Container className="themed-container" fluid={true}>
                 {this.state.options.map((opcion, index) => {
+
                     return (
                         <div key={index} className="container-fluid">
                             <Container >

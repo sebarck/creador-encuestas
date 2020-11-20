@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { NuevaEncuesta } from './NuevaEncuesta';
 import SurveyList from './Survey/SurveyList';
 import Login from './Login';
+import Usuarios from './Usuarios';
 
 class App extends Component {
     render() {
@@ -17,6 +18,7 @@ class App extends Component {
                     <Switch>
                         <Route path="/encuesta/:id" component={NuevaEncuesta} />
                         <Route exact path="/encuestas" component={SurveyList} />
+                        <Route exact path="/usuarios" component={Usuarios} />
                         <Route exact path="/" component={Login} />
                     </Switch>
                 </BrowserRouter>
