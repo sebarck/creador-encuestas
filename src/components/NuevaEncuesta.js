@@ -140,6 +140,8 @@ export class NuevaEncuesta extends Component {
                 data => console.log(data),
                 (e) => console.log(e) 
             )        
+            this.setState({titulo: { titulo: '', descripcion: '' }})
+            this.setState({questions: []})
         }
         else {
             actualizarEncuesta(
@@ -149,7 +151,10 @@ export class NuevaEncuesta extends Component {
                 data => console.log(data),
                 (e) => console.log(e) 
             )
+            this.props.history.push("/encuestas/");
         }
+        this.setState({titulo: { titulo: '', descripcion: '' }})
+        this.setState({questions: []})
     }
 
 
