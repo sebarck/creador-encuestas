@@ -34,6 +34,7 @@ const DrawerMenu = () => {
     setOpen(false);
   };
 
+
   const handleDrawerCloseLogin = () => {
     sessionStorage.clear();
     localStorage.clear();
@@ -65,6 +66,7 @@ const DrawerMenu = () => {
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeft />
           </IconButton>
+
         </div>
         <Divider />
         <List>
