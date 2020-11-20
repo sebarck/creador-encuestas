@@ -18,8 +18,12 @@ import { Typography } from '@material-ui/core';
 import { login } from '../controller/loginController'
 
 
+
+
 export class Login extends Component {
+componentDidMount = () => {this.props.isDrawerVisibleFalse();}
   
+
   constructor() {
     super()
     this.state = ({
@@ -33,6 +37,7 @@ export class Login extends Component {
   }
 
   Copyright() {
+    
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
@@ -78,6 +83,10 @@ handleLogin = (e) => {
             if (data.ok) {
                 this.setState({isLogged: true})
                 localStorage.setItem('token', data.token)
+                sessionStorage.setItem('usuario', JSON.stringify(data.usuario))
+                sessionStorage.setItem('rolUsuario', data.usuario.role)
+                sessionStorage.setItem('userLogged', true)
+                this.props.isDrawerVisibleTrue()
                 this.props.history.push('/encuestas')
             }
             else {
@@ -91,9 +100,12 @@ handleLogin = (e) => {
 }
 
   render () {
+    
     return (
+      
       <Container component="main" maxWidth="xs">
       <CssBaseline />
+      <br/>
       <div className={this.classes.paper}>
       <img
           src={Logo}
@@ -162,7 +174,7 @@ handleLogin = (e) => {
             </Grid>
           </form>
         </div>
-        
+        <br/>
         <Box mt={8}>
           {this.Copyright}
         </Box>
