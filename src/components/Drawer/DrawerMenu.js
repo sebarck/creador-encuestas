@@ -57,7 +57,7 @@ const DrawerMenu = () => {
                         </ListItemIcon>
                         <ListItemText primary="Encuestas creadas" />
                     </ListItem>
-                    <ListItem button component={Link} to="/perfil" key="perfil" onClick={handleDrawerClose}>
+                    <ListItem button component={Link} to="/MiPerfil" key="perfil" onClick={handleDrawerClose}>
                         <ListItemIcon>
                             <Person />
                         </ListItemIcon>
