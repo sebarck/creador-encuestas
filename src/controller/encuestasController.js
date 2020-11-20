@@ -10,6 +10,7 @@ function getHeaders() {
 }
 
 export const generarEncuesta = (body,callbackResponse, callbackData, callbackCatch) => {
+    
     const url = process.env.REACT_APP_BACKEND_URI
     const myInit = {
         method: 'POST',
