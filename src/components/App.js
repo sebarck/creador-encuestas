@@ -8,7 +8,7 @@ import { NuevaEncuesta } from './NuevaEncuesta';
 import SurveyList from './Survey/SurveyList';
 import Login from './Login';
 
-import Usuarios from './Usuarios';
+import Usuarios from './Usuarios2';
 import MiPerfil from './MiPerfil';
 
 class App extends Component {
@@ -34,7 +34,6 @@ class App extends Component {
                     <Switch>
                         <Route path="/encuesta/:id" component={NuevaEncuesta} />
                         <Route exact path="/encuestas" component={SurveyList} />
-
                         <Route exact path="/usuarios" component={Usuarios} />
                         <Route exact path="/" render={(props) => <Login isDrawerVisibleFalse={this.showingDrawerFalse} isDrawerVisibleTrue={this.showingDrawerTrue}/>} />
                         <Route exact path="/perfil" component={MiPerfil} />

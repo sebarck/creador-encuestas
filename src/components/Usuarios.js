@@ -3,10 +3,8 @@ import MaterialTable from "material-table";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { obtenerTodasEncuestas } from "../controller/encuestasController";
-import AlertDialogSlide from "../components/Survey/Modal";
-import {
-  eliminarEncuesta,
-} from "../controller/encuestasController";
+import AlertDialogSlide from "../components/mensajeria/ModalUserDeletion";
+import { eliminarUsuario } from "../controller/usuarioController";
 
 export class SurveyList extends Component {
   constructor() {
@@ -44,6 +42,7 @@ export class SurveyList extends Component {
     this.obtenerEncuestas();
   };
 
+  //esto tiene que ser obtener usuarios
   obtenerEncuestas = () => {
     console.log("disparar evento");
     obtenerTodasEncuestas(
@@ -67,17 +66,19 @@ export class SurveyList extends Component {
     );
   };
 
-  modificarEncuesta = (id) => {
-    this.props.history.push("/encuesta/" + id);
-  };
 
-  eliminarEncuesta = (id, name) => {
+//   modificarEncuesta = (id) => {
+//     this.props.history.push("/encuesta/" + id);
+//   };
+
+  eliminarUsuario = (id, name) => {
     this.setState({ id, nombre: name });
     this.abrirModal();
   };
 
+  //esto tiene que ser para eliminar usuario
   handlerEliminar = (id) => {
-    eliminarEncuesta(
+    eliminarUsuario(
       id,
       (data) => {
         console.log("eliminacion OK");
@@ -102,26 +103,28 @@ export class SurveyList extends Component {
         />
         <Container maxWidth="lg">
           <MaterialTable
-            title="Usuarios"
+            title="Administración de usuarios"
             columns={[
               { title: "Nombre", field: "nombre" },
-            //   { title: "Descripcion", field: "description" },
-            //   { title: "Fecha de creacion", field: "creationDate" },
-            //   { title: "Creado por", field: "createdBy" },
-            //   { title: "id", field: "id", hidden: true },
+              { title: "Email", field: "email" },
+              { title: "Estado", field: "estado" },
+              //   { title: "Descripcion", field: "description" },
+              //   { title: "Fecha de creacion", field: "creationDate" },
+              //   { title: "Creado por", field: "createdBy" },
+              //   { title: "id", field: "id", hidden: true },
             ]}
             data={this.state.data1.usuarios}
             actions={[
               {
                 icon: "edit",
-                tooltip: "Modificar encuesta",
+                tooltip: "Modificar usuario",
                 onClick: (event, rowData) => this.modificarEncuesta(rowData.id),
               },
               {
                 icon: "delete",
-                tooltip: "Eliminar encuesta",
+                tooltip: "Eliminar usuario",
                 onClick: (event, rowData) =>
-                  this.eliminarEncuesta(rowData.id, rowData.name),
+                  this.eliminarUsuario(rowData.id, rowData.name),
               },
             ]}
             localization={{
