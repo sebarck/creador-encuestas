@@ -41,23 +41,7 @@ export default function Usuarios2() {
   const classes = useStyles();
   const { useState } = React;
 
-  const [columns, setColumns] = useState([
-    { title: "Nombre", field: "name" },
-    {
-      title: "Email",
-      field: "email",
-    },
-    {
-      title: "Rol",
-      field: "roleUser",
-      lookup: { 0: "ADMIN-ROLE", 63: "USER-ROLE" },
-    },
-  ]);
-
-  const [data2, setData2] = useState([
-    { name: "Mehmet", email: "asd@asd.com", roleUser: 0 },
-    { name: "Zerya Betül", email: "asd@asd.com", roleUser: 63 },
-  ]);
+  
 
   const [userData, setUserData] = useState();
 
