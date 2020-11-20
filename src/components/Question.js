@@ -24,7 +24,7 @@ export class Question extends Component {
             case 4: 
                 return <OptionQuestion handleMultiplesOptions={this.props.handleMultiplesOptions} multiple="true"question={this.props.question.multiplesOptions} />
             default:
-                return <OptionImage handleOptionImagen={this.props.handleOptionImagen}/>
+                return <OptionImage handleOptionImagen={this.props.handleImageImageOptin} imageOptions={this.props.question.imageOptions}/>
             
         }
         
