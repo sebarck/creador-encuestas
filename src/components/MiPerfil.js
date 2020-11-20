@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const userID = JSON.parse(sessionStorage.getItem("usuario"));
+let userID = ""
 const url = process.env.REACT_APP_BACKEND_URI + "/usuario/" + userID._id;
 
   const obtenerUser = async () => await axios.get(url,{
@@ -48,7 +48,11 @@ export default function SignIn() {
   const[password , setPass] = React.useState("");
   const[user, setUser] = React.useState();
 
+
   React.useEffect(() => {
+    if(sessionStorage.getItem("usuario")){
+      userID = JSON.parse(sessionStorage.getItem("usuario"));
+    }
     const fetchUser = async () => {setUser(await obtenerUser())};
     fetchUser();
 },[]);
