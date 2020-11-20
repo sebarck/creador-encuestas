@@ -37,7 +37,7 @@ class App extends Component {
 
                         <Route exact path="/usuarios" component={Usuarios} />
                         <Route exact path="/" render={(props) => <Login isDrawerVisibleFalse={this.showingDrawerFalse} isDrawerVisibleTrue={this.showingDrawerTrue}/>} />
-                        <Route exact path="/MiPerfil" component={MiPerfil} />
+                        <Route exact path="/perfil" component={MiPerfil} />
 
                     </Switch>
                 </BrowserRouter>
