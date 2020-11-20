@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -20,10 +20,8 @@ export default function AlertDialogSlide(props) {
     props.abrirModal()
   };
 
-  useEffect(() => { 
-    console.log(props.input)
-    console.log(props.nombre)
-  })
+
+
 
   return (
     <div>

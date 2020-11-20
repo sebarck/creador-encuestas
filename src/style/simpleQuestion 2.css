@@ -1,0 +1,155 @@
+html {background-color:  rgb(242, 250, 255);}
+#root{ background-color: rgb(242, 250, 255);}
+input:focus {    
+    background-color: #EEE; 
+    border-bottom: solid white 1px;
+}
+
+.title {
+    width: 90%;
+    font-size: 36px;
+    height: 60px;
+    padding: 10px; 
+    margin: 10px;
+    background-color: white;
+    border: none;
+    border-bottom: solid black 1px;
+    resize: none;
+    overflow: hidden;
+    font-weight: bold;
+}
+
+.title:focus {
+    background-color: #EEE; 
+    border-bottom: solid white 1px;
+}
+
+.tittleQuestion {
+    width: 100%;
+    font-size: 20px;
+    height: 60px;
+    padding: 10px; 
+    margin: 10px;
+    background-color: white;
+    border: none;
+    border-bottom: solid black 1px;
+    resize: none;
+    overflow: hidden;
+
+}
+
+.tittleQuestion:focus{
+    background-color: #EEE; 
+    border-bottom: solid white 1px;
+}
+
+.descripcionTitulo {
+    width: 90%;
+    font-size: 15px;
+    height: 40px;
+    padding: 10px; 
+    margin: 10px;
+    background-color: white;
+    border: none;
+    border-bottom: solid black 1px;
+    resize: none;
+    font-weight: bold;
+}
+
+.descripcionTitulo:focus {
+        background-color: #EEE; 
+        border-bottom: solid white 1px;
+}
+
+.descriptionQuestion {
+    width: 100%;
+    font-size: 15px;
+    height: 40px;
+    padding: 10px; 
+    margin: 10px;
+    background-color: white;
+    border: none;
+    border-bottom: solid black 1px;
+    resize: none;
+}
+
+.tittleQuestion:focus{
+    background-color: #EEE; 
+    border-bottom: solid white 1px;
+}
+
+.smallInput {
+    width: 80%;
+    font-size: 15px;
+    height: 40px;
+    padding: 10px; 
+    margin: 10px;
+    background-color: white;
+    border: none;
+    border-bottom: solid black 1px;
+    resize: none;
+}
+
+.largeInput {
+    width: 100%;
+    font-size: 15px;
+    height: 40px;
+    padding: 10px; 
+    margin: 10px;
+    background-color: white;
+    border: none;
+    border-bottom: solid black 1px;
+    resize: none;
+}
+
+.inputShortAnswer {
+    color: #6c757d;
+    margin: 10px;
+    margin-right: 0px;
+    padding: 10px;
+    padding-right: 0px;
+    border-bottom: solid black 1px;
+}
+
+.botonAgregar {
+    display: flex;
+    position: relative;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+}
+
+.imagenAgregar{
+    position: relative;
+    
+    top: -13px;
+    left: -13px;
+}
+.conteinerBotonAgregar{
+    height: 50px;
+    position: absolute;
+
+}
+
+.contenedorPersonal {
+    -webkit-box-shadow: 6px 8px 16px -2px rgba(0,0,0,0.76);
+    -moz-box-shadow: 6px 8px 16px -2px rgba(0,0,0,0.76);
+    box-shadow: 6px 8px 16px -2px rgba(0,0,0,0.76);
+    background-color: white;
+    margin-top: 20px;
+    padding-bottom: 15px;
+}
+
+.labelComponent {
+    font-size: 15px;
+    height: 40px;
+    padding: 10px; 
+    margin: 10px;
+    background-color: white;
+    border: none;
+}
+
+.buttonSelector {
+    margin: 15px;
+    padding: 10px;
+}
