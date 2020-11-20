@@ -1,19 +1,19 @@
 import React from 'react';
+import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import { Container, Row, Col } from 'reactstrap';
 import 'date-fns';
 import Fecha from './Fecha.js'
+import LogoGrande from '../images/observatoriopymegrande.jpg'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '25ch',
     },
   },
 }));
@@ -30,114 +30,137 @@ export default function SignIn() {
 
 
   return (
-    <Container fixed>
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Perfil de usuario
-        </Typography>
-        <form className={classes.form} noValidate>
+    <Container style={{ marginLeft: 20}}>
 
 
-        <div className={classes.root}>
-            <Grid item xs={3}>
-            <TextField
-              id="Nombre y apellido"
-              label="Nombre y apellido"
+<Row>
 
-              placeholder="Nombre y apellido"
-              fullWidth
-              variant="outlined"
-            />
-            </Grid>
+        <Col sm={{ size: 5, order: 1}}>
 
 
-            <Grid item xs={3}>
-            <Fecha />
-            </Grid>
+            <div className={classes.paper}>
+
+              <Typography component="h1" variant="h6">
+                Perfil de usuario
+              </Typography>
+              <form className={classes.form} noValidate>
+
+
+              <div className={classes.paper}>
+                  <Grid>
+                  <TextField
+                    id="Nombre y apellido"
+                    label="Nombre y apellido"
+                    placeholder="Nombre y apellido"
+                    fullWidth
+                    variant="outlined"
+                  />
+                  </Grid>
+
+                  <Grid>
+                  <Fecha />
+                  </Grid>
+
+                  <Grid>
+                  <TextField
+                    id="Dirección de Email"
+                    label="Dirección de Email"
+                    placeholder="Email"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                  </Grid>
+
+
+                  <Grid>
+                  <TextField
+                    id="Celular"
+                    label="Celular"
+                    placeholder="Celular"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                  </Grid>
 
 
 
+          <Grid>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="contraseña actual"
+                label="Contraseña actual"
+                type={values.showPassword ? 'text' : 'password'}
+                id="contraseña"
+                autoComplete="contraseña-actual"
+              />
+          </Grid>
 
-
-            <Grid item xs={3}>
-            <TextField
-              id="Dirección de Email"
-              label="Dirección de Email"
-              style={{ margin: 8 }}
-              placeholder="Email"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-            </Grid>
-
-
-            <Grid item xs={3}>
-            <TextField
-              id="outlined-full-width"
-              label="Celular"
-              style={{ margin: 8 }}
-              placeholder="Celular"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-            </Grid>
-
-        </div>
-
-    <Grid item xs={3}>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="contraseña actual"
-          label="Contraseña actual"
-          type={values.showPassword ? 'text' : 'password'}
-          id="contraseña"
-          autoComplete="contraseña-actual"
-        />
-</Grid>
-
-<Grid item xs={3}>
-    <TextField
-      variant="outlined"
-      margin="normal"
-      required
-      fullWidth
-      name="Contraseña Nueva"
-      label="Contraseña nueva"
-      type={values.showPassword ? 'text' : 'password'}
-      id="contraseñanueva"
-    />
-</Grid>
-
-
-    <Grid item xs={3}>
-          <Button
-            type="submit"
+          <Grid>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
             fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Realizar cambios
-          </Button>
-</Grid>
+            name="Contraseña Nueva"
+            label="Contraseña nueva"
+            type={values.showPassword ? 'text' : 'password'}
+            id="contraseñanueva"
+          />
+          </Grid>
+
+
+          <Grid>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  Realizar cambios
+                </Button>
+          </Grid>
+
+              </div>
+
+
+              </form>
+            </div>
 
 
 
+        </Col>
 
-        </form>
-      </div>
+<Col sm={{ size: 2, order: 2}}>
+</Col>
+
+<Col sm={{ size: 3, order: 3}}>
+            <div>
+            <img
+                src={LogoGrande}
+                className="imagenObservatorioPymeGrande"
+                alt="Obs pyme"
+
+            />
+            </div>
+        </Col>
+
+              </Row>
+
+
     </Container>
+
+
   );
 }
