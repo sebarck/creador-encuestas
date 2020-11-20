@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 let userID = ""
-const url = process.env.REACT_APP_BACKEND_URI + "/usuario/" + userID._id;
+let url = process.env.REACT_APP_BACKEND_URI + "/usuario/";
 
   const obtenerUser = async () => await axios.get(url,{
     "headers": getHeaders()}).then((response) => response.data)
@@ -52,12 +52,15 @@ export default function SignIn() {
   React.useEffect(() => {
     if(sessionStorage.getItem("usuario")){
       userID = JSON.parse(sessionStorage.getItem("usuario"));
+      url = url + userID._id
     }
+    
     const fetchUser = async () => {setUser(await obtenerUser())};
     fetchUser();
 },[]);
 
   React.useEffect(()=>{
+    console.log(user)
     if(user){
       setName(user.usuario.nombre);
       setEmail(user.usuario.email)
