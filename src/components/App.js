@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { NuevaEncuesta } from './NuevaEncuesta';
 import SurveyList from './Survey/SurveyList';
 import Login from './Login';
+import MiPerfil from "./MiPerfil"
 
 class App extends Component {
     render() {
@@ -18,6 +19,7 @@ class App extends Component {
                         <Route path="/encuesta/:id" component={NuevaEncuesta} />
                         <Route exact path="/encuestas" component={SurveyList} />
                         <Route exact path="/" component={Login} />
+                        <Route exact path="/perfil" component={MiPerfil} />
                     </Switch>
                 </BrowserRouter>
             </div>
