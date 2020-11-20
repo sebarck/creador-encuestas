@@ -1,7 +1,8 @@
 html {background-color:  rgb(242, 250, 255);}
 #root{ background-color: rgb(242, 250, 255);}
-input:focus {    
-    background-color: #EEE; 
+#root2{ background-color: pink;}
+input:focus {
+    background-color: #EEE;
     border-bottom: solid white 1px;
 }
 
@@ -9,7 +10,7 @@ input:focus {
     width: 90%;
     font-size: 36px;
     height: 60px;
-    padding: 10px; 
+    padding: 10px;
     margin: 10px;
     background-color: white;
     border: none;
@@ -19,7 +20,7 @@ input:focus {
 }
 
 .title:focus {
-    background-color: #EEE; 
+    background-color: #EEE;
     border-bottom: solid white 1px;
 }
 
@@ -27,7 +28,7 @@ input:focus {
     width: 100%;
     font-size: 20px;
     height: 60px;
-    padding: 10px; 
+    padding: 10px;
     margin: 10px;
     background-color: white;
     border: none;
@@ -38,7 +39,7 @@ input:focus {
 }
 
 .tittleQuestion:focus{
-    background-color: #EEE; 
+    background-color: #EEE;
     border-bottom: solid white 1px;
 }
 
@@ -46,7 +47,7 @@ input:focus {
     width: 90%;
     font-size: 20px;
     height: 40px;
-    padding: 10px; 
+    padding: 10px;
     margin: 10px;
     background-color: white;
     border: none;
@@ -55,7 +56,7 @@ input:focus {
 }
 
 .descripcionTitulo:focus {
-        background-color: #EEE; 
+        background-color: #EEE;
         border-bottom: solid white 1px;
 }
 
@@ -63,7 +64,7 @@ input:focus {
     width: 100%;
     font-size: 15px;
     height: 40px;
-    padding: 10px; 
+    padding: 10px;
     margin: 10px;
     background-color: white;
     border: none;
@@ -72,7 +73,7 @@ input:focus {
 }
 
 .tittleQuestion:focus{
-    background-color: #EEE; 
+    background-color: #EEE;
     border-bottom: solid white 1px;
 }
 
@@ -80,7 +81,7 @@ input:focus {
     width: 80%;
     font-size: 15px;
     height: 40px;
-    padding: 10px; 
+    padding: 10px;
     margin: 10px;
     background-color: white;
     border: none;
@@ -92,7 +93,7 @@ input:focus {
     width: 100%;
     font-size: 15px;
     height: 40px;
-    padding: 10px; 
+    padding: 10px;
     margin: 10px;
     background-color: white;
     border: none;
@@ -120,7 +121,7 @@ input:focus {
 
 .imagenAgregar{
     position: relative;
-    
+
     top: -13px;
     left: -13px;
 }
@@ -140,7 +141,7 @@ input:focus {
 .labelComponent {
     font-size: 15px;
     height: 40px;
-    padding: 10px; 
+    padding: 10px;
     margin: 10px;
     background-color: white;
     border: none;

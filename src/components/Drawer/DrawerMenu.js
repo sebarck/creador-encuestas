@@ -63,7 +63,7 @@ const DrawerMenu = () => {
                             </ListItemIcon>
                             <ListItemText primary="Encuestas creadas" />
                         </ListItem>
-                        <ListItem button component={Link} to="/perfil" key="perfil" onClick={handleDrawerClose}>
+                        <ListItem button component={Link} to="/MiPerfil" key="MiPerfil" onClick={handleDrawerClose}>
                             <ListItemIcon>
                                 <Person />
                             </ListItemIcon>
@@ -71,13 +71,14 @@ const DrawerMenu = () => {
                         </ListItem>
 
                     </List>
-                </Drawer> 
-                <Switch>    
+                </Drawer>
+                <Switch>
                     <Route path="/encuesta/:id" component={NuevaEncuesta} />
                     <Route exact path="/" component={SurveyList} />
 										<Route exact path="/login" component={InicioDeSesión} />
+                    <Route exact path="/MiPerfil" component={MiPerfil} />
                 </Switch>
-                </Drawer>
+
         </div>
     );
 }
