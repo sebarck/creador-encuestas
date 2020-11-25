@@ -9,7 +9,7 @@ import {
   duplicarEncuesta,
 } from "../../controller/encuestasController";
 
-export class SurveyList extends Component {    
+export class SurveyList extends Component {
   constructor() {
     super();
     this.state = {
@@ -34,6 +34,7 @@ export class SurveyList extends Component {
             name: encuesta.poll_title,
             description: encuesta.description,
             creationDate: encuesta.createAt,
+            state: encuesta.poll_state,
             id: encuesta._id,
           };
 
@@ -80,6 +81,7 @@ export class SurveyList extends Component {
   abrirModal = () => {
     this.setState({ openModal: !this.state.openModal });
   };
+
   render() {
     return (
       <div>
@@ -97,7 +99,7 @@ export class SurveyList extends Component {
               { title: "Nombre", field: "name" },
               { title: "Descripcion", field: "description" },
               { title: "Fecha de creacion", field: "creationDate" },
-              { title: "id", field: "id", hidden: true },
+              { title: "Estado encuesta", field: "state" }
             ]}
             data={this.state.data}
             actions={[
