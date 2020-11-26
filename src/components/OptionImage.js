@@ -12,6 +12,24 @@ export class OptionImage extends Component {
         }
     }
 
+    componentDidMount = () => {
+        this.setState({description: this.props.imageOptions.description})
+        this.setState({imageType: this.props.imageOptions.imageType})
+        this.setState({maxSize: this.props.imageOptions.maxSize}) 
+    }
+
+    componentDidUpdate = (prevProps) => {
+        if (this.props.imageOptions.description !== prevProps.imageOptions.description) {
+            this.setState({description: this.props.imageOptions.description}) 
+        }
+        if (this.props.imageOptions.imageType !== prevProps.imageOptions.imageType) {
+            this.setState({imageType: this.props.imageOptions.imageType}) 
+        }
+        if (this.props.imageOptions.maxSize !== prevProps.imageOptions.maxSize) {
+            this.setState({maxSize: this.props.imageOptions.maxSize}) 
+        }
+    }
+
     updateDescription = (e) => {
         this.setState({description: e.target.value})
         return this.props.handleOptionImagen(this.state)
@@ -25,6 +43,7 @@ export class OptionImage extends Component {
 
     updateImageType = (e) => {
         this.setState({imageType: e.target.value})
+        return this.props.handleOptionImagen(this.state)
     }
 
     render () {
@@ -39,7 +58,8 @@ export class OptionImage extends Component {
                                 placeholder="Ingresá una descripción, de ser necesario" 
                                 aria-label="Username" 
                                 aria-describedby="basic-addon1" 
-                                onChange={this.updateDescription}    
+                                onChange={(e) => this.updateDescription(e)}  
+                                value={this.state.description}
                             />
                         </div>
                     </Col>
@@ -56,7 +76,8 @@ export class OptionImage extends Component {
                         className="smallInput"
                         placeholder="ingresá tu nueva opción"
                         aria-label="opcion"
-                        onChange={(e) => this.updateMaxSize}
+                        onChange={(e) => this.updateMaxSize(e)}
+                        value={this.state.maxSize}
                     />       
                     </Col>
                 </Row>
@@ -71,7 +92,8 @@ export class OptionImage extends Component {
                             type="text"
                             className="smallInput"
                             aria-label="opcion"
-                            onChange={(e) => this.updateImageType}
+                            onChange={(e) => this.updateImageType(e)}
+                            value={this.state.imageType}
                         />
                     </Col>
                 </Row>

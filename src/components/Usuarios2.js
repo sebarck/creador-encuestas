@@ -13,7 +13,7 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import { obtenerTodosUsuarios } from "../controller/usuarioController";
+import { obtenerTodosUsuarios, eliminarUsuario, actualizarUsuario } from "../controller/usuarioController";
 import axios from "axios";
 const origin = process.env.REACT_APP_BACKEND_ORIGIN;
 
@@ -41,23 +41,7 @@ export default function Usuarios2() {
   const classes = useStyles();
   const { useState } = React;
 
-  const [columns, setColumns] = useState([
-    { title: "Nombre", field: "name" },
-    {
-      title: "Email",
-      field: "email",
-    },
-    {
-      title: "Rol",
-      field: "roleUser",
-      lookup: { 0: "ADMIN-ROLE", 63: "USER-ROLE" },
-    },
-  ]);
-
-  const [data2, setData2] = useState([
-    { name: "Mehmet", email: "asd@asd.com", roleUser: 0 },
-    { name: "Zerya Betül", email: "asd@asd.com", roleUser: 63 },
-  ]);
+  
 
   const [userData, setUserData] = useState();
 
@@ -147,7 +131,12 @@ export default function Usuarios2() {
           ]}
           data={userData}
             editable={{
-              onRowUpdate: (newData, oldData) =>
+              onRowUpdate: (newData, oldData) => {
+                actualizarUsuario(newData.id,
+                    newData,
+                    data => console.log(data),
+                    (e) => console.log(e))
+                return (
                 new Promise((resolve, reject) => {
                   setTimeout(() => {
                     const dataUpdate = [...userData];
@@ -157,8 +146,17 @@ export default function Usuarios2() {
 
                     resolve();
                   }, 1000);
-                }),
-              onRowDelete: (oldData) =>
+                })
+                )},
+              onRowDelete: (oldData) => {
+                
+                eliminarUsuario(oldData.id,
+                    data => console.log(data),
+                    (e) => console.log(e))
+
+
+                console.log('pasando por aca')
+                return (
                 new Promise((resolve, reject) => {
                   setTimeout(() => {
                     const dataDelete = [...userData];
@@ -168,7 +166,8 @@ export default function Usuarios2() {
 
                     resolve();
                   }, 1000);
-                }),
+                })
+                )},
             }}
         />
         <br />

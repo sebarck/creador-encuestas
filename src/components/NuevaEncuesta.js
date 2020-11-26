@@ -89,6 +89,11 @@ export class NuevaEncuesta extends Component {
         componente.tipoPregunta = 1
         componente.titulo = tituloPregunta.title
         componente.multiplesOptions = []
+        componente.imageOptions = {
+            description : "",
+            maxSize : "0",
+            imageType : ""
+        }
         componentes.push(componente)
         this.setState({questions: componentes})
     }
@@ -127,12 +132,16 @@ export class NuevaEncuesta extends Component {
     managePoll = () => {
         let convertStateToBodyAPI = encuestasToBodyApi(this.state)      
         if (this.props.match.params.id === '0') { //Se genera una nueva encuesta controlando que nos se envía el parámetro
+            let usuario = JSON.parse(sessionStorage.getItem('usuario'))
+            convertStateToBodyAPI.usuario_id = usuario._id
             generarEncuesta(
                 convertStateToBodyAPI,
                 response => console.log(response.json()),
-                data => console.log(data),
+                data => alert(`Encuesta guarda con éxito`),
                 (e) => console.log(e) 
             )        
+            this.setState({titulo: { titulo: '', descripcion: '' }})
+            this.setState({questions: []})
         }
         else {
             actualizarEncuesta(
@@ -142,7 +151,10 @@ export class NuevaEncuesta extends Component {
                 data => console.log(data),
                 (e) => console.log(e) 
             )
+            this.props.history.push("/encuestas/");
         }
+        this.setState({titulo: { titulo: '', descripcion: '' }})
+        this.setState({questions: []})
     }
 
 

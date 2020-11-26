@@ -1,9 +1,9 @@
 export const encuestasToBodyApi = (encuesta) => {
-        
     let bodyApi = {
         poll_title:  encuesta.titulo.titulo,
         poll_state: "true",
         description: encuesta.titulo.descripcion,
+        
         questions: {
             total: Object.values(encuesta.questions).length,
             values: []
@@ -12,6 +12,11 @@ export const encuestasToBodyApi = (encuesta) => {
     Object.values(encuesta.questions).forEach((question,index) => {
         let questionBody = {
             q_type: question.tipoPregunta.toString(),
+            description: question.imageOptions.description,
+            filters: {
+                    extensions: (question.imageOptions.imageType).split(','),
+                    max_size: question.imageOptions.maxSize
+                },
             value: question.titulo,
             mandatory: Boolean(true),
             options: question.multiplesOptions
@@ -34,7 +39,13 @@ export const bodyApiToEncuesta = (bodyApi) => {
         let questionBody = {
             tipoPregunta: parseInt(question.q_type),
             titulo: question.value,
-            multiplesOptions: question.options
+            multiplesOptions: question.options,
+            imageOptions: {
+                    description: question.description,
+                    maxSize: question.filters.max_size,
+                    imageType: question.filters.extensions.toString()
+                }
+            
         }
         encuesta.questions.push(questionBody)
     })

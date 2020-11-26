@@ -21,9 +21,9 @@ export class Questions extends Component {
         )
     }
 
-    actualizarOpcionImagen = (camposOpcionenImagen) => {
+    actualizarOpcionImagen = (index,camposOpcionenImagen) => {
         return (
-            this.props.handleOptionImage(camposOpcionenImagen)
+            this.props.handleImageOptions(index,camposOpcionenImagen)
         )
     }
 
@@ -37,7 +37,7 @@ export class Questions extends Component {
                             handleChange={this.actualizadorTitulo} 
                             handleQuestionSelector={this.actualizadorTipoPregunta}
                             handleMultiplesOptions={(multiplesOpciones) => this.actualizarMultiplesOpciones(index,multiplesOpciones)}
-                            handleImageImageOptin={this.actualizarOpcionImagen}
+                            handleImageImageOptin={(imageOptions) => this.actualizarOpcionImagen(index,imageOptions)}
                             title={question.titulo}
                             question={question}
                         />
