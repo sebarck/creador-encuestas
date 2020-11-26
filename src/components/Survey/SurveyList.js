@@ -133,14 +133,14 @@ export class SurveyList extends Component {
                 onClick: (event, rowData) => {
                   this.publicarEncuesta(rowData.id);
                 },
-                disabled: (rowData.state == "PUBLICADA"),
+                disabled: (rowData.state === "PUBLICADA"),
               }),
               rowData => ({
                 icon: "clear",
                 tooltip: "Inactivar encuesta",
                 onClick: (event, rowData) =>
                   this.desactivarEncuesta(rowData.id),
-                disabled: (rowData.state == "INACTIVA") || (rowData.state == "BORRADOR"),
+                disabled: (rowData.state === "INACTIVA") || (rowData.state === "BORRADOR"),
               }),
               {
                 icon: "library_add",
@@ -153,14 +153,14 @@ export class SurveyList extends Component {
                 icon: "edit",
                 tooltip: "Modificar encuesta",
                 onClick: (event, rowData) => this.modificarEncuesta(rowData.id),
-                disabled: (rowData.state == "PUBLICADA"),
+                disabled: (rowData.state === "PUBLICADA"),
               }),
               rowData => ({
                 icon: "delete",
                 tooltip: "Eliminar encuesta",
                 onClick: (event, rowData) =>
                   this.eliminarEncuesta(rowData.id, rowData.name),
-              disabled: (rowData.state == "PUBLICADA"),
+              disabled: (rowData.state === "PUBLICADA"),
               }),
             ]}
             localization={{
