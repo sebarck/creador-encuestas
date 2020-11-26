@@ -129,6 +129,15 @@ export class NuevaEncuesta extends Component {
         this.setState({questions: questions})
     }
 
+    deleteQuestion = (index) => {
+        console.log('eliminar elemento', index)
+        var questions = this.state.questions
+        console.log("quetions antes de eliminar", questions)
+        questions.splice(index,1)
+        console.log("questions depsués de eliminar",questions)
+        this.setState({questions: questions})
+
+    }
     managePoll = () => {
         let convertStateToBodyAPI = encuestasToBodyApi(this.state)      
         if (this.props.match.params.id === '0') { //Se genera una nueva encuesta controlando que nos se envía el parámetro
@@ -176,6 +185,7 @@ export class NuevaEncuesta extends Component {
                                 handleQuestionType={this.updateQuestionType}
                                 handleMultiplesOptions={this.updateMultiplesOptions}
                                 handleImageOptions={this.updateImageOptions}
+                                handleDeleteQuestion={this.deleteQuestion}
                             />
                         </Col>
                         <Col className='right-column-builder'>

@@ -27,6 +27,12 @@ export class Questions extends Component {
         )
     }
 
+    eliminarPregunta = (index) => {
+        return (
+            this.props.handleDeleteQuestion(index)
+        )
+    }
+
     render () {
         return (
             this.props.questions.map((question,index) => {
@@ -38,7 +44,9 @@ export class Questions extends Component {
                             handleQuestionSelector={this.actualizadorTipoPregunta}
                             handleMultiplesOptions={(multiplesOpciones) => this.actualizarMultiplesOpciones(index,multiplesOpciones)}
                             handleImageImageOptin={(imageOptions) => this.actualizarOpcionImagen(index,imageOptions)}
+                            handleDeleteQuestion={() => this.eliminarPregunta(index)}
                             title={question.titulo}
+
                             question={question}
                         />
                     </div>
