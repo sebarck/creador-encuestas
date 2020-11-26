@@ -4,7 +4,6 @@ import { SelectorQuestions } from './SelectorQuestions'
 import { SimpleQuestion } from './SimpleQuestion'
 import { SimpleQuestionLarge } from './SimpleQuestionLarge'
 import { OptionImage } from './OptionImage'
-import { Button } from 'reactstrap';
 import Eliminar from '../images/delete.png'
 
 export class Question extends Component {
