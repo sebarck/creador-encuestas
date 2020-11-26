@@ -4,6 +4,8 @@ import { SelectorQuestions } from './SelectorQuestions'
 import { SimpleQuestion } from './SimpleQuestion'
 import { SimpleQuestionLarge } from './SimpleQuestionLarge'
 import { OptionImage } from './OptionImage'
+import { Button } from 'reactstrap';
+import Eliminar from '../images/delete.png'
 
 export class Question extends Component {
   
@@ -37,6 +39,9 @@ export class Question extends Component {
         this.props.handleQuestionSelector(this.props.index,tipoPregunta)
     }
 
+    deleteQuestion = () => {
+        this.props.handleDeleteQuestion()
+    }
 
     render () {
         return (
@@ -52,10 +57,20 @@ export class Question extends Component {
                             aria-describedby="basic-addon1">
                         </textarea>
                     </div>    
-                    <div className="col-md-3">
+                    <div className="col-md-2">
                         <SelectorQuestions questionType={this.updateQuestionSelector} selectedQuestion={this.props.question.tipoPregunta}>
                             Seleccioná tu pregunta
                         </SelectorQuestions>
+                    </div>
+                    <div className="col-md-1 botonEliminar">
+                        <img 
+                            src={Eliminar} 
+                            
+                            alt="Girl in a jacket" 
+                            width="26" 
+                            height="26" 
+                            onClick={this.deleteQuestion} 
+                        />
                     </div>
                 </div>
                 <div className="container">  
