@@ -1,7 +1,6 @@
 export const encuestasToBodyApi = (encuesta) => {
     let bodyApi = {
         poll_title:  encuesta.titulo.titulo,
-        poll_state: "true",
         description: encuesta.titulo.descripcion,
         
         questions: {

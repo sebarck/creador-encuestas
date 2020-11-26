@@ -35,7 +35,7 @@ export class SurveyList extends Component {
           let dataListSurvey = {
             name: encuesta.poll_title,
             description: encuesta.description,
-            creationDate: encuesta.createAt,
+            updatedDate: encuesta.updateAt,
             state: encuesta.poll_state,
             id: encuesta._id,
           };
@@ -122,7 +122,7 @@ export class SurveyList extends Component {
             columns={[
               { title: "Nombre", field: "name" },
               { title: "Descripcion", field: "description" },
-              { title: "Fecha de creacion", field: "creationDate" },
+              { title: "Últ actualización", field: "updatedDate" },
               { title: "Estado encuesta", field: "state" },
             ]}
             data={this.state.data}
