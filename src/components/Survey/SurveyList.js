@@ -5,6 +5,8 @@ import { withRouter } from "react-router-dom";
 import { obtenerTodasEncuestas } from "../../controller/encuestasController";
 import AlertDialogSlide from "./Modal";
 import {
+  publicarEncuesta,
+  desactivarEncuesta,
   eliminarEncuesta,
   duplicarEncuesta,
 } from "../../controller/encuestasController";
@@ -62,6 +64,28 @@ export class SurveyList extends Component {
     );
   };
 
+  publicarEncuesta = (id) => {
+    publicarEncuesta(
+      id,
+      (data) => {
+        console.log("Publicación OK");
+        this.obtenerEncuestas();
+      },
+      (e) => console.log(e)
+    );
+  };
+
+  desactivarEncuesta = (id) => {
+    desactivarEncuesta(
+      id,
+      (data) => {
+        console.log("Desactivación OK");
+        this.obtenerEncuestas();
+      },
+      (e) => console.log(e)
+    );
+  };
+
   eliminarEncuesta = (id, name) => {
     this.setState({ id, nombre: name });
     this.abrirModal();
@@ -99,10 +123,25 @@ export class SurveyList extends Component {
               { title: "Nombre", field: "name" },
               { title: "Descripcion", field: "description" },
               { title: "Fecha de creacion", field: "creationDate" },
-              { title: "Estado encuesta", field: "state" }
+              { title: "Estado encuesta", field: "state" },
             ]}
             data={this.state.data}
             actions={[
+              rowData => ({
+                icon: "checker",
+                tooltip: "Publicar encuesta",
+                onClick: (event, rowData) => {
+                  this.publicarEncuesta(rowData.id);
+                },
+                disabled: (rowData.state == "PUBLICADA"),
+              }),
+              rowData => ({
+                icon: "clear",
+                tooltip: "Inactivar encuesta",
+                onClick: (event, rowData) =>
+                  this.desactivarEncuesta(rowData.id),
+                disabled: (rowData.state == "INACTIVA") || (rowData.state == "BORRADOR"),
+              }),
               {
                 icon: "library_add",
                 tooltip: "Duplicar encuesta",
@@ -110,17 +149,19 @@ export class SurveyList extends Component {
                   this.duplicarEncuesta(rowData.id);
                 },
               },
-              {
+              rowData => ({
                 icon: "edit",
                 tooltip: "Modificar encuesta",
                 onClick: (event, rowData) => this.modificarEncuesta(rowData.id),
-              },
-              {
+                disabled: (rowData.state == "PUBLICADA"),
+              }),
+              rowData => ({
                 icon: "delete",
                 tooltip: "Eliminar encuesta",
                 onClick: (event, rowData) =>
                   this.eliminarEncuesta(rowData.id, rowData.name),
-              },
+              disabled: (rowData.state == "PUBLICADA"),
+              }),
             ]}
             localization={{
               body: {
