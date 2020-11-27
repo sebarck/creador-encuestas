@@ -44,7 +44,6 @@ const DrawerMenu = () => {
   const history = useHistory();
 
   if (!sessionStorage.getItem('userLogged')) {
-    console.log("no auth token set");
     history.push("/");
   }
 

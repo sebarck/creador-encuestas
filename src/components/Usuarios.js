@@ -80,7 +80,6 @@ export class SurveyList extends Component {
     eliminarUsuario(
       id,
       (data) => {
-        console.log("eliminacion OK");
         this.obtenerEncuestas();
       },
       (e) => console.log(e)

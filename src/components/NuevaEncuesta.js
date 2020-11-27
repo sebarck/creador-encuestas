@@ -49,7 +49,7 @@ export class NuevaEncuesta extends Component {
         const id = this.props.match.params.id
         if (id !== '0' && id) {
             obtenerEncuestaById(id,
-                data => {
+                (data) => {
                     var convertBodyApiToState = bodyApiToEncuesta(data)
                     this.setState({titulo: convertBodyApiToState.titulo, questions: convertBodyApiToState.questions})
                 },
@@ -130,20 +130,12 @@ export class NuevaEncuesta extends Component {
     }
 
     deleteQuestion = (index) => {
-        console.log('eliminar elemento', index)
         var questions = this.state.questions
-        console.log("quetions antes de eliminar", questions)
         questions.splice(index,1)
-        console.log("questions depsués de eliminar",questions)
         this.setState({questions: questions})
 
     }
 
-    cleanTitleQuestion = (e) => {
-        console.log('es una funcion?',e)
-        e()
-
-    }
     managePoll = () => {
         let convertStateToBodyAPI = encuestasToBodyApi(this.state)      
         if (this.props.match.params.id === '0') { //Se genera una nueva encuesta controlando que nos se envía el parámetro
@@ -170,7 +162,6 @@ export class NuevaEncuesta extends Component {
         }
         this.setState({titulo: { titulo: '', descripcion: '' }})
         this.setState({questions: []})
-        this.cleanTitleQuestion()
     }
 
 
@@ -200,7 +191,6 @@ export class NuevaEncuesta extends Component {
                                 <Col>
                                     <QuestionGenerator 
                                     handleButton={this.addQuestion}
-                                    handleClean={this.cleanTitleQuestion}
                                          />
                                 </Col>
                             </Row>

@@ -28,7 +28,6 @@ export class OptionQuestion extends Component {
     
 
     addOption = () => {
-        console.log(this.props.question)
         var opciones = this.state.options
         var opcion = {}
         opcion.valueOption = ""

@@ -28,7 +28,6 @@ export class SurveyList extends Component {
 
   obtenerEncuestas = () => {
     let role = sessionStorage.getItem('rolUsuario')
-    console.log('role', role)
     role === 'ADMIN-ROLE' ? this.obtenerEncuestasParaAdmin() : this.obtenerEncuestasParaUsuarios()
 
   };
@@ -86,7 +85,6 @@ export class SurveyList extends Component {
     duplicarEncuesta(
       id,
       (data) => {
-        console.log("Duplicacion OK");
         this.obtenerEncuestas();
       },
       (e) => console.log(e)
@@ -97,7 +95,6 @@ export class SurveyList extends Component {
     publicarEncuesta(
       id,
       (data) => {
-        console.log("Publicación OK");
         this.obtenerEncuestas();
       },
       (e) => console.log(e)
@@ -108,7 +105,6 @@ export class SurveyList extends Component {
     desactivarEncuesta(
       id,
       (data) => {
-        console.log("Desactivación OK");
         this.obtenerEncuestas();
       },
       (e) => console.log(e)
@@ -124,7 +120,6 @@ export class SurveyList extends Component {
     eliminarEncuesta(
       id,
       (data) => {
-        console.log("eliminacion OK");
         this.obtenerEncuestas();
       },
       (e) => console.log(e)
