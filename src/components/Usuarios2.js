@@ -73,11 +73,9 @@ export default function Usuarios2() {
   }, []);
 
   function obtenerUsuarios() {
-    console.log("disparar evento obtención usuarios");
     obtenerTodosUsuarios(
       (data) => {
         let dataState = [];
-        console.log(data);
         data.usuarios.map((usuario) => {
           let dataListUsuario = {
             role: usuario.role,
@@ -98,7 +96,6 @@ export default function Usuarios2() {
 
   async function handleClickCrearUsuario() {
     if (password !== "") {
-      console.log(name);
       const response = await axios.post(url, {
         headers: getHeaders(),
         nombre: name,
