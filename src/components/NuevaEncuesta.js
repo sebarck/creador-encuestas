@@ -49,7 +49,7 @@ export class NuevaEncuesta extends Component {
         const id = this.props.match.params.id
         if (id !== '0' && id) {
             obtenerEncuestaById(id,
-                data => {
+                (data) => {
                     var convertBodyApiToState = bodyApiToEncuesta(data)
                     this.setState({titulo: convertBodyApiToState.titulo, questions: convertBodyApiToState.questions})
                 },
@@ -162,7 +162,6 @@ export class NuevaEncuesta extends Component {
         }
         this.setState({titulo: { titulo: '', descripcion: '' }})
         this.setState({questions: []})
-        this.cleanTitleQuestion()
     }
 
 
@@ -192,7 +191,6 @@ export class NuevaEncuesta extends Component {
                                 <Col>
                                     <QuestionGenerator 
                                     handleButton={this.addQuestion}
-                                    handleClean={this.cleanTitleQuestion}
                                          />
                                 </Col>
                             </Row>

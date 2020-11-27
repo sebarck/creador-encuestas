@@ -152,7 +152,6 @@ export default function Usuarios2() {
                     (e) => console.log(e))
 
 
-                console.log('pasando por aca')
                 return (
                 new Promise((resolve, reject) => {
                   setTimeout(() => {
