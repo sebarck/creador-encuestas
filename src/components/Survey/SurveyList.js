@@ -2,7 +2,7 @@ import { Container } from "@material-ui/core";
 import MaterialTable from "material-table";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { obtenerTodasEncuestas } from "../../controller/encuestasController";
+import { obtenerTodasEncuestas, obtenerTodasEncuestasParaAdmin } from "../../controller/encuestasController";
 import AlertDialogSlide from "./Modal";
 import {
   publicarEncuesta,
@@ -27,7 +27,13 @@ export class SurveyList extends Component {
   };
 
   obtenerEncuestas = () => {
-    console.log("disparar evento");
+    let role = sessionStorage.getItem('rolUsuario')
+    console.log('role', role)
+    role === 'ADMIN-ROLE' ? this.obtenerEncuestasParaAdmin() : this.obtenerEncuestasParaUsuarios()
+
+  };
+
+  obtenerEncuestasParaUsuarios = () => {
     obtenerTodasEncuestas(
       (data) => {
         let dataState = [];
@@ -47,7 +53,30 @@ export class SurveyList extends Component {
       },
       (e) => console.log(e)
     );
-  };
+  }
+
+  obtenerEncuestasParaAdmin = () => {
+    obtenerTodasEncuestasParaAdmin(
+      (data) => {
+        let dataState = [];
+        data.data.map((encuesta) => {
+          let dateFormated = new Date(encuesta.createAt)
+          let dataListSurvey = {
+            name: encuesta.poll_title,
+            description: encuesta.description,
+            creationDate: dateFormated.toLocaleDateString(), 
+            state: encuesta.poll_state,
+            id: encuesta._id,
+          };
+
+          dataState.push(dataListSurvey);
+          return true;
+        });
+        this.setState({ data: dataState });
+      },
+      (e) => console.log(e)
+    );
+  }
 
   modificarEncuesta = (id) => {
     this.props.history.push("/encuesta/" + id);

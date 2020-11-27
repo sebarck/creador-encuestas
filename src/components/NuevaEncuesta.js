@@ -138,6 +138,12 @@ export class NuevaEncuesta extends Component {
         this.setState({questions: questions})
 
     }
+
+    cleanTitleQuestion = (e) => {
+        console.log('es una funcion?',e)
+        e()
+
+    }
     managePoll = () => {
         let convertStateToBodyAPI = encuestasToBodyApi(this.state)      
         if (this.props.match.params.id === '0') { //Se genera una nueva encuesta controlando que nos se envía el parámetro
@@ -164,6 +170,7 @@ export class NuevaEncuesta extends Component {
         }
         this.setState({titulo: { titulo: '', descripcion: '' }})
         this.setState({questions: []})
+        this.cleanTitleQuestion()
     }
 
 
@@ -191,7 +198,10 @@ export class NuevaEncuesta extends Component {
                         <Col className='right-column-builder'>
                             <Row>
                                 <Col>
-                                    <QuestionGenerator handleButton={this.addQuestion} />
+                                    <QuestionGenerator 
+                                    handleButton={this.addQuestion}
+                                    handleClean={this.cleanTitleQuestion}
+                                         />
                                 </Col>
                             </Row>
                             <Row>

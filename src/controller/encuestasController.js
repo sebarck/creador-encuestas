@@ -57,6 +57,21 @@ export const obtenerTodasEncuestas = (callbackData, callbackCatch) => {
         .catch(e => callbackCatch(e))
 }
 
+export const obtenerTodasEncuestasParaAdmin = (callbackData, callbackCatch) => {
+    const url = process.env.REACT_APP_BACKEND_URI
+    const myInit = {
+        method: 'GET',
+        headers: getHeaders(),
+        mode: 'cors',
+        cache: 'default',
+    };
+
+    fetch(url + '/encuestas/todas', myInit)
+        .then(response => response.json())
+        .then(data => callbackData(data))
+        .catch(e => callbackCatch(e))
+}
+
 export const obtenerEncuestaById = (id, callbackData, callbackCatch) => {
     const url = process.env.REACT_APP_BACKEND_URI
     const myInit = {
